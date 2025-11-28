@@ -1267,38 +1267,37 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
     return <div className="text-center py-12 text-gray-500">No interventions data available</div>;
   }
 
-    const interventions = metrics.interventions;
+  const interventions: any = metrics.interventions;
 
-  // IRS and LLIN rates
+  // IRS and LLIN rates – prefer the fields that actually work in your current backend
   const irsRate =
-    typeof interventions.irsRatePercent === 'number'
-      ? interventions.irsRatePercent
-      : 0;
+    interventions.irsCoverageRate ??
+    interventions.irsRatePercent ??
+    0;
 
   const llinRate =
-    typeof interventions.avgLlinUsageRate === 'number'
-      ? interventions.avgLlinUsageRate
-      : 0;
+    interventions.llinUsageRate ??
+    interventions.avgLlinUsageRate ??
+    0;
 
-  // LLIN coverage details
+  // LLIN coverage details – support both flat and nested forms
   const totalLlins =
+    interventions.totalLlins ??
     interventions.llinCoverage?.totalLlins ??
     0;
 
   const avgLlinsPerHouse =
+    interventions.avgLlinsPerHouse ??
     interventions.llinCoverage?.avgLlinsPerHouse ??
     0;
 
   const housesWithLlins =
+    interventions.housesWithLlins ??
     interventions.llinCoverage?.housesWithLlins ??
     0;
 
-  // Fallback total houses (uses collections as a proxy if nothing better is available)
-  const totalHouses =
-    avgLlinsPerHouse > 0
-      ? Math.round((totalLlins / avgLlinsPerHouse) * 10) / 10
-      : metrics.summary?.totalCollections || 0;
-
+  // Total houses – keep your original behaviour
+  const totalHouses = metrics.summary?.totalCollections || 0;
 
   return (
     <div className="space-y-8">
