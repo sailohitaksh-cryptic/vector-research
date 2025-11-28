@@ -261,9 +261,8 @@ function OverviewTab({ metrics }: { metrics: Metrics | null }) {
   if (!metrics) return <div className="text-center py-12 text-gray-500">No data available</div>;
 
   // Fix: Get actual counts from different possible field names
-  const uniqueSites = metrics.summary?.sitesCount || 
-                      metrics.summary?.uniqueSites ||
-                      (metrics.geographic?.districts?.length || 0);
+  const uniqueSites = metrics.summary?.uniqueSites ||
+                    (metrics.geographic?.districts?.length || 0);
   
   const uniqueCollectors = metrics.summary?.collectorsCount || 
                           metrics.summary?.uniqueCollectors ||
