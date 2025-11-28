@@ -209,38 +209,38 @@ export async function fetchCollectors(filters?: Filters) {
 /**
  * Fetch completeness data
  */
-export async function fetchCompleteness(yearMonth: string, filters?: Filters) {
-  const queryString = buildQueryString(filters);
-  const url = `${API_BASE_URL}/api/completeness/${yearMonth}${queryString}`;
+// export async function fetchCompleteness(yearMonth: string, filters?: Filters) {
+//   const queryString = buildQueryString(filters);
+//   const url = `${API_BASE_URL}/api/completeness/${yearMonth}${queryString}`;
   
-  console.log('Fetching completeness from:', url);
+//   console.log('Fetching completeness from:', url);
 
-  try {
-    const response = await fetch(url);
+//   try {
+//     const response = await fetch(url);
     
-    if (!response.ok) {
-      // Completeness endpoint may not exist yet - return empty data
-      console.warn('Completeness endpoint not available (404), returning empty data');
-      return {
-        overallCompleteness: 0,
-        districtCompleteness: {},
-        incompleteSites: []
-      };
-    }
+//     if (!response.ok) {
+//       // Completeness endpoint may not exist yet - return empty data
+//       console.warn('Completeness endpoint not available (404), returning empty data');
+//       return {
+//         overallCompleteness: 0,
+//         districtCompleteness: {},
+//         incompleteSites: []
+//       };
+//     }
 
-    const data = await response.json();
-    const result = data.completeness || data;
-    return makeSerializable(result);
-  } catch (error) {
-    console.error('Completeness fetch error:', error);
-    // Return empty structure instead of throwing
-    return {
-      overallCompleteness: 0,
-      districtCompleteness: {},
-      incompleteSites: []
-    };
-  }
-}
+//     const data = await response.json();
+//     const result = data.completeness || data;
+//     return makeSerializable(result);
+//   } catch (error) {
+//     console.error('Completeness fetch error:', error);
+//     // Return empty structure instead of throwing
+//     return {
+//       overallCompleteness: 0,
+//       districtCompleteness: {},
+//       incompleteSites: []
+//     };
+//   }
+// }
 
 /**
  * Export data as CSV

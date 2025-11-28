@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useAPI } from '@/hooks/useAPI';
-import { fetchMetrics, fetchCollectors, fetchCompleteness } from '@/lib/api';
+import { fetchMetrics, fetchCollectors } from '@/lib/api';
 import { Metrics, Collector } from '@/types';
 import Filters, { FilterState } from './Filters';
 import DownloadButton from './DownloadButton';
@@ -85,10 +85,10 @@ export default function Dashboard() {
     return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
   }, []);
 
-  const { data: completeness, loading: completenessLoading } = useAPI(
-    () => fetchCompleteness(currentYearMonth, apiFilters),
-    apiFilters
-  );
+  // const { data: completeness, loading: completenessLoading } = useAPI(
+  //   () => fetchCompleteness(currentYearMonth, apiFilters),
+  //   apiFilters
+  // );
 
   // Extract filter options from metrics
   const filterOptions = useMemo(() => {
@@ -750,6 +750,15 @@ const getCollectorLastActivity = (c: Collector | any): string | null => {
   );
 };
 
+const getCollectorDistrict = (c: Collector | any): string => {
+  const anyCollector = c as any;
+  return (
+    anyCollector.district ??
+    anyCollector.District ??
+    'N/A'
+  );
+};
+
 
   const totalCollectors = collectors.length;
 const totalCollections = collectors.reduce(
@@ -872,8 +881,8 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
                       {collectorName}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collector.district || collector.District || 'N/A'}
-                    </td>
+  {getCollectorDistrict(collector)}
+</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {collectorTotal}
                     </td>
@@ -1779,231 +1788,6 @@ function GeographicDistributionTab({ metrics }: { metrics: Metrics | null }) {
             style={{ width: '100%', height: '500px' }}
           />
         </div>
-      </div>
-    </div>
-  );
-}
-
-
-function DataQualityTab({ metrics }: { metrics: Metrics | null }) {
-  if (!metrics) {
-    return <div className="text-center py-12 text-gray-500">No data available</div>;
-  }
-
-  // Calculate quality indicators based on metrics
-  const totalCollections = metrics.summary?.totalCollections || 0;
-  const totalSpecimens = metrics.summary?.totalSpecimens || 0;
-
-  // Simulated quality checks (replace with actual data if available)
-  const suspiciousNetUsage = Math.floor(totalCollections * 0.02); // 2% suspicious
-  const largeHouseholds = Math.floor(totalCollections * 0.03); // 3% large
-  const missingSpeciesID = Math.floor(totalSpecimens * 0.01); // 1% missing
-  const methodOutliers = Math.floor(totalCollections * 0.02); // 2% outliers
-  
-  const totalIssues = suspiciousNetUsage + largeHouseholds + missingSpeciesID + methodOutliers;
-  const qualityScore = totalCollections > 0 
-    ? ((1 - totalIssues / (totalCollections + totalSpecimens)) * 100).toFixed(1)
-    : '100.0';
-
-  return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Data Quality Indicators</h2>
-        <p className="text-gray-600">Identify potential data issues requiring validation. These checks ensure data integrity and reliability for decision-making.</p>
-      </div>
-
-      {/* Overall Quality Score */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-8">
-        <div className="flex items-center justify-between">
-          <div className="flex-1">
-            <h3 className="text-xl font-semibold text-blue-900 mb-2">Overall Data Quality Score</h3>
-            <div className="flex items-baseline space-x-4">
-              <div className="text-6xl font-bold text-blue-900">{qualityScore}%</div>
-              <div className="text-sm text-blue-700">
-                <div>{totalCollections.toLocaleString()} records checked</div>
-                <div>{totalIssues} potential issues identified</div>
-                <div className="font-medium mt-1">
-                  {parseFloat(qualityScore) >= 95 ? '✓ Excellent' :
-                   parseFloat(qualityScore) >= 90 ? '⚠ Good' : '⚠ Needs Improvement'}
-                </div>
-              </div>
-            </div>
-            <div className="mt-4 w-full bg-blue-200 rounded-full h-3">
-              <div 
-                className="bg-blue-600 h-3 rounded-full transition-all duration-500"
-                style={{ width: `${qualityScore}%` }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Quality Issues Breakdown */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Suspicious Net Usage */}
-        <div className="bg-white border-2 border-orange-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <h4 className="text-lg font-semibold text-orange-900 flex items-center">
-                <FiAlertCircle className="mr-2" size={20} />
-                Suspicious Net Usage
-              </h4>
-              <p className="text-xs text-orange-600 mt-1">More people under nets than nets available</p>
-            </div>
-            <div className="text-3xl font-bold text-orange-900">{suspiciousNetUsage}</div>
-          </div>
-          <p className="text-sm text-gray-600 mb-3">
-            <strong>Action:</strong> Verify with collector. May indicate data entry error or need for clarification on net sharing practices.
-          </p>
-          <div className="w-full bg-orange-100 rounded-full h-2">
-            <div 
-              className="bg-orange-600 h-2 rounded-full"
-              style={{ width: `${(suspiciousNetUsage / totalCollections * 100)}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Large Households */}
-        <div className="bg-white border-2 border-yellow-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <h4 className="text-lg font-semibold text-yellow-900 flex items-center">
-                <FiHome className="mr-2" size={20} />
-                Large Household Flag
-              </h4>
-              <p className="text-xs text-yellow-600 mt-1">Households with &gt;20 people</p>
-            </div>
-            <div className="text-3xl font-bold text-yellow-900">{largeHouseholds}</div>
-          </div>
-          <p className="text-sm text-gray-600 mb-3">
-            <strong>Action:</strong> Verify household size. May be correct for extended families or multiple structures, but warrants confirmation.
-          </p>
-          <div className="w-full bg-yellow-100 rounded-full h-2">
-            <div 
-              className="bg-yellow-600 h-2 rounded-full"
-              style={{ width: `${(largeHouseholds / totalCollections * 100)}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Missing Species ID */}
-        <div className="bg-white border-2 border-red-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <h4 className="text-lg font-semibold text-red-900 flex items-center">
-                <FiActivity className="mr-2" size={20} />
-                Missing Species ID
-              </h4>
-              <p className="text-xs text-red-600 mt-1">Specimens without species identification</p>
-            </div>
-            <div className="text-3xl font-bold text-red-900">{missingSpeciesID}</div>
-          </div>
-          <p className="text-sm text-gray-600 mb-3">
-            <strong>Action:</strong> Priority for re-identification by entomology lab. Cannot be used for vector-specific metrics.
-          </p>
-          <div className="w-full bg-red-100 rounded-full h-2">
-            <div 
-              className="bg-red-600 h-2 rounded-full"
-              style={{ width: `${(missingSpeciesID / totalSpecimens * 100)}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Collection Method Validation */}
-        <div className="bg-white border-2 border-purple-200 rounded-lg p-6 hover:shadow-md transition-shadow">
-          <div className="flex items-start justify-between mb-3">
-            <div>
-              <h4 className="text-lg font-semibold text-purple-900 flex items-center">
-                <FiTarget className="mr-2" size={20} />
-                Method Validation Issues
-              </h4>
-              <p className="text-xs text-purple-600 mt-1">Collections outside expected yield range</p>
-            </div>
-            <div className="text-3xl font-bold text-purple-900">{methodOutliers}</div>
-          </div>
-          <p className="text-sm text-gray-600 mb-3">
-            <strong>Action:</strong> Values far outside range may indicate equipment malfunction or exceptional conditions. Document reasons.
-          </p>
-          <div className="w-full bg-purple-100 rounded-full h-2">
-            <div 
-              className="bg-purple-600 h-2 rounded-full"
-              style={{ width: `${(methodOutliers / totalCollections * 100)}%` }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Quality Issues Summary Chart */}
-      <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Quality Issues Distribution</h3>
-        <div className="bg-gray-50 rounded-lg p-4 border">
-          <Plot
-            data={[{
-              x: ['Suspicious Net Usage', 'Large Households', 'Missing Species ID', 'Method Outliers'],
-              y: [suspiciousNetUsage, largeHouseholds, missingSpeciesID, methodOutliers],
-              type: 'bar',
-              marker: {
-                color: ['#f59e0b', '#eab308', '#ef4444', '#8b5cf6']
-              },
-              text: [suspiciousNetUsage, largeHouseholds, missingSpeciesID, methodOutliers],
-              textposition: 'outside',
-              textfont: { size: 12, weight: 'bold' }
-            }]}
-            layout={{
-              yaxis: { title: 'Number of Records Flagged' },
-              xaxis: { title: 'Issue Type', tickangle: -20 },
-              showlegend: false,
-              margin: { l: 60, r: 30, t: 30, b: 100 }
-            }}
-            config={{ responsive: true, displayModeBar: false }}
-            style={{ width: '100%', height: '400px' }}
-          />
-        </div>
-      </div>
-
-      {/* Expected Ranges Reference */}
-      <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Collection Method Expected Ranges</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-          <div className="p-4 bg-blue-50 rounded-lg">
-            <div className="font-medium text-blue-900 mb-2">CDC Light Trap</div>
-            <p className="text-blue-700">Expected: 5-50 mosquitoes/collection</p>
-          </div>
-          <div className="p-4 bg-green-50 rounded-lg">
-            <div className="font-medium text-green-900 mb-2">Pyrethrum Spray Catch</div>
-            <p className="text-green-700">Expected: 10-100 mosquitoes/collection</p>
-          </div>
-          <div className="p-4 bg-purple-50 rounded-lg">
-            <div className="font-medium text-purple-900 mb-2">Human Landing Catch</div>
-            <p className="text-purple-700">Expected: 5-30 mosquitoes/collection</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Action Items */}
-      <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-2 border-gray-300 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-          <FiAlertCircle className="mr-2 text-blue-600" />
-          Quality Improvement Action Items
-        </h3>
-        <ul className="space-y-3 text-sm text-gray-700">
-          <li className="flex items-start">
-            <span className="inline-block w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-xs">1</span>
-            <span>Review and verify all flagged records with field collectors within 48 hours of data submission</span>
-          </li>
-          <li className="flex items-start">
-            <span className="inline-block w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-xs">2</span>
-            <span>Send specimens with missing species ID to entomology lab for priority identification</span>
-          </li>
-          <li className="flex items-start">
-            <span className="inline-block w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-xs">3</span>
-            <span>Provide targeted retraining for collectors with high error rates or unusual data patterns</span>
-          </li>
-          <li className="flex items-start">
-            <span className="inline-block w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 flex-shrink-0 font-bold text-xs">4</span>
-            <span>Monitor quality score weekly and investigate any sudden drops in data quality</span>
-          </li>
-        </ul>
       </div>
     </div>
   );
