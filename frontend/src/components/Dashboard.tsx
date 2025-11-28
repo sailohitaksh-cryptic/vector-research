@@ -1267,12 +1267,38 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
     return <div className="text-center py-12 text-gray-500">No interventions data available</div>;
   }
 
-  const irsRate = metrics.interventions.irsCoverageRate || 0;
-  const llinRate = metrics.interventions.llinUsageRate || 0;
-  const totalLlins = metrics.interventions.totalLlins || 0;
-  const avgLlinsPerHouse = metrics.interventions.avgLlinsPerHouse || 0;
-  const housesWithLlins = metrics.interventions.housesWithLlins || 0;
-  const totalHouses = metrics.summary?.totalCollections || 0;
+    const interventions = metrics.interventions;
+
+  // IRS and LLIN rates
+  const irsRate =
+    typeof interventions.irsRatePercent === 'number'
+      ? interventions.irsRatePercent
+      : 0;
+
+  const llinRate =
+    typeof interventions.avgLlinUsageRate === 'number'
+      ? interventions.avgLlinUsageRate
+      : 0;
+
+  // LLIN coverage details
+  const totalLlins =
+    interventions.llinCoverage?.totalLlins ??
+    0;
+
+  const avgLlinsPerHouse =
+    interventions.llinCoverage?.avgLlinsPerHouse ??
+    0;
+
+  const housesWithLlins =
+    interventions.llinCoverage?.housesWithLlins ??
+    0;
+
+  // Fallback total houses (uses collections as a proxy if nothing better is available)
+  const totalHouses =
+    avgLlinsPerHouse > 0
+      ? Math.round((totalLlins / avgLlinsPerHouse) * 10) / 10
+      : metrics.summary?.totalCollections || 0;
+
 
   return (
     <div className="space-y-8">
