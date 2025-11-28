@@ -24,21 +24,45 @@ const { fetchAndProcessData } = require('./scripts/fetchData');
 
 const app = express();
 
-// Middleware
-app.use(helmet());
+// ✅ SAFARI-COMPATIBLE CORS with function-based origin validation
 const corsOptions = {
-  origin: [
-    'http://localhost:3000',
-    'https://vectorresearch-dashboard.vercel.app',
-    'https://*.vercel.app'  // Allows Vercel preview deployments
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'https://vectorresearch-dashboard.vercel.app',
+    ];
+    
+    // Check if origin matches Vercel preview deployments
+    if (origin.match(/^https:\/\/vectorresearch-dashboard-.*\.vercel\.app$/)) {
+      return callback(null, true);
+    }
+    
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    // Log and reject unknown origins
+    logger.warn(`Blocked CORS request from: ${origin}`);
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Disposition']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  exposedHeaders: ['Content-Disposition', 'Content-Type', 'Content-Length'], // ✅ Safari needs these
+  maxAge: 86400, // 24 hours
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
 app.use(cors(corsOptions));
+
+// ✅ Explicit preflight handling for Safari
+app.options('*', cors(corsOptions));
+
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
