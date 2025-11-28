@@ -22,7 +22,7 @@ import {
 
 const Plot = dynamic(() => import('@/components/Plot'), { ssr: false });
 
-const filterUnknownSpecies = (speciesData: Record<string, number>) => {
+const filterUnknownSpecies = (speciesData: Record<string, number>): Record<string, number> => {
   return Object.entries(speciesData)
     .filter(([species, count]) => 
       species?.toLowerCase() !== 'unknown' && 
@@ -30,7 +30,10 @@ const filterUnknownSpecies = (speciesData: Record<string, number>) => {
       species.trim() !== '' &&
       count > 0
     )
-    .reduce((acc, [s, c]) => ({ ...acc, [s]: c }), {});
+    .reduce<Record<string, number>>(
+      (acc, [s, c]) => ({ ...acc, [s]: c }),
+      {}
+    );
 };
 
 const tabs = [
@@ -298,8 +301,12 @@ function OverviewTab({ metrics }: { metrics: Metrics | null }) {
     }
   ];
 
-  const speciesCounts = filterUnknownSpecies(metrics.species?.speciesCounts || {});
-  const sortedSpecies = Object.entries(speciesCounts).sort(([, a], [, b]) => b - a);
+  const speciesCounts = filterUnknownSpecies(
+  (metrics.species?.speciesCounts || {}) as Record<string, number>
+);
+
+const sortedSpecies = (Object.entries(speciesCounts) as [string, number][])
+  .sort(([, a], [, b]) => b - a);
 
   return (
     <div className="space-y-8">
@@ -344,7 +351,8 @@ function OverviewTab({ metrics }: { metrics: Metrics | null }) {
           </h3>
           <div className="space-y-3">
             {sortedSpecies.slice(0, 5).map(([species, count]) => {
-              const total = Object.values(speciesCounts).reduce((a, b) => a + b, 0);
+              const total = (Object.values(speciesCounts) as number[])
+  .reduce((a, b) => a + b, 0);
               const percentage = total > 0 ? ((count / total) * 100).toFixed(1) : '0';
               
               return (
@@ -1187,9 +1195,16 @@ function SpeciesCompositionTab({ metrics }: { metrics: Metrics | null }) {
     return <div className="text-center py-12 text-gray-500">No species data available</div>;
   }
 
-  const speciesCounts = filterUnknownSpecies(metrics.species.speciesCounts || {});
-  const sortedSpecies = Object.entries(speciesCounts).sort(([, a], [, b]) => b - a);
-  const total = Object.values(speciesCounts).reduce((a, b) => a + b, 0);
+  
+  const speciesCounts = filterUnknownSpecies(
+  (metrics.species.speciesCounts || {}) as Record<string, number>
+);
+
+const sortedSpecies = (Object.entries(speciesCounts) as [string, number][])
+  .sort(([, a], [, b]) => b - a);
+
+const total = (Object.values(speciesCounts) as number[])
+  .reduce((a, b) => a + b, 0);
 
   // Separate Anopheles species
   const anophelesSpecies = sortedSpecies.filter(([name]) => name.toLowerCase().includes('anopheles'));
