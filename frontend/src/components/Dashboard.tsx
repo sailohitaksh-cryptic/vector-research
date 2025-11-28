@@ -720,14 +720,26 @@ function FieldTeamTab({ collectors, loading }: { collectors: Collector[] | null;
     return <div className="text-center py-12 text-gray-500">No field team data available</div>;
   }
 
+  const getCollectorTotalCollections = (c: Collector | any): number => {
+    const anyCollector = c as any;
+    return (
+      anyCollector.totalCollections ??
+      anyCollector.total_collections ??
+      0
+    );
+  };
+
   const totalCollectors = collectors.length;
-  const totalCollections = collectors.reduce((sum, c) => sum + (c.totalCollections || 0), 0);
-  const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors : 0;
+const totalCollections = collectors.reduce(
+  (sum, c) => sum + getCollectorTotalCollections(c),
+  0
+);
+const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors : 0;
 
   // Sort by collections
-  const sortedCollectors = [...collectors].sort((a, b) => 
-    (b.totalCollections || 0) - (a.totalCollections || 0)
-  );
+  const sortedCollectors = [...collectors].sort(
+  (a, b) => getCollectorTotalCollections(b) - getCollectorTotalCollections(a)
+);
 
   return (
     <div className="space-y-8">
@@ -781,13 +793,13 @@ function FieldTeamTab({ collectors, loading }: { collectors: Collector[] | null;
               x: sortedCollectors.slice(0, 10).map(c => 
                 c.collectorName || c.SessionCollectorName || c.name || 'Unknown'
               ),
-              y: sortedCollectors.slice(0, 10).map(c => c.totalCollections || 0),
+              y: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
               type: 'bar',
               marker: { 
                 color: '#10b981',
                 line: { color: '#059669', width: 1 }
               },
-              text: sortedCollectors.slice(0, 10).map(c => c.totalCollections || 0),
+              text: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
               textposition: 'outside',
               textfont: { size: 12 }
             }]}
@@ -820,8 +832,9 @@ function FieldTeamTab({ collectors, loading }: { collectors: Collector[] | null;
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {sortedCollectors.map((collector, index) => {
-                const performance = (collector.totalCollections || 0) >= avgCollections * 1.2 ? 'High' :
-                                   (collector.totalCollections || 0) >= avgCollections * 0.8 ? 'Medium' : 'Low';
+                const collectorTotal = getCollectorTotalCollections(collector);
+                const performance = collectorTotal >= avgCollections * 1.2 ? 'High' :
+                   collectorTotal >= avgCollections * 0.8 ? 'Medium' : 'Low';
                 const performanceColor = performance === 'High' ? 'green' : 
                                         performance === 'Medium' ? 'blue' : 'orange';
                 
@@ -847,7 +860,7 @@ function FieldTeamTab({ collectors, loading }: { collectors: Collector[] | null;
                       {collector.district || collector.District || 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collector.totalCollections || collector.total_collections || 0}
+                      {collectorTotal}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {lastActivity ? new Date(lastActivity).toLocaleDateString() : 'N/A'}
