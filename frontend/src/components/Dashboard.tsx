@@ -264,8 +264,7 @@ function OverviewTab({ metrics }: { metrics: Metrics | null }) {
   const uniqueSites = metrics.summary?.uniqueSites ||
                     (metrics.geographic?.districts?.length || 0);
   
-  const uniqueCollectors = metrics.summary?.collectorsCount || 
-                          metrics.summary?.uniqueCollectors ||
+  const uniqueCollectors = metrics.summary?.uniqueCollectors ||
                           0;
 
   const keyMetrics = [
