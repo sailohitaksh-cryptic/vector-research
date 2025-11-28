@@ -449,13 +449,13 @@ const sortedSpecies = (Object.entries(speciesCounts) as [string, number][])
 
 function IndoorRestingDensityTab({ metrics }: { metrics: Metrics | null }) {
   // Step 1: Log what we actually have
-  useEffect(() => {
-    console.log('🏠 Indoor Resting Debug:', {
-      hasIndoorResting: !!metrics?.indoorResting,
-      indoorRestingData: metrics?.indoorResting,
-      keys: metrics?.indoorResting ? Object.keys(metrics.indoorResting) : []
-    });
-  }, [metrics]);
+  // useEffect(() => {
+  //   console.log('🏠 Indoor Resting Debug:', {
+  //     hasIndoorResting: !!metrics?.indoorResting,
+  //     indoorRestingData: metrics?.indoorResting,
+  //     keys: metrics?.indoorResting ? Object.keys(metrics.indoorResting) : []
+  //   });
+  // }, [metrics]);
 
   // Step 2: Better data detection - check if ANY field has data
   const indoorData = metrics?.indoorResting;
