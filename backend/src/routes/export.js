@@ -1,6 +1,6 @@
 /**
- * Export Routes
- * Handles CSV export endpoints for downloading reports
+ * Export Routes - FIXED VERSION
+ * Sorts by date in filename, not mtime
  */
 
 const express = require('express');
@@ -13,17 +13,24 @@ const EXPORTS_DIR = path.join(__dirname, '..', '..', 'data', 'exports');
 
 /**
  * Helper function to find latest file matching pattern
+ * FIXED: Now sorts by date in filename, not mtime
  */
 function findLatestFile(pattern) {
   try {
     const files = fs.readdirSync(EXPORTS_DIR)
       .filter(file => file.match(pattern))
-      .map(file => ({
-        name: file,
-        path: path.join(EXPORTS_DIR, file),
-        time: fs.statSync(path.join(EXPORTS_DIR, file)).mtime.getTime()
-      }))
-      .sort((a, b) => b.time - a.time);
+      .map(file => {
+        // Extract date from filename (YYYY-MM-DD)
+        const dateMatch = file.match(/(\d{4}-\d{2}-\d{2})/);
+        const dateStr = dateMatch ? dateMatch[1] : '1970-01-01';
+        
+        return {
+          name: file,
+          path: path.join(EXPORTS_DIR, file),
+          date: new Date(dateStr).getTime()
+        };
+      })
+      .sort((a, b) => b.date - a.date); // Sort by date in filename, newest first
     
     return files.length > 0 ? files[0].path : null;
   } catch (error) {
