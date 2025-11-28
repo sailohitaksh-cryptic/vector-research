@@ -447,7 +447,11 @@ const sortedSpecies = (Object.entries(speciesCounts) as [string, number][])
 // INDOOR RESTING DENSITY TAB - Fixed to handle missing data gracefully
 // ============================================================================
 
-function IndoorRestingDensityTab({ metrics }: { metrics: Metrics | null }) {
+function IndoorRestingDensityTab({
+  metrics,
+}: {
+  metrics: (Metrics & { indoorResting?: Record<string, number> }) | null;
+}) {
   // Step 1: Log what we actually have
   // useEffect(() => {
   //   console.log('🏠 Indoor Resting Debug:', {
