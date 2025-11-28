@@ -740,6 +740,16 @@ function FieldTeamTab({ collectors, loading }: { collectors: Collector[] | null;
   );
 };
 
+const getCollectorLastActivity = (c: Collector | any): string | null => {
+  const anyCollector = c as any;
+  return (
+    anyCollector.lastCollectionDate ??
+    anyCollector.last_collection_date ??
+    anyCollector.lastActivity ??
+    null
+  );
+};
+
 
   const totalCollectors = collectors.length;
 const totalCollections = collectors.reduce(
@@ -852,9 +862,8 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
                 const collectorName = getCollectorName(collector);
 
                 // Try multiple possible field names for last activity
-                const lastActivity = collector.lastCollectionDate || 
-                                   collector.last_collection_date ||
-                                   collector.lastActivity;
+                const lastActivity = getCollectorLastActivity(collector);
+                const lastActivityDate = lastActivity ? new Date(lastActivity) : null;
                 
                 return (
                   <tr key={index} className="hover:bg-gray-50">
@@ -887,169 +896,6 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
   );
 }
 
-// ============================================================================
-// COMPLETENESS TAB - Added back with graceful 404 handling
-// ============================================================================
-
-function CompletenessTab({ completeness, loading }: { completeness: any; loading: boolean }) {
-  if (loading) {
-    return <div className="text-center py-12 text-gray-500">Loading completeness data...</div>;
-  }
-
-  // Check if data is available
-  const hasData = completeness && (
-    completeness.overallCompleteness > 0 ||
-    Object.keys(completeness.districtCompleteness || {}).length > 0 ||
-    completeness.incompleteSites?.length > 0
-  );
-
-  if (!hasData) {
-    return (
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Data Completeness Metrics</h2>
-          <p className="text-gray-600">Track data quality and submission rates</p>
-        </div>
-
-        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-8 text-center">
-          <FiCheckCircle className="mx-auto text-blue-600 mb-4" size={48} />
-          <h3 className="text-xl font-semibold text-blue-900 mb-2">Completeness Data Not Yet Available</h3>
-          <p className="text-blue-700 mb-4">
-            Completeness tracking will be available once the backend endpoint is configured.
-          </p>
-          <div className="bg-white rounded-lg p-4 mt-4 text-left">
-            <h4 className="font-semibold text-gray-900 mb-2">What is Data Completeness?</h4>
-            <p className="text-sm text-gray-600 mb-3">
-              Data completeness measures the percentage of required fields that are filled in for each surveillance record. This metric helps:
-            </p>
-            <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
-              <li>Identify districts with data quality issues</li>
-              <li>Track field team training needs</li>
-              <li>Ensure reliable data for decision-making</li>
-              <li>Monitor data submission rates</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const overallCompleteness = completeness.overallCompleteness || 0;
-  const districtData = completeness.districtCompleteness || {};
-  const incompleteSites = completeness.incompleteSites || [];
-
-  return (
-    <div className="space-y-8">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Data Completeness Metrics</h2>
-        <p className="text-gray-600">Track data quality and submission rates. Target: &gt;95% completeness.</p>
-      </div>
-
-      {/* Overall Completeness */}
-      <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-8">
-        <h3 className="text-xl font-semibold text-green-900 mb-4">Overall Completeness Rate</h3>
-        <div className="flex items-center space-x-6">
-          <div className="flex-1">
-            <div className="text-6xl font-bold text-green-900 mb-2">{overallCompleteness.toFixed(1)}%</div>
-            <div className="text-sm text-green-700 mb-4">Percentage of complete surveillance records</div>
-            <div className="w-full bg-green-200 rounded-full h-4">
-              <div 
-                className="bg-green-600 h-4 rounded-full transition-all duration-500"
-                style={{ width: `${overallCompleteness}%` }}
-              />
-            </div>
-          </div>
-        </div>
-        <p className="text-sm text-green-700 mt-4">
-          {overallCompleteness >= 95 ? '✓ Excellent data quality' :
-           overallCompleteness >= 90 ? '⚠ Good - minor improvements needed' :
-           '⚠ Needs improvement - review field team training'}
-        </p>
-      </div>
-
-      {/* District-Level Completeness */}
-      {Object.keys(districtData).length > 0 && (
-        <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">District-Level Completeness</h3>
-          <div className="bg-white border rounded-lg overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">District</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Completeness Rate</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {Object.entries(districtData)
-                  .sort(([, a], [, b]) => (b as number) - (a as number))
-                  .map(([district, rate]) => {
-                    const rateNum = rate as number;
-                    const status = rateNum >= 95 ? 'Excellent' : rateNum >= 90 ? 'Good' : 'Needs Improvement';
-                    const statusColor = rateNum >= 95 ? 'green' : rateNum >= 90 ? 'blue' : 'orange';
-                    
-                    return (
-                      <tr key={district} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{district}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <div className="flex items-center">
-                            <div className="w-32 bg-gray-200 rounded-full h-2 mr-3">
-                              <div 
-                                className={`bg-${statusColor}-600 h-2 rounded-full`}
-                                style={{ width: `${rateNum}%` }}
-                              />
-                            </div>
-                            <span>{rateNum.toFixed(1)}%</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${statusColor}-100 text-${statusColor}-800`}>
-                            {status}
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* Incomplete Sites */}
-      {incompleteSites.length > 0 && (
-        <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Sites Requiring Follow-Up</h3>
-          <p className="text-sm text-gray-600 mb-4">
-            Contact collectors within 48 hours for missing data
-          </p>
-          <div className="bg-white border rounded-lg overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Site ID</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Site Name</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Missing Fields</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {incompleteSites.slice(0, 20).map((site: any, index: number) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{site.siteId}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{site.siteName || 'N/A'}</td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {site.missingFields?.join(', ') || 'Unknown'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 
 function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
   if (!metrics?.temporal) {
