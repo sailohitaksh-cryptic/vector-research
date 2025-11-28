@@ -417,7 +417,7 @@ const sortedSpecies = (Object.entries(speciesCounts) as [string, number][])
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
             <div className="text-2xl font-bold text-blue-900">
-              {metrics.summary?.districtsCount || metrics.geographic?.districts?.length || 0}
+              {metrics.geographic?.districts?.length || 0}
             </div>
             <div className="text-sm text-blue-700">Districts Covered</div>
           </div>
