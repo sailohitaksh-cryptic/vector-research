@@ -245,17 +245,34 @@ export async function fetchCollectors(filters?: Filters) {
 /**
  * Export data as CSV
  */
+/**
+ * Export data as CSV - SAFARI COMPATIBLE
+ */
 export async function exportData(filters?: Filters) {
   const queryString = buildQueryString(filters);
   const url = `${API_BASE_URL}/api/export/vectorcam-report${queryString}`;
   
   console.log('Exporting data from:', url);
 
-  const response = await fetch(url);
-  
-  if (!response.ok) {
-    throw new Error(`Export failed: ${response.status}`);
-  }
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      credentials: 'include',  // ✅ CRITICAL for Safari CORS
+      headers: {
+        'Accept': 'text/csv'
+      },
+      mode: 'cors'  // ✅ Explicit CORS mode
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => 'Unknown error');
+      console.error('Export failed:', response.status, errorText);
+      throw new Error(`Export failed: ${response.status} - ${errorText}`);
+    }
 
-  return response.blob();
+    return response.blob();
+  } catch (error) {
+    console.error('Export error:', error);
+    throw error;
+  }
 }
