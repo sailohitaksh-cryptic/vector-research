@@ -60,3 +60,4 @@ pipeline/data/raw/*.csv
 *.tmp
 *.bak
 *.backup
+.vercel
