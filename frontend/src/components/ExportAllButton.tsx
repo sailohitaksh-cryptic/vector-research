@@ -1,10 +1,11 @@
 /**
- * ExportAllButton Component - FIXED VERSION
+ * ExportAllButton Component - ENVIRONMENT VARIABLE FIX
  * File: frontend/src/components/ExportAllButton.tsx
  * 
- * Changes:
+ * CRITICAL FIX:
+ * - Uses NEXT_PUBLIC_API_URL environment variable instead of hardcoded localhost
+ * - Added Safari-compatible fetch options (credentials, mode, headers)
  * - Handles undefined filters properly
- * - Uses new API service
  * - Better error handling
  */
 
@@ -47,25 +48,30 @@ export default function ExportAllButton({ filters = {} }: ExportAllButtonProps) 
       }
 
       const queryString = params.toString();
+      
+      // ✅ USE ENVIRONMENT VARIABLE - NOT HARDCODED
       const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
-const url = `${API_BASE_URL}/api/export/vectorcam-report...` + (queryString ? `?${queryString}` : '');
+      const url = `${API_BASE_URL}/api/export/vectorcam-report${
+        queryString ? '?' + queryString : ''
+      }`;
 
       console.log('Exporting from:', url);
+      console.log('API Base URL:', API_BASE_URL);
       console.log('Active filters:', filters);
 
-      // Fetch the CSV
+      // ✅ Safari-compatible fetch with credentials and CORS mode
       const response = await fetch(url, {
-  method: 'GET',
-  credentials: 'include',
-  headers: {
-    'Accept': 'text/csv'
-  },
-  mode: 'cors'
-});
+        method: 'GET',
+        credentials: 'include',  // Required for Safari CORS
+        headers: {
+          'Accept': 'text/csv'
+        },
+        mode: 'cors'  // Explicit CORS mode
+      });
       
       if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Export failed:', errorText);
+        const errorText = await response.text().catch(() => 'Unknown error');
+        console.error('Export failed:', response.status, errorText);
         throw new Error(`Export failed: ${response.status} - ${errorText}`);
       }
 
