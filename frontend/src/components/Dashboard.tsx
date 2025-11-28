@@ -729,6 +729,18 @@ function FieldTeamTab({ collectors, loading }: { collectors: Collector[] | null;
     );
   };
 
+  const getCollectorName = (c: Collector | any): string => {
+  const anyCollector = c as any;
+  return (
+    anyCollector.collectorName ??
+    anyCollector.collector_name ??   // snake_case from backend
+    anyCollector.SessionCollectorName ??
+    anyCollector.name ??
+    'Unknown'
+  );
+};
+
+
   const totalCollectors = collectors.length;
 const totalCollections = collectors.reduce(
   (sum, c) => sum + getCollectorTotalCollections(c),
@@ -789,20 +801,18 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Top 10 Performers</h3>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
-            data={[{
-              x: sortedCollectors.slice(0, 10).map(c => 
-                c.collectorName || c.SessionCollectorName || c.name || 'Unknown'
-              ),
-              y: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
-              type: 'bar',
-              marker: { 
-                color: '#10b981',
-                line: { color: '#059669', width: 1 }
-              },
-              text: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
-              textposition: 'outside',
-              textfont: { size: 12 }
-            }]}
+  data={[{
+    x: sortedCollectors.slice(0, 10).map(c => getCollectorName(c)),
+    y: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
+    type: 'bar',
+    marker: { 
+      color: '#10b981',
+      line: { color: '#059669', width: 1 }
+    },
+    text: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
+    textposition: 'outside',
+    textfont: { size: 12 }
+  }]}
             layout={{
               xaxis: { title: 'Collector Name', tickangle: -45 },
               yaxis: { title: 'Number of Collections' },
@@ -839,11 +849,7 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
                                         performance === 'Medium' ? 'blue' : 'orange';
                 
                 // Try multiple possible field names for collector name
-                const collectorName = collector.collectorName || 
-                                     collector.SessionCollectorName || 
-                                     collector.name ||
-                                     collector.collector_name ||
-                                     'Unknown';
+                const collectorName = getCollectorName(collector);
 
                 // Try multiple possible field names for last activity
                 const lastActivity = collector.lastCollectionDate || 
