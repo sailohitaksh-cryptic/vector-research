@@ -173,7 +173,6 @@ export default function Dashboard() {
               </p>
             </div>
             <div className="flex items-center space-x-3">
-              <DownloadButton />
               <ExportAllButton />
             </div>
           </div>
