@@ -54,7 +54,14 @@ const url = `${API_BASE_URL}/api/export/vectorcam-report...` + (queryString ? `?
       console.log('Active filters:', filters);
 
       // Fetch the CSV
-      const response = await fetch(url);
+      const response = await fetch(url, {
+  method: 'GET',
+  credentials: 'include',
+  headers: {
+    'Accept': 'text/csv'
+  },
+  mode: 'cors'
+});
       
       if (!response.ok) {
         const errorText = await response.text();
