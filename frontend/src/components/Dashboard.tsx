@@ -91,26 +91,42 @@ export default function Dashboard() {
   // );
 
   // Extract filter options from metrics
-  const filterOptions = useMemo(() => {
-    if (!metrics) return { districts: [], methods: [], species: [] };
+  const [filterOptions, setFilterOptions] = useState({
+  districts: [] as string[],
+  methods: [] as string[],
+  species: [] as string[],
+});
 
-    const districts = metrics?.geographic?.districts 
-      ? [...metrics.geographic.districts].sort() 
-      : [];
+useEffect(() => {
+  if (!metrics) return;
 
-    const methods = metrics?.collectionMethods?.collectionsByMethod
-      ? Object.keys(metrics.collectionMethods.collectionsByMethod).sort()
-      : [];
+  const districts = metrics.geographic?.districts
+    ? [...metrics.geographic.districts].sort()
+    : [];
 
-    const species = metrics?.species?.speciesCounts
-      ? Object.keys(metrics.species.speciesCounts)
-          .filter(s => s && s.toLowerCase() !== 'unknown' && s !== 'N/A' && s.trim() !== '')
-          .sort()
-          .slice(0, 15)
-      : [];
-    
-    return { districts, methods, species };
-  }, [metrics]);
+  const methods = metrics.collectionMethods?.collectionsByMethod
+    ? Object.keys(metrics.collectionMethods.collectionsByMethod).sort()
+    : [];
+
+  const species = metrics.species?.speciesCounts
+    ? Object.keys(metrics.species.speciesCounts)
+        .filter(
+          s =>
+            s &&
+            s.toLowerCase() !== 'unknown' &&
+            s !== 'N/A' &&
+            s.trim() !== ''
+        )
+        .sort()
+        .slice(0, 15)
+    : [];
+
+  setFilterOptions(prev => ({
+    districts: Array.from(new Set([...prev.districts, ...districts])),
+    methods: Array.from(new Set([...prev.methods, ...methods])),
+    species: Array.from(new Set([...prev.species, ...species])),
+  }));
+}, [metrics]);
 
   // Filtered data
   const filteredMetrics = useMemo(() => 
