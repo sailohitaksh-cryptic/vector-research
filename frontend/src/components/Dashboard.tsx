@@ -55,7 +55,6 @@ export default function Dashboard() {
   const [filters, setFilters] = useState<FilterState>({
     dateRange: { start: '', end: '' },
     districts: [],
-    methods: [],
     species: []
   });
 
@@ -64,7 +63,6 @@ export default function Dashboard() {
     startDate: filters.dateRange.start || undefined,
     endDate: filters.dateRange.end || undefined,
     districts: filters.districts.length > 0 ? filters.districts : undefined,
-    methods: filters.methods.length > 0 ? filters.methods : undefined,
     species: filters.species.length > 0 ? filters.species : undefined,
   }), [filters]);
 
@@ -205,7 +203,6 @@ export default function Dashboard() {
               onClick={() => setFilters({
                 dateRange: { start: '', end: '' },
                 districts: [],
-                methods: [],
                 species: []
               })}
               className="ml-3 text-sm text-blue-600 hover:text-blue-800 font-medium"
