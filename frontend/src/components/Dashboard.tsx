@@ -169,7 +169,7 @@ export default function Dashboard() {
               <p className="text-sm text-gray-600 mt-1">
                 {metrics?.summary?.totalCollections?.toLocaleString() || 0} collections • {' '}
                 {metrics?.summary?.totalSpecimens?.toLocaleString() || 0} specimens • {' '}
-                {metrics?.summary?.districtsCount || metrics?.geographic?.districts?.length || 0} districts
+                {metrics?.geographic?.districts?.length || 0} districts
               </p>
             </div>
             <div className="flex items-center space-x-3">
