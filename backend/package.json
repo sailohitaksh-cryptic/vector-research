@@ -1,0 +1,45 @@
+{
+  "name": "vector-research-backend",
+  "version": "1.0.0",
+  "description": "Backend API for VectorResearch Dashboard",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "fetch-data": "node src/scripts/fetchData.js",
+    "test": "jest",
+    "lint": "eslint src/",
+    "setup": "mkdir -p data/exports data/logs && cp .env.example .env && echo '✅ Setup complete! Edit .env with your API_SECRET_KEY'"
+  },
+  "keywords": ["vector", "mosquito", "surveillance", "dashboard"],
+  "author": "",
+  "license": "PROPRIETARY",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "axios": "^1.6.2",
+    "csv-parser": "^3.0.0",
+    "csv-stringify": "^6.4.5",
+    "papaparse": "^5.4.1",
+    "better-sqlite3": "^9.2.2",
+    "aws-sdk": "^2.1520.0",
+    "@aws-sdk/client-s3": "^3.478.0",
+    "@aws-sdk/lib-storage": "^3.478.0",
+    "date-fns": "^3.0.6",
+    "lodash": "^4.17.21",
+    "node-cron": "^3.0.3",
+    "winston": "^3.11.0",
+    "compression": "^1.7.4",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "jest": "^29.7.0",
+    "eslint": "^8.56.0",
+    "@types/node": "^20.10.6"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

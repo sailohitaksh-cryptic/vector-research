@@ -1,0 +1,403 @@
+ID,NumPeopleSleptInHouse,WasIrsConducted,MonthsSinceIrs,NumLlinsAvailable,LlinType,LlinBrand,NumPeopleSleptUnderLlin,CreatedAt,UpdatedAt,SessionID,SessionFrontendID,SessionCollectorTitle,SessionCollectorName,SessionCollectionDate,SessionCollectionMethod,SessionSpecimenCondition,SessionNotes,SessionCreatedAt,SessionCompletedAt,SessionSubmittedAt,SessionUpdatedAt,SiteID,SiteDistrict,SiteSubCounty,SiteParish,SiteVillageName,SiteHouseNumber,SiteIsActive,SiteHealthCenter,ProgramID,ProgramName,ProgramCountry,DeviceID,DeviceModel,DeviceRegisteredAt,CollectionYear,CollectionMonth,CollectionYearMonth,CollectionQuarter,LlinUsageRate,DataQualityFlag
+177,8,No,,0,Unknown,Unknown,,2025-11-26 23:33:33+00:00,2025-11-26 23:33:33+00:00,293.0,7b8922b3-d766-4858-83d6-b00b818f8402,Field Operations Team (FOT),johnny2,2025-11-26 23:28:12+00:00,CDC Light Trap (LTC),Fresh,,2025-11-26 23:28:12+00:00,2025-11-26 23:33:31+00:00,2025-11-26 23:33:32+00:00,2025-11-26 23:33:32+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,57.0,motorola moto g play (2021),2025-11-26T23:15:37.000Z,2025.0,11.0,2025-11,4.0,0.0,OK
+176,67,Yes,67.0,67,Pyrethroid + Chlorfenapyr,Interceptor G2,67.0,2025-11-26 23:20:23+00:00,2025-11-26 23:20:23+00:00,291.0,b3e65539-0c5d-4b32-8685-225a11d122bf,Village Health Team (VHT),johnny,2025-11-26 23:15:39+00:00,CDC Light Trap (LTC),Fresh,67,2025-11-26 23:15:39+00:00,2025-11-26 23:20:21+00:00,2025-11-26 23:20:23+00:00,2025-11-26 23:20:23+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,57.0,motorola moto g play (2021),2025-11-26T23:15:37.000Z,2025.0,11.0,2025-11,4.0,100.0,Suspicious: Large household
+175,0,No,,0,Unknown,Unknown,,2025-11-26 19:04:53+00:00,2025-11-26 19:04:53+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+174,0,No,,0,Unknown,Unknown,,2025-11-26 18:59:43+00:00,2025-11-26 18:59:43+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+173,0,No,,0,Unknown,Unknown,,2025-11-26 18:57:57+00:00,2025-11-26 18:57:57+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+172,0,No,,0,Unknown,Unknown,,2025-11-26 15:22:40+00:00,2025-11-26 15:22:40+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+171,2,No,,5,Pyrethroid + Chlorfenapyr,Interceptor G2,2.0,2025-11-26 06:31:27+00:00,2025-11-26 06:31:27+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,100.0,OK
+170,0,No,,0,Unknown,Unknown,,2025-11-26 06:30:38+00:00,2025-11-26 06:30:38+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+169,0,Yes,2.0,5,Pyrethroid + Pyriproxyfen,Royal Guard,1.0,2025-11-26 06:26:43+00:00,2025-11-26 06:26:43+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,inf,OK
+168,0,Yes,2.0,1,Pyrethroid + Pyriproxyfen,Royal Guard,3.0,2025-11-26 06:15:26+00:00,2025-11-26 06:15:26+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,inf,Suspicious: More people than nets
+167,0,No,,0,Unknown,Unknown,,2025-11-25 20:34:21+00:00,2025-11-25 20:34:21+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+166,0,No,,0,Unknown,Unknown,,2025-11-25 20:30:57+00:00,2025-11-25 20:30:57+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+165,0,No,,0,Unknown,Unknown,,2025-11-25 11:42:53+00:00,2025-11-25 11:42:53+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+164,1,No,,2,Pyrethroid Only,OLYSET Net,0.0,2025-11-25 11:23:17+00:00,2025-11-25 11:23:17+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+163,0,No,,0,Unknown,Unknown,,2025-10-02 18:32:46+00:00,2025-10-02 18:32:46+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+162,2,Yes,2.0,2,Pyrethroid + Chlorfenapyr,Interceptor,2.0,2025-09-23 11:43:21+00:00,2025-09-23 11:43:21+00:00,276.0,b3a57719-62d4-40d0-8ab7-04073bb82ce2,nxnx,dnxn,2025-09-23 11:17:46+00:00,Pyrethrum Spray Catch (PSC),Fresh,"House Number: 01
+House Number: 01",2025-09-23 11:17:46+00:00,2025-09-23 11:43:44+00:00,2025-09-23 11:43:21+00:00,2025-09-23 11:43:21+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,23.0,motorola moto g play (2021),2025-08-10T10:06:46.000Z,2025.0,9.0,2025-09,3.0,100.0,OK
+161,6,Yes,2.0,2,Pyrethroid + PBO,Interceptor,2.0,2025-09-23 09:54:35+00:00,2025-09-23 09:54:35+00:00,275.0,0a76ad2b-971d-4fa7-8bc6-0d49b21f3c90,vco,nails peter,2025-09-23 08:49:38+00:00,Human Landing Catch (HLC),Dessicated,"fetteg
+
+
+House Number: 91",2025-09-23 08:49:38+00:00,2025-09-23 09:52:22+00:00,2025-09-23 09:54:34+00:00,2025-09-23 09:54:34+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,49.0,motorola moto g play (2021),2025-09-10T10:32:07.000Z,2025.0,9.0,2025-09,3.0,33.33333333333333,OK
+160,5,Yes,8.0,3,Pyrethroid + PBO,Interceptor G2,2.0,2025-09-23 09:54:31+00:00,2025-09-23 09:54:31+00:00,274.0,880b2d8d-1f29-4a47-934a-b8d91896fec7,VCO,Naika Peter,2025-09-23 09:16:54+00:00,Pyrethrum Spray Catch (PSC),Fresh,"House Number: 01
+House Number: 01",2025-09-23 09:16:54+00:00,2025-09-23 09:52:32+00:00,2025-09-23 09:54:30+00:00,2025-09-23 09:54:30+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,48.0,motorola moto g play (2021),2025-09-10T10:32:07.000Z,2025.0,9.0,2025-09,3.0,40.0,OK
+159,3,No,,0,Unknown,Unknown,,2025-09-08 13:01:11+00:00,2025-09-08 13:01:11+00:00,273.0,9b16b0d1-651a-4e82-9d90-21b7aa2b2f7f,Entomologist ,Kigongo ,2025-08-10 10:10:23+00:00,CDC Light Trap (LTC),Fresh,"House Number: 1
+House Number: 1",2025-08-10 10:10:23+00:00,2025-09-08 13:00:47+00:00,2025-09-08 13:01:10+00:00,2025-09-08 13:01:10+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,23.0,motorola moto g play (2021),2025-08-10T10:06:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+156,2,No,,1,Pyrethroid + Chlorfenapyr,Interceptor,1.0,2025-09-01 18:47:06+00:00,2025-09-01 18:47:06+00:00,272.0,c30bd1df-f283-4876-b20c-547a46b935f8,vht,jv,2025-08-22 09:17:56+00:00,Pyrethrum Spray Catch (PSC),Fresh,"none
+House Number: 1",2025-08-22 09:17:56+00:00,2025-08-29 10:25:58+00:00,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,50.0,OK
+157,5,Yes,7.0,3,Pyrethroid Only,Royal Sentry 2.0,3.0,2025-09-01 18:47:06+00:00,2025-09-01 18:47:06+00:00,271.0,d7cc416f-7da8-480a-ae4f-3f4ed220a896,vector control officer,naillka petrr,2025-08-28 12:10:38+00:00,Pyrethrum Spray Catch (PSC),Fresh,"House Number: 01
+House Number: 01",2025-08-28 12:10:38+00:00,2025-08-29 10:25:39+00:00,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,60.0,OK
+158,2,Yes,12.0,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-09-01 18:47:06+00:00,2025-09-01 18:47:06+00:00,270.0,1116979c-e55d-4b75-9558-ed0bdcf51e74,Entomologist,kato mike,2025-08-20 10:08:48+00:00,Pyrethrum Spray Catch (PSC),Fresh,"
+
+House Number: 3",2025-08-20 10:08:48+00:00,2025-08-23 09:35:24+00:00,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+151,5,Yes,5.0,2,Pyrethroid + Chlorfenapyr,OLYSET Net,5.0,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,266.0,ee6de2c8-5889-494e-af99-d96560238e62,hznz,xjx,2025-08-31 10:55:49+00:00,Human Landing Catch (HLC),Fresh,"House Number: 4
+House Number: 4",2025-08-31 10:55:49+00:00,2025-08-31 16:06:30+00:00,2025-09-01 18:47:04+00:00,2025-09-01 18:47:04+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+152,59,Yes,9.0,1,Pyrethroid Only,PermaNet 2.0,2.0,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,264.0,962a62e9-546e-43f0-89d6-1a1066c4b181,vector control officer ,Naika peter,2025-08-28 12:49:17+00:00,Pyrethrum Spray Catch (PSC),Dessicated,"House Number: 01
+House Number: 01",2025-08-28 12:49:17+00:00,2025-08-29 10:25:22+00:00,2025-09-01 18:47:04+00:00,2025-09-01 18:47:04+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,3.389830508474576,Suspicious: Large household
+153,0,No,,0,Unknown,Unknown,,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,265.0,dd58e334-b18f-44cf-a241-5c0d68315d41,Entomologist ,Kigongo Siriman,2025-08-25 07:24:37+00:00,Pyrethrum Spray Catch (PSC),Fresh,"House Number: 02
+House Number: 02",2025-08-25 07:24:37+00:00,2025-08-29 10:25:47+00:00,2025-09-01 18:47:04+00:00,2025-09-01 18:47:04+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+154,2,No,,0,Unknown,Unknown,,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,268.0,9babb70f-4d8b-4f06-a079-0a1279a6713f,erdf,gggv,2025-08-28 11:06:46+00:00,Pyrethrum Spray Catch (PSC),Fresh,"House Number: 01
+House Number: 01",2025-08-28 11:06:46+00:00,2025-08-28 11:20:49+00:00,2025-09-01 18:47:04+00:00,2025-09-01 18:47:04+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+155,7,Yes,10.0,2,Pyrethroid Only,PermaNet 2.0,3.0,2025-09-01 18:47:05+00:00,2025-09-01 18:47:05+00:00,269.0,ceff7447-171c-4019-bd80-2732ae11e61c,vector control officer ,Naika peter,2025-08-28 13:31:37+00:00,Pyrethrum Spray Catch (PSC),Dessicated,"House Number: 01
+House Number: 01",2025-08-28 13:31:37+00:00,2025-08-29 10:25:13+00:00,2025-09-01 18:47:04+00:00,2025-09-01 18:47:04+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,42.857142857142854,OK
+150,0,No,,0,Unknown,Unknown,,2025-08-20 02:14:43+00:00,2025-08-20 02:14:43+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+149,0,No,,0,Unknown,Unknown,,2025-08-19 18:40:19+00:00,2025-08-19 18:40:19+00:00,262.0,b1ceb817-32c6-4878-8928-6678f180e155,Master,Eleanor,2025-08-17 10:27:37+00:00,Other,Fresh,"JHU trap 12, Malongo
+House Number: 12",2025-08-17 10:27:37+00:00,2025-08-19 15:34:54+00:00,2025-08-19 18:40:18+00:00,2025-08-19 18:40:18+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+148,0,No,,0,Unknown,Unknown,,2025-08-19 03:45:20+00:00,2025-08-19 03:45:20+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+147,0,No,,0,Unknown,Unknown,,2025-08-18 17:08:07+00:00,2025-08-18 17:08:07+00:00,260.0,b7d1a8b9-6182-440b-bdb2-2ceda200ab76,student,Lauren,2025-08-17 10:27:41+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC 19
+
+House Number: CDC 19",2025-08-17 10:27:41+00:00,2025-08-17 10:32:01+00:00,2025-08-18 17:08:07+00:00,2025-08-18 17:08:07+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+146,0,No,,0,Unknown,Unknown,,2025-08-18 17:08:00+00:00,2025-08-18 17:08:00+00:00,258.0,95291573-ea77-4ac4-82f8-9be06d6b2285,Student,Jack,2025-08-15 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"JH12
+House Number: na",2025-08-17 06:29:48+00:00,2025-08-17 06:43:31+00:00,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+140,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,254.0,bffeac2e-d33d-4a96-b501-ef76ab40b360,Rock Clmbr,Jack,2025-08-15 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"CDC 19
+House Number: ka",2025-08-17 06:43:52+00:00,2025-08-17 06:50:22+00:00,2025-08-18 17:07:58+00:00,2025-08-18 17:07:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+141,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,253.0,43063012-6b12-4b21-80a4-80cb18c84871,student,Lauren,2025-08-17 10:02:51+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC 25
+House Number: CDC 25",2025-08-17 10:02:51+00:00,2025-08-17 10:07:20+00:00,2025-08-18 17:07:58+00:00,2025-08-18 17:07:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+142,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,255.0,8dc3d04d-8dc6-4a01-926c-963330fd51bd,student,Lauren,2025-08-17 09:03:10+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC 11
+House Number: CDC 11",2025-08-17 09:03:10+00:00,2025-08-17 09:15:13+00:00,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+143,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,256.0,f5bce5f7-32be-4b02-bec1-9a05753c1fe0,student,Lauren,2025-08-17 10:07:20+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC 3
+House Number: CDC 3",2025-08-17 10:07:20+00:00,2025-08-17 10:09:11+00:00,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+144,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,257.0,a02f14d8-e47e-4e44-adee-79b9115c9903,student,Lauren,2025-08-17 09:21:32+00:00,Other,Fresh,"malongo, JHU TRAP 2
+House Number: JH TRAP 2",2025-08-17 09:21:32+00:00,2025-08-17 09:24:52+00:00,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+145,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,259.0,85e95582-f7ab-4e27-a5e6-ed9d67aebbe3,student,Lauren,2025-08-17 09:38:50+00:00,Other,Fresh,"malongo, JH 7
+House Number: JH 7",2025-08-17 09:38:50+00:00,2025-08-17 10:02:48+00:00,2025-08-18 17:07:59+00:00,2025-08-18 17:07:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+139,0,No,,0,Unknown,Unknown,,2025-08-18 17:07:58+00:00,2025-08-18 17:07:58+00:00,252.0,333f2738-1743-40e4-a055-9a91b4e68853,student,Lauren,2025-08-17 09:15:15+00:00,Other,Fresh,"malongo, JH TRAP 1
+House Number: JH TRAP 1",2025-08-17 09:15:15+00:00,2025-08-17 09:21:32+00:00,2025-08-18 17:07:57+00:00,2025-08-18 17:07:57+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+138,0,No,,0,Unknown,Unknown,,2025-08-17 10:09:10+00:00,2025-08-17 10:09:10+00:00,251.0,ed6f5c38-5ed2-4ae9-884b-90c557e4aa09,DJ,Eleanor,2025-08-17 10:05:49+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 5, Malongo
+House Number: 5",2025-08-17 10:05:49+00:00,2025-08-17 10:09:06+00:00,2025-08-17 10:09:10+00:00,2025-08-17 10:09:10+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+137,0,No,,0,Unknown,Unknown,,2025-08-17 10:06:47+00:00,2025-08-17 10:06:47+00:00,250.0,7eefd6d7-902b-4ee8-abc1-aa0cbe147141,big mama,haley,2025-08-17 10:02:46+00:00,Other,Fresh,"malongo, JH trap 8
+House Number: JH trap 8",2025-08-17 10:02:46+00:00,2025-08-17 10:06:47+00:00,2025-08-17 10:06:47+00:00,2025-08-17 10:06:47+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+136,0,No,,0,Unknown,Unknown,,2025-08-17 10:04:25+00:00,2025-08-17 10:04:25+00:00,249.0,03907fb5-576d-40d9-b7f3-c23fbab903af,DJ,Eleanor,2025-08-17 10:03:13+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 7, Malongo
+House Number: 7",2025-08-17 10:03:13+00:00,2025-08-17 10:04:23+00:00,2025-08-17 10:04:25+00:00,2025-08-17 10:04:25+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+135,0,No,,0,Unknown,Unknown,,2025-08-17 09:42:30+00:00,2025-08-17 09:42:30+00:00,248.0,45967268-4b90-4d41-8755-cdae790f0c9c,bossman,haley,2025-08-16 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC trap 10
+House Number: CDC trap 10",2025-08-17 09:38:13+00:00,2025-08-17 09:42:23+00:00,2025-08-17 09:42:29+00:00,2025-08-17 09:42:29+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+134,0,No,,0,Unknown,Unknown,,2025-08-17 09:26:16+00:00,2025-08-17 09:26:16+00:00,247.0,e3fdf51f-8553-4c4b-8e00-de6050b341f0,boss,haley,2025-08-17 09:18:09+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC trap 1
+House Number: CDC trap 1",2025-08-17 09:18:09+00:00,2025-08-17 09:26:16+00:00,2025-08-17 09:26:16+00:00,2025-08-17 09:26:16+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+133,0,No,,0,Unknown,Unknown,,2025-08-17 09:25:45+00:00,2025-08-17 09:25:45+00:00,246.0,61aad6b5-44fd-4f4e-a56a-73f44292824c,Engr,Eleanor,2025-08-17 09:23:52+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 8, Malongo
+House Number: 8",2025-08-17 09:23:52+00:00,2025-08-17 09:25:42+00:00,2025-08-17 09:25:45+00:00,2025-08-17 09:25:45+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+132,0,No,,0,Unknown,Unknown,,2025-08-17 09:23:52+00:00,2025-08-17 09:23:52+00:00,245.0,883b385a-e950-4468-8aa5-060123cf18b8,Judge,Eleanor,2025-08-17 09:18:26+00:00,Other,Fresh,"JHU trap 11, Malongo
+House Number: 11",2025-08-17 09:18:26+00:00,2025-08-17 09:23:50+00:00,2025-08-17 09:23:52+00:00,2025-08-17 09:23:52+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+131,0,No,,0,Unknown,Unknown,,2025-08-17 09:15:52+00:00,2025-08-17 09:15:52+00:00,244.0,51fde9ac-d4b8-4579-8351-575fb2ac2876,Dr,Eleanor,2025-08-17 09:08:59+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 6, Malongo
+House Number: 6",2025-08-17 09:08:59+00:00,2025-08-17 09:15:50+00:00,2025-08-17 09:15:51+00:00,2025-08-17 09:15:51+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+130,0,No,,0,Unknown,Unknown,,2025-08-17 09:15:42+00:00,2025-08-17 09:15:42+00:00,243.0,00c9ee12-2b3d-4772-b7e5-31ed71bdff42,Pokemon trainer,haley,2025-08-15 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC trap 19
+House Number: CDC trap 19",2025-08-17 06:45:14+00:00,2025-08-17 09:15:41+00:00,2025-08-17 09:15:42+00:00,2025-08-17 09:15:42+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+129,0,No,,0,Unknown,Unknown,,2025-08-17 09:07:37+00:00,2025-08-17 09:07:37+00:00,242.0,3faf52b8-97f9-42e1-a5af-5d0ca731056f,Elder,Eleanor,2025-08-17 09:03:19+00:00,Other,Fresh,"JHU trap 3, Malongo
+House Number: 3",2025-08-17 09:03:19+00:00,2025-08-17 09:07:30+00:00,2025-08-17 09:07:36+00:00,2025-08-17 09:07:36+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+128,0,No,,0,Unknown,Unknown,,2025-08-17 06:44:31+00:00,2025-08-17 06:44:31+00:00,241.0,b7955abb-ee4d-4c3a-b10f-3b2d7b86fe94,Emperor,Eleanor,2025-08-15 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 10, Malongo
+House Number: 10",2025-08-17 06:35:28+00:00,2025-08-17 06:44:29+00:00,2025-08-17 06:44:31+00:00,2025-08-17 06:44:31+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+127,0,No,,0,Unknown,Unknown,,2025-08-17 06:44:20+00:00,2025-08-17 06:44:20+00:00,240.0,cbea3ed0-361f-4c4c-8962-177d6cc54043,maam,haley,2025-08-15 21:00:00+00:00,Other,Fresh,"malongo, JH trap 7
+House Number: JH trap 7",2025-08-17 06:39:31+00:00,2025-08-17 06:44:19+00:00,2025-08-17 06:44:20+00:00,2025-08-17 06:44:20+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+126,0,No,,0,Unknown,Unknown,,2025-08-17 06:39:17+00:00,2025-08-17 06:39:17+00:00,239.0,65cce6aa-685f-4652-a309-dc6fbbcdc928,student,Ana,2025-08-16 08:48:11+00:00,CDC Light Trap (LTC),Fresh,"House Number: 3
+House Number: 3",2025-08-16 08:48:11+00:00,2025-08-17 06:39:16+00:00,2025-08-17 06:39:16+00:00,2025-08-17 06:39:16+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+125,0,No,,0,Unknown,Unknown,,2025-08-17 06:34:59+00:00,2025-08-17 06:34:59+00:00,238.0,39869e37-00fd-4041-ac72-6200b9d960e4,Colonel,Eleanor,2025-08-15 21:00:00+00:00,Other,Fresh,"JHU trap 1, Malongo
+House Number: 1",2025-08-17 06:31:39+00:00,2025-08-17 06:34:57+00:00,2025-08-17 06:34:58+00:00,2025-08-17 06:34:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+124,0,No,,0,Unknown,Unknown,,2025-08-17 06:28:33+00:00,2025-08-17 06:28:33+00:00,237.0,b155a584-27a2-4c10-b954-6896b997f0f9,General,Eleanor,2025-08-15 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 7, Malongo
+House Number: 7",2025-08-17 06:24:38+00:00,2025-08-17 06:28:31+00:00,2025-08-17 06:28:33+00:00,2025-08-17 06:28:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+123,0,No,,0,Unknown,Unknown,,2025-08-17 06:24:38+00:00,2025-08-17 06:24:38+00:00,236.0,93d49600-61f5-4eb9-87c0-9152bb94e485,Captain,Eleanor,2025-08-15 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 1, Malongo
+House Number: 1",2025-08-17 06:22:33+00:00,2025-08-17 06:24:36+00:00,2025-08-17 06:24:37+00:00,2025-08-17 06:24:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+122,0,No,,0,Unknown,Unknown,,2025-08-17 06:22:03+00:00,2025-08-17 06:22:03+00:00,235.0,905cf13c-2e74-4a73-b2e6-7acbc142ce9c,student,Eleanor,2025-08-15 21:00:00+00:00,Other,Fresh,"JHU trap 9, Malongo
+House Number: 9",2025-08-17 06:15:30+00:00,2025-08-17 06:22:01+00:00,2025-08-17 06:22:02+00:00,2025-08-17 06:22:02+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+119,0,No,,0,Unknown,Unknown,,2025-08-16 12:29:48+00:00,2025-08-16 12:29:48+00:00,223.0,15e60213-dfb8-40b0-be2b-ce8c86605df9,student,haley,2025-08-16 08:47:13+00:00,CDC Light Trap (LTC),Fresh,"Malongo, CDC trap 6
+House Number: CDC trap 6",2025-08-16 08:47:13+00:00,2025-08-16 08:56:27+00:00,2025-08-16 12:29:47+00:00,2025-08-16 12:29:47+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+120,0,No,,0,Unknown,Unknown,,2025-08-16 12:29:48+00:00,2025-08-16 12:29:48+00:00,221.0,da72a398-33be-4187-a7d1-aa49afa11bba,Student,Jack,2025-08-16 11:23:47+00:00,CDC Light Trap (LTC),Fresh,"MALANGO JH 3
+House Number: na",2025-08-16 11:23:47+00:00,2025-08-16 12:29:16+00:00,2025-08-16 12:29:47+00:00,2025-08-16 12:29:47+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+121,0,No,,0,Unknown,Unknown,,2025-08-16 12:29:48+00:00,2025-08-16 12:29:48+00:00,222.0,d726e441-d3dc-4edb-8c34-e511119497ce,missus,haley,2025-08-16 08:56:30+00:00,Other,Fresh,"malongo, JH trap 2
+House Number: JH trap 2",2025-08-16 08:56:30+00:00,2025-08-16 08:58:27+00:00,2025-08-16 12:29:47+00:00,2025-08-16 12:29:47+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+118,0,No,,0,Unknown,Unknown,,2025-08-16 12:08:56+00:00,2025-08-16 12:08:56+00:00,220.0,324840de-c8b6-46da-84b3-61e9f8fbb340,Engineer,Sunny,2025-08-16 10:41:33+00:00,CDC Light Trap (LTC),Fresh,"Namadhi 100+ mosquito test on mansonia and culex
+House Number: na",2025-08-16 10:41:33+00:00,2025-08-16 12:08:54+00:00,2025-08-16 12:08:56+00:00,2025-08-16 12:08:56+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+117,0,No,,0,Unknown,Unknown,,2025-08-16 11:45:11+00:00,2025-08-16 11:45:11+00:00,219.0,c34a0450-fce9-4c85-a6ae-8a808ff62be0,student,Lauren,2025-08-16 11:24:52+00:00,Other,Fresh,"Malongo, JHU trap 11
+House Number: JHU TRAP 11",2025-08-16 11:24:52+00:00,2025-08-16 11:45:08+00:00,2025-08-16 11:45:11+00:00,2025-08-16 11:45:11+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+116,0,No,,0,Unknown,Unknown,,2025-08-16 11:24:02+00:00,2025-08-16 11:24:02+00:00,218.0,10c6ee60-7830-4fa8-951b-aa7f7efbd215,student,Lauren,2025-08-16 11:21:39+00:00,CDC Light Trap (LTC),Fresh,"Malongo, CDC 5
+House Number: CDC TRAP 5",2025-08-16 11:21:39+00:00,2025-08-16 11:24:00+00:00,2025-08-16 11:24:02+00:00,2025-08-16 11:24:02+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+115,0,No,,0,Unknown,Unknown,,2025-08-16 09:40:09+00:00,2025-08-16 09:40:09+00:00,217.0,a84fdbba-e16b-43de-9664-eb97d0902ffe,student,Lauren,2025-08-16 09:37:13+00:00,CDC Light Trap (LTC),Fresh,"Malongo, CDC 11
+
+House Number: CDC 11",2025-08-16 09:37:13+00:00,2025-08-16 09:40:07+00:00,2025-08-16 09:40:09+00:00,2025-08-16 09:40:09+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+114,0,No,,0,Unknown,Unknown,,2025-08-16 09:18:49+00:00,2025-08-16 09:18:49+00:00,216.0,3979d48c-ebf0-4866-8ef2-21e41c2ae901,student,Eleanor,2025-08-16 09:13:49+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 8, Malongo
+House Number: 8",2025-08-16 09:13:49+00:00,2025-08-16 09:18:42+00:00,2025-08-16 09:18:49+00:00,2025-08-16 09:18:49+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+113,0,No,,0,Unknown,Unknown,,2025-08-16 08:55:41+00:00,2025-08-16 08:55:41+00:00,215.0,4cda2528-4fcf-4dd7-805c-a60cd9f2a9ac,Sgt,Jack,2025-08-16 08:47:13+00:00,CDC Light Trap (LTC),Fresh,"MALONGO CDC 6
+House Number: CDC 6",2025-08-16 08:47:13+00:00,2025-08-16 08:55:40+00:00,2025-08-16 08:55:41+00:00,2025-08-16 08:55:41+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+112,0,No,,0,Unknown,Unknown,,2025-08-16 08:55:04+00:00,2025-08-16 08:55:04+00:00,214.0,69ba3654-b816-4d9c-84b0-969818766880,student,Eleanor,2025-08-16 08:50:23+00:00,Other,Fresh,"JHU trap 10, Malongo
+House Number: 10",2025-08-16 08:50:23+00:00,2025-08-16 08:55:02+00:00,2025-08-16 08:55:03+00:00,2025-08-16 08:55:03+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+111,0,No,,0,Unknown,Unknown,,2025-08-16 08:47:47+00:00,2025-08-16 08:47:47+00:00,213.0,c5ca863a-7648-4110-91d0-77bb58f14799,student,Eleanor,2025-08-16 08:45:25+00:00,Other,Fresh,"JHU trap 8, Malongo
+House Number: 8",2025-08-16 08:45:25+00:00,2025-08-16 08:47:44+00:00,2025-08-16 08:47:46+00:00,2025-08-16 08:47:46+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+110,0,No,,0,Unknown,Unknown,,2025-08-16 08:43:13+00:00,2025-08-16 08:43:13+00:00,212.0,eb58c5d1-ea40-4a52-a48d-8c0b350ec8dd,student,Lauren,2025-08-15 11:55:05+00:00,CDC Light Trap (LTC),Other,"malongo, CDC 7
+
+House Number: CDC 7",2025-08-15 11:55:05+00:00,2025-08-16 08:43:09+00:00,2025-08-16 08:43:13+00:00,2025-08-16 08:43:13+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+109,0,No,,0,Unknown,Unknown,,2025-08-16 04:26:33+00:00,2025-08-16 04:26:33+00:00,211.0,d72eb344-22eb-49df-b34a-8e522eb6a8aa,cbid,Anand,2025-08-15 11:42:37+00:00,CDC Light Trap (LTC),Fresh,"molongo CDC 7
+
+House Number: molongo CDC 7",2025-08-15 11:42:37+00:00,2025-08-16 04:25:07+00:00,2025-08-16 04:26:33+00:00,2025-08-16 04:26:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+108,0,No,,0,Unknown,Unknown,,2025-08-15 20:48:00+00:00,2025-08-15 20:48:00+00:00,206.0,b3829aa0-29c3-4ec5-a722-2495f3a30ae4,student,Lauren,2025-08-15 11:59:26+00:00,CDC Light Trap (LTC),Other,"malongo, CDC 7
+
+House Number: CDC 7",2025-08-15 11:59:26+00:00,2025-08-15 20:47:59+00:00,2025-08-15 20:47:59+00:00,2025-08-15 20:47:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+107,0,No,,0,Unknown,Unknown,,2025-08-15 11:59:25+00:00,2025-08-15 11:59:25+00:00,203.0,adadf62c-08c7-43bb-b830-c1aadffbc1cc,student,haley,2025-08-15 11:31:35+00:00,Other,Fresh,"malongo, JH trap 7
+House Number: JH trap 7",2025-08-15 11:31:35+00:00,2025-08-15 11:59:23+00:00,2025-08-15 11:59:25+00:00,2025-08-15 11:59:25+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+106,0,No,,0,Unknown,Unknown,,2025-08-15 11:55:07+00:00,2025-08-15 11:55:07+00:00,202.0,fc75c20a-0893-41d1-9cd5-b087a667ecab,student,Lauren,2025-08-15 11:33:28+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC 5
+
+House Number: CDC TRAP 5",2025-08-15 11:33:28+00:00,2025-08-15 11:55:04+00:00,2025-08-15 11:55:07+00:00,2025-08-15 11:55:07+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+105,0,No,,0,Unknown,Unknown,,2025-08-15 11:49:58+00:00,2025-08-15 11:49:58+00:00,201.0,3199f4dd-abe2-419e-8b13-8423246e5c6c,mistah,Jack,2025-08-15 11:07:36+00:00,CDC Light Trap (LTC),Fresh,"CDC 3
+House Number: na",2025-08-15 11:07:36+00:00,2025-08-15 11:49:55+00:00,2025-08-15 11:49:57+00:00,2025-08-15 11:49:57+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+104,0,No,,0,Unknown,Unknown,,2025-08-15 11:42:38+00:00,2025-08-15 11:42:38+00:00,200.0,e35d961f-37e4-4d27-ae82-b9b5a4273497,cbid,Anand,2025-08-15 11:27:59+00:00,CDC Light Trap (LTC),Fresh,"molongo
+House Number: cdc-01, namadhi, molongo",2025-08-15 11:27:59+00:00,2025-08-15 11:42:36+00:00,2025-08-15 11:42:38+00:00,2025-08-15 11:42:38+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+103,0,No,,0,Unknown,Unknown,,2025-08-15 11:31:36+00:00,2025-08-15 11:31:36+00:00,199.0,0697be5e-69e3-4bbc-bfce-0eb18b2e37a1,student,Lauren,2025-08-15 11:04:12+00:00,CDC Light Trap (LTC),Other,"Malongo, CDC LT 11
+
+House Number: CDC TRAP 11",2025-08-15 11:04:12+00:00,2025-08-15 11:31:32+00:00,2025-08-15 11:31:35+00:00,2025-08-15 11:31:35+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+102,0,No,,0,Unknown,Unknown,,2025-08-15 11:25:57+00:00,2025-08-15 11:25:57+00:00,198.0,26b42744-9f6b-413a-b048-b7ae4a4b49e2,student,haley,2025-08-15 10:59:59+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC trap 11
+House Number: CDC trap 11",2025-08-15 10:59:59+00:00,2025-08-15 11:25:57+00:00,2025-08-15 11:25:57+00:00,2025-08-15 11:25:57+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+101,0,No,,0,Unknown,Unknown,,2025-08-15 11:24:57+00:00,2025-08-15 11:24:57+00:00,197.0,17f18e7a-7f96-42c6-a79d-3805c57f1d65,student,Eleanor,2025-08-15 10:42:21+00:00,CDC Light Trap (LTC),Fresh,"CDC trap 10, Malongo
+House Number: 10",2025-08-15 10:42:21+00:00,2025-08-15 11:24:50+00:00,2025-08-15 11:24:57+00:00,2025-08-15 11:24:57+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+100,0,No,,0,Unknown,Unknown,,2025-08-15 11:04:14+00:00,2025-08-15 11:04:14+00:00,196.0,1bf7baaa-98bb-478a-884f-043f1fbac687,student,Lauren,2025-08-15 10:14:49+00:00,Other,Other,"malongo, JHU TRAP 3
+
+House Number: JHU TRAP 3",2025-08-15 10:14:49+00:00,2025-08-15 11:04:10+00:00,2025-08-15 11:04:13+00:00,2025-08-15 11:04:13+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+99,0,No,,0,Unknown,Unknown,,2025-08-15 10:36:30+00:00,2025-08-15 10:36:30+00:00,195.0,f8be04b4-a012-4783-bcbe-1cc0213c6378,student,Eleanor,2025-08-15 10:11:44+00:00,Other,Fresh,"JH trap 12, Malongo
+House Number: 12",2025-08-15 10:11:44+00:00,2025-08-15 10:36:23+00:00,2025-08-15 10:36:30+00:00,2025-08-15 10:36:30+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+98,0,No,,0,Unknown,Unknown,,2025-08-15 09:56:57+00:00,2025-08-15 09:56:57+00:00,194.0,2fadb1ab-454c-4b87-829c-2cbe3fde64bb,student,Lauren,2025-08-15 09:14:47+00:00,Other,Fresh,"malongo, JHU TRAP 1
+
+House Number: JHU TRAP 1",2025-08-15 09:14:47+00:00,2025-08-15 09:56:51+00:00,2025-08-15 09:56:57+00:00,2025-08-15 09:56:57+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+97,0,No,,0,Unknown,Unknown,,2025-08-15 09:48:12+00:00,2025-08-15 09:48:12+00:00,193.0,5d097098-1d46-4c14-90be-e983b4272a45,mr,Jack,2025-08-15 09:11:23+00:00,CDC Light Trap (LTC),Fresh,"MALONGO CDC 19
+House Number: na",2025-08-15 09:11:23+00:00,2025-08-15 09:48:04+00:00,2025-08-15 09:48:09+00:00,2025-08-15 09:48:09+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+96,0,No,,0,Unknown,Unknown,,2025-08-15 09:34:52+00:00,2025-08-15 09:34:52+00:00,192.0,8497c99b-fcf2-414b-8933-ec06ba09b2b9,student,haley,2025-08-15 09:11:01+00:00,CDC Light Trap (LTC),Fresh,"malongo, CDC trap 8
+House Number: CDC trap 8",2025-08-15 09:11:01+00:00,2025-08-15 09:34:46+00:00,2025-08-15 09:34:51+00:00,2025-08-15 09:34:51+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+91,0,No,,0,Unknown,Unknown,,2025-08-15 09:20:13+00:00,2025-08-15 09:20:13+00:00,191.0,b4640cde-1d71-4048-b1ee-d4ec0f9f70c5,student,haley,2025-08-14 08:45:07+00:00,Other,Fresh,"mayuge, JH trap 12
+House Number: JH trap 12",2025-08-14 08:45:07+00:00,2025-08-14 08:53:35+00:00,2025-08-15 09:20:11+00:00,2025-08-15 09:20:11+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+92,0,No,,0,Unknown,Unknown,,2025-08-15 09:20:13+00:00,2025-08-15 09:20:13+00:00,190.0,e17ae24f-82fe-4c1c-acae-5b94b8ca0a69,student,haley,2025-08-14 09:00:12+00:00,Other,Fresh,"mayuge, JH trap 10
+House Number: JH trap 10",2025-08-14 09:00:12+00:00,2025-08-14 09:46:43+00:00,2025-08-15 09:20:11+00:00,2025-08-15 09:20:11+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+93,0,No,,0,Unknown,Unknown,,2025-08-15 09:20:13+00:00,2025-08-15 09:20:13+00:00,187.0,4a6517c2-88e8-434e-b139-43dd22d264bf,student,Eleanor,2025-08-15 08:23:56+00:00,Other,Fresh,"JHU trap 8, Malongo
+House Number: 8",2025-08-15 08:23:56+00:00,2025-08-15 09:19:45+00:00,2025-08-15 09:20:11+00:00,2025-08-15 09:20:11+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+94,0,No,,0,Unknown,Unknown,,2025-08-15 09:20:13+00:00,2025-08-15 09:20:13+00:00,189.0,0e9b71ea-0edd-4757-9435-3cc827fba744,student,haley,2025-08-14 08:53:44+00:00,Other,Fresh,"mayuge, JH trap 9
+House Number: JH trap 9",2025-08-14 08:53:44+00:00,2025-08-14 09:00:10+00:00,2025-08-15 09:20:11+00:00,2025-08-15 09:20:11+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+95,0,No,,0,Unknown,Unknown,,2025-08-15 09:20:13+00:00,2025-08-15 09:20:13+00:00,188.0,d37e2478-b237-483a-a482-7171c73f0777,student,haley,2025-08-14 09:46:54+00:00,Other,Fresh,"mayuge, JH trap 7
+House Number: JH trap 7",2025-08-14 09:46:54+00:00,2025-08-14 09:56:51+00:00,2025-08-15 09:20:11+00:00,2025-08-15 09:20:11+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+90,0,No,,0,Unknown,Unknown,,2025-08-15 08:51:56+00:00,2025-08-15 08:51:56+00:00,186.0,e6de5212-fccb-4445-a966-b01ace51c450,student,haley,2025-08-15 08:42:41+00:00,Other,Fresh,"malongo, JH trap 11
+House Number: JH trap 11",2025-08-15 08:42:41+00:00,2025-08-15 08:51:55+00:00,2025-08-15 08:51:56+00:00,2025-08-15 08:51:56+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+89,0,No,,0,Unknown,Unknown,,2025-08-15 08:43:25+00:00,2025-08-15 08:43:25+00:00,185.0,d0e21ab8-e756-456f-b3fe-61a6466ea016,Mr,Jack,2025-08-15 08:31:22+00:00,CDC Light Trap (LTC),Fresh,"MALONGO CDC 6
+House Number: na",2025-08-15 08:31:22+00:00,2025-08-15 08:43:23+00:00,2025-08-15 08:43:24+00:00,2025-08-15 08:43:24+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+88,0,No,,0,Unknown,Unknown,,2025-08-15 08:43:07+00:00,2025-08-15 08:43:07+00:00,184.0,ae7b18be-3d0d-4792-9dee-d2f5d11731be,student,Lauren,2025-08-15 08:27:43+00:00,Other,Other,"malongo, JHU TRAP 2
+
+House Number: JHU TRAP 2",2025-08-15 08:27:43+00:00,2025-08-15 08:43:04+00:00,2025-08-15 08:43:06+00:00,2025-08-15 08:43:06+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+87,0,No,,0,Unknown,Unknown,,2025-08-15 08:42:33+00:00,2025-08-15 08:42:33+00:00,183.0,3059f300-484a-4523-a00c-998995e02b00,student,haley,2025-08-15 08:26:15+00:00,Other,Fresh,"malongo, JH trap 9
+House Number: JHU trap 9",2025-08-15 08:26:15+00:00,2025-08-15 08:42:31+00:00,2025-08-15 08:42:32+00:00,2025-08-15 08:42:32+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+86,0,No,,0,Unknown,Unknown,,2025-08-14 10:05:53+00:00,2025-08-14 10:05:53+00:00,182.0,05fee842-4093-448e-b483-b14b6955720d,student,Lauren,2025-08-14 09:56:17+00:00,Other,Fresh,"mayuge, JHU TRAP 6
+House Number: JHU TRAP 6",2025-08-14 09:56:17+00:00,2025-08-14 10:05:43+00:00,2025-08-14 10:05:52+00:00,2025-08-14 10:05:52+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+83,0,No,,0,Unknown,Unknown,,2025-08-14 09:52:37+00:00,2025-08-14 09:52:37+00:00,181.0,a38b920a-4dd0-47e8-9c41-20c13063aa06,student,Eleanor,2025-08-14 08:49:46+00:00,Other,Fresh,"JHU trap 11, Mayuge
+House Number: 11",2025-08-14 08:49:46+00:00,2025-08-14 09:45:30+00:00,2025-08-14 09:52:37+00:00,2025-08-14 09:52:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+84,0,No,,0,Unknown,Unknown,,2025-08-14 09:52:37+00:00,2025-08-14 09:52:37+00:00,179.0,fdea1cd9-9563-4f36-8fad-ba4be13f19df,student,Eleanor,2025-08-14 09:45:32+00:00,Other,Fresh,"JHU trap 5, Mayuge
+House Number: 5",2025-08-14 09:45:32+00:00,2025-08-14 09:51:47+00:00,2025-08-14 09:52:37+00:00,2025-08-14 09:52:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+85,0,No,,0,Unknown,Unknown,,2025-08-14 09:52:37+00:00,2025-08-14 09:52:37+00:00,180.0,e242fec3-aaf9-4c27-8a82-544cab8aa3e3,Mr,Jack,2025-08-13 08:48:35+00:00,CDC Light Trap (LTC),Fresh,"JH 9 and 10
+House Number: 6",2025-08-13 08:48:35+00:00,2025-08-13 09:21:26+00:00,2025-08-14 09:52:37+00:00,2025-08-14 09:52:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+82,0,No,,0,Unknown,Unknown,,2025-08-14 09:50:13+00:00,2025-08-14 09:50:13+00:00,178.0,9baedeff-3d4d-4831-ba0b-0666b1b5da86,student,Lauren,2025-08-14 09:30:25+00:00,Other,Fresh,"mayuge, JHU TRAP 4
+House Number: JHU TRAP 4",2025-08-14 09:30:25+00:00,2025-08-14 09:50:11+00:00,2025-08-14 09:50:12+00:00,2025-08-14 09:50:12+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+81,0,No,,0,Unknown,Unknown,,2025-08-14 09:12:28+00:00,2025-08-14 09:12:28+00:00,177.0,2e3024ec-4367-4908-967a-7c79c5635cda,Mr,Jack,2025-08-14 08:40:33+00:00,CDC Light Trap (LTC),Fresh,"JH Trap 8
+House Number: na",2025-08-14 08:40:33+00:00,2025-08-14 09:12:26+00:00,2025-08-14 09:12:28+00:00,2025-08-14 09:12:28+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+80,0,No,,0,Unknown,Unknown,,2025-08-14 09:09:32+00:00,2025-08-14 09:09:32+00:00,176.0,44e3e51f-4c70-46ec-8f85-6193d73b8149,student,Lauren,2025-08-14 08:55:34+00:00,Other,Fresh,"mayuge, JHU TRAP 3
+
+House Number: JHU TRAP 3",2025-08-14 08:55:34+00:00,2025-08-14 09:09:12+00:00,2025-08-14 09:09:32+00:00,2025-08-14 09:09:32+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+79,0,No,,0,Unknown,Unknown,,2025-08-14 08:54:43+00:00,2025-08-14 08:54:43+00:00,175.0,1a1e8649-22f9-404f-9063-b2b309643614,student,Lauren,2025-08-14 08:47:10+00:00,Other,Fresh,"mayuge, JHU TRAP 2
+House Number: JHU TRAP 2",2025-08-14 08:47:10+00:00,2025-08-14 08:54:42+00:00,2025-08-14 08:54:43+00:00,2025-08-14 08:54:43+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+78,0,No,,0,Unknown,Unknown,,2025-08-14 08:47:13+00:00,2025-08-14 08:47:13+00:00,174.0,21a69c26-b94f-47ea-a3d7-7c88e0703b1e,student,Lauren,2025-08-14 08:40:48+00:00,Other,Fresh,"mayuge, JHU TRAP 1
+House Number: JHU TRAP 1",2025-08-14 08:40:48+00:00,2025-08-14 08:47:08+00:00,2025-08-14 08:47:12+00:00,2025-08-14 08:47:12+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+76,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-13 15:19:25+00:00,2025-08-13 15:19:25+00:00,172.0,d93a91e2-f0e5-461a-8b4a-c1ffadf880b1,student,Lauren,2025-08-13 08:36:30+00:00,Other,Fresh,"mayuge, JHU LT modified light
+
+House Number: 2",2025-08-13 08:36:30+00:00,2025-08-13 08:44:17+00:00,2025-08-13 15:19:24+00:00,2025-08-13 15:19:24+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+77,0,No,,0,Unknown,Unknown,,2025-08-13 15:19:25+00:00,2025-08-13 15:19:25+00:00,173.0,300382ce-1a8c-44f6-b6f3-a0d13e3e2e3f,student,Lauren,2025-08-13 08:58:02+00:00,Other,Fresh,"mayuge, JHU LT
+House Number: JHU LT 6",2025-08-13 08:58:02+00:00,2025-08-13 09:07:05+00:00,2025-08-13 15:19:25+00:00,2025-08-13 15:19:25+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+73,0,No,,0,Unknown,Unknown,,2025-08-13 15:19:24+00:00,2025-08-13 15:19:24+00:00,169.0,b69253a0-935b-4de1-ae00-3b7f5a76daff,student,Lauren,2025-08-13 09:07:11+00:00,Other,Fresh,"mayuge, JHU trap
+House Number: JHU TRAP 7",2025-08-13 09:07:11+00:00,2025-08-13 09:10:03+00:00,2025-08-13 15:19:21+00:00,2025-08-13 15:19:21+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+74,0,No,,0,Unknown,Unknown,,2025-08-13 15:19:24+00:00,2025-08-13 15:19:24+00:00,171.0,e1af73bd-d8b4-4797-b276-09b28f667c45,student,Lauren,2025-08-13 08:53:10+00:00,Other,Fresh,"mayuge, JHU LT 5
+House Number: JHU Trap 5",2025-08-13 08:53:10+00:00,2025-08-13 08:57:39+00:00,2025-08-13 15:19:23+00:00,2025-08-13 15:19:23+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+75,3,No,,1,Pyrethroid + PBO,PermaNet 3.0,3.0,2025-08-13 15:19:24+00:00,2025-08-13 15:19:24+00:00,170.0,3f0d8a08-87b9-41fa-9dec-e4599ea22d86,student,Lauren,2025-08-13 08:44:19+00:00,Other,Fresh,"mayuge, JHU LT modified light
+
+House Number: 3",2025-08-13 08:44:19+00:00,2025-08-13 08:53:09+00:00,2025-08-13 15:19:23+00:00,2025-08-13 15:19:23+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+70,0,No,,0,Unknown,Unknown,,2025-08-13 09:34:21+00:00,2025-08-13 09:34:21+00:00,166.0,72086b76-c89d-479b-ac11-576152a79c77,student,haley,2025-08-13 08:36:04+00:00,Other,Fresh,"mayuge, JH trap 12, lowered grate
+House Number: JH trap 12",2025-08-13 08:36:04+00:00,2025-08-13 08:38:49+00:00,2025-08-13 09:34:20+00:00,2025-08-13 09:34:20+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+71,0,No,,0,Unknown,Unknown,,2025-08-13 09:34:21+00:00,2025-08-13 09:34:21+00:00,168.0,00af8677-842a-4618-a084-f6ebd94d50d7,student,haley,2025-08-13 08:40:57+00:00,Other,Fresh,"mayuge, JH trap 11, lowered grate
+House Number: JH trap 11",2025-08-13 08:40:57+00:00,2025-08-13 08:47:40+00:00,2025-08-13 09:34:21+00:00,2025-08-13 09:34:21+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+72,0,No,,0,Unknown,Unknown,,2025-08-13 09:34:21+00:00,2025-08-13 09:34:21+00:00,167.0,efa3f643-88ec-4b1e-8d30-f9b11dc6d1a8,student,haley,2025-08-13 08:48:25+00:00,Other,Fresh,"mayuge, JH trap 7
+House Number: JH trap 7",2025-08-13 08:48:25+00:00,2025-08-13 09:11:37+00:00,2025-08-13 09:34:21+00:00,2025-08-13 09:34:21+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+69,0,No,,0,Unknown,Unknown,,2025-08-13 09:29:23+00:00,2025-08-13 09:29:23+00:00,165.0,e1fd21df-965e-41a5-8d1f-1190f8a30043,student,Eleanor,2025-08-13 09:01:19+00:00,Other,Fresh,"JHU trap 8, Mayuge
+House Number: 8",2025-08-13 09:01:19+00:00,2025-08-13 09:29:20+00:00,2025-08-13 09:29:22+00:00,2025-08-13 09:29:22+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+67,0,No,,0,Unknown,Unknown,,2025-08-13 08:59:09+00:00,2025-08-13 08:59:09+00:00,163.0,8abe7865-b4b3-41d3-aead-5141c434768d,student,Eleanor,2025-08-13 08:55:16+00:00,Other,Fresh,"JHU trap 4 (cool light), Mayuge
+House Number: 4",2025-08-13 08:55:16+00:00,2025-08-13 08:57:45+00:00,2025-08-13 08:59:09+00:00,2025-08-13 08:59:09+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+68,0,No,,0,Unknown,Unknown,,2025-08-13 08:59:09+00:00,2025-08-13 08:59:09+00:00,164.0,4e450822-a961-45b1-8c12-64f5da47e4d5,student,Eleanor,2025-08-13 08:35:59+00:00,Other,Fresh,"JHU trap 1 (warm light)
+House Number: 1",2025-08-13 08:35:59+00:00,2025-08-13 08:51:35+00:00,2025-08-13 08:59:09+00:00,2025-08-13 08:59:09+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+65,0,No,,0,Unknown,Unknown,,2025-08-12 11:40:00+00:00,2025-08-12 11:40:00+00:00,160.0,950f62c4-8db2-45b7-9835-ce11e95daaf7,student,haley,2025-08-11 12:00:44+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 7",2025-08-11 12:00:44+00:00,2025-08-11 12:15:32+00:00,2025-08-12 11:39:58+00:00,2025-08-12 11:39:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,41.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+66,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-12 11:40:00+00:00,2025-08-12 11:40:00+00:00,162.0,fecfa4de-8954-4edd-a0e2-c82e61d84b09,CBID,Anand,2025-08-11 10:48:00+00:00,Other,Fresh,"mayuge
+House Number: 2",2025-08-11 10:48:00+00:00,2025-08-11 11:20:16+00:00,2025-08-12 11:39:59+00:00,2025-08-12 11:39:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,45.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+61,2,No,,0,Unknown,Unknown,,2025-08-12 11:39:59+00:00,2025-08-12 11:39:59+00:00,161.0,3e0449f4-6f21-4516-8a58-47c9cb2eb29f,cbid,Anand,2025-08-12 09:00:17+00:00,Other,Fresh,"mayuge jh 7
+House Number: 7",2025-08-12 09:00:17+00:00,2025-08-12 09:27:04+00:00,2025-08-12 11:39:59+00:00,2025-08-12 11:39:59+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,42.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+62,0,No,,0,Unknown,Unknown,,2025-08-12 11:39:59+00:00,2025-08-12 11:39:59+00:00,158.0,957f5f21-908d-4598-8205-820d74d4fde9,CBID Student,Anand,2025-08-11 11:36:38+00:00,CDC Light Trap (LTC),Fresh,"Mayuge CDC 10
+House Number: 10",2025-08-11 11:36:38+00:00,2025-08-11 12:00:13+00:00,2025-08-12 11:39:58+00:00,2025-08-12 11:39:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,43.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+63,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-12 11:39:59+00:00,2025-08-12 11:39:59+00:00,157.0,6e53e540-0078-4696-b3cf-949bd9f602e3,CBID,Anand,2025-08-11 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"mayuge jh 10
+House Number: 10",2025-08-12 08:47:48+00:00,2025-08-12 09:00:14+00:00,2025-08-12 11:39:58+00:00,2025-08-12 11:39:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,44.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+64,0,No,,0,Unknown,Unknown,,2025-08-12 11:39:59+00:00,2025-08-12 11:39:59+00:00,159.0,8426aefd-d3fe-46c4-abf0-336678672306,CBID Student,Anand,2025-08-11 11:20:19+00:00,CDC Light Trap (LTC),Fresh,"Mayuge CDC 8
+House Number: 8",2025-08-11 11:20:19+00:00,2025-08-11 11:32:24+00:00,2025-08-12 11:39:58+00:00,2025-08-12 11:39:58+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,40.0,motorola moto g play (2021),2025-08-11T08:43:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+60,0,No,,0,Unknown,Unknown,,2025-08-12 11:30:04+00:00,2025-08-12 11:30:04+00:00,156.0,3fb2dfb0-1c05-44a0-812d-08ce0cd49dda,Mr,Jack Darbonne,2025-08-11 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"Mayuge JH Trap 5
+House Number: na",2022-12-16 23:01:17+00:00,2025-08-12 11:30:00+00:00,2025-08-12 11:30:03+00:00,2025-08-12 11:30:03+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+59,0,No,,0,Unknown,Unknown,,2025-08-12 11:27:19+00:00,2025-08-12 11:27:19+00:00,152.0,40df4c2e-bc98-4294-8918-92cb5499a122,student,Eleanor,2025-08-12 10:57:47+00:00,CDC Light Trap (LTC),Fresh,"CDC 5, Mayuge
+House Number: 5",2025-08-12 10:57:47+00:00,2025-08-12 11:03:54+00:00,2025-08-12 11:27:17+00:00,2025-08-12 11:27:17+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,39.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+56,0,No,,0,Unknown,Unknown,,2025-08-12 11:27:18+00:00,2025-08-12 11:27:18+00:00,153.0,250704cd-8482-4402-8325-c51645f8c935,Mr,Jack,2025-08-12 09:04:54+00:00,CDC Light Trap (LTC),Fresh,"Mayuge JH5
+
+House Number: na",2025-08-12 09:04:54+00:00,2025-08-12 09:07:34+00:00,2025-08-12 11:27:17+00:00,2025-08-12 11:27:17+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,38.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+57,0,No,,0,Unknown,Unknown,,2025-08-12 11:27:18+00:00,2025-08-12 11:27:18+00:00,155.0,94ea43f9-a229-4673-82a2-3988d4a90f23,Mr.,Jack Darbonne,2025-08-12 09:10:33+00:00,CDC Light Trap (LTC),Fresh,"MAYUGE JH 2
+House Number: n",2025-08-12 09:10:33+00:00,2025-08-12 09:28:29+00:00,2025-08-12 11:27:17+00:00,2025-08-12 11:27:17+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,37.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+58,0,No,,0,Unknown,Unknown,,2025-08-12 11:27:18+00:00,2025-08-12 11:27:18+00:00,154.0,73c7c576-6fff-45b6-b391-996fd7eb3503,Mr,Jack D,2025-08-12 09:28:41+00:00,CDC Light Trap (LTC),Fresh,"CDC H3
+House Number: 3",2025-08-12 09:28:41+00:00,2025-08-12 10:57:41+00:00,2025-08-12 11:27:17+00:00,2025-08-12 11:27:17+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,36.0,motorola moto g play (2021),2022-12-16T22:59:07.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+55,0,No,,0,Unknown,Unknown,,2025-08-12 11:21:34+00:00,2025-08-12 11:21:34+00:00,151.0,b2bccc3a-3556-47d8-8fb1-7aed20580423,student,haley,2025-08-12 09:16:11+00:00,Other,Fresh,"mayuge
+House Number: JH trap 11",2025-08-12 09:16:11+00:00,2025-08-12 09:20:02+00:00,2025-08-12 11:21:34+00:00,2025-08-12 11:21:34+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+50,4,No,,1,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,148.0,4c4e09ae-a4a8-43aa-90af-f624da04bea6,student,haley,2025-08-12 08:45:29+00:00,Other,Fresh,"JH trap 6, mayuge
+House Number: JH trap 9",2025-08-12 08:45:29+00:00,2025-08-12 09:13:12+00:00,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+51,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,150.0,24a08d47-7cd1-4e76-8f7e-5eba85cf4783,student,haley,2025-08-12 09:21:46+00:00,Other,Fresh,"mayuge
+House Number: JH trap 4",2025-08-12 09:21:46+00:00,2025-08-12 09:32:07+00:00,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+52,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,146.0,e3cb7e0a-99f3-47d1-a6ad-84e56f094251,student,haley,2025-08-12 09:48:59+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 4",2025-08-12 09:48:59+00:00,2025-08-12 10:22:18+00:00,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+53,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,147.0,a27a4459-0b0a-45a4-bf0a-1cc9dc639c8a,student,haley,2025-08-12 10:52:08+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 10",2025-08-12 10:52:08+00:00,2025-08-12 11:09:45+00:00,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+54,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,149.0,0be5c778-edf5-4b37-a816-a2f085332e28,student,haley,2025-08-11 10:06:40+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC 1",2025-08-11 10:06:40+00:00,2025-08-12 11:20:08+00:00,2025-08-12 11:21:33+00:00,2025-08-12 11:21:33+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+49,0,No,,0,Unknown,Unknown,,2025-08-12 11:17:53+00:00,2025-08-12 11:17:53+00:00,145.0,7234cac8-32ee-4d52-bc74-6ca4c5566e37,test,Sunny,2025-08-11 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"House Number: na
+House Number: na",2025-08-12 10:45:12+00:00,2025-08-12 11:17:50+00:00,2025-08-12 11:17:53+00:00,2025-08-12 11:17:53+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+48,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-12 11:08:35+00:00,2025-08-12 11:08:35+00:00,143.0,cc73d17a-b320-40ef-95fd-6d586fc126c8,student,Lauren,2025-08-12 11:04:26+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: 10",2025-08-12 11:04:26+00:00,2025-08-12 11:08:34+00:00,2025-08-12 11:08:35+00:00,2025-08-12 11:08:35+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+47,4,No,,1,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-12 11:02:49+00:00,2025-08-12 11:02:49+00:00,142.0,38c86fca-2786-4b8f-b525-fd095200aae4,student,Lauren,2025-08-12 10:28:13+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: 9",2025-08-12 10:28:13+00:00,2025-08-12 11:02:47+00:00,2025-08-12 11:02:49+00:00,2025-08-12 11:02:49+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+46,3,No,,1,Pyrethroid + PBO,PermaNet 3.0,3.0,2025-08-12 10:28:07+00:00,2025-08-12 10:28:07+00:00,141.0,7f4bbed6-416f-46cd-80b1-90c897c392e8,student,Lauren,2025-08-12 10:22:04+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: 8",2025-08-12 10:22:04+00:00,2025-08-12 10:28:05+00:00,2025-08-12 10:28:07+00:00,2025-08-12 10:28:07+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+45,0,Yes,1549494673.0,648467679,Pyrethroid + Pyriproxyfen,OLYSET Plus,676776585.0,2025-08-12 10:26:07+00:00,2025-08-12 10:26:07+00:00,140.0,c698e491-8307-42be-8350-798970a70c79,test,Sunny,2025-08-11 21:00:00+00:00,CDC Light Trap (LTC),Fresh,"CDC 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+House Number: na",2025-08-12 10:12:09+00:00,2025-08-12 10:26:02+00:00,2025-08-12 10:26:06+00:00,2025-08-12 10:26:06+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,inf,OK
+44,3,No,,1,Pyrethroid + PBO,PermaNet 3.0,3.0,2025-08-12 10:22:02+00:00,2025-08-12 10:22:02+00:00,139.0,c0ab1d85-3660-454d-80b8-672e99232849,Student,Lauren,2025-08-12 10:09:22+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: 8",2025-08-12 10:09:22+00:00,2025-08-12 10:21:59+00:00,2025-08-12 10:22:02+00:00,2025-08-12 10:22:02+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+43,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-12 10:09:22+00:00,2025-08-12 10:09:22+00:00,138.0,52e7991a-fcd1-4181-ab8f-91db77726332,student,Lauren,2025-08-12 09:25:11+00:00,Other,Fresh,"JHU Trap, mayuge
+
+House Number: 1",2025-08-12 09:25:11+00:00,2025-08-12 10:09:20+00:00,2025-08-12 10:09:21+00:00,2025-08-12 10:09:21+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+42,0,No,,0,Unknown,Unknown,,2025-08-12 10:01:56+00:00,2025-08-12 10:01:56+00:00,137.0,b9ff0eb4-1861-4eb6-aba0-edd823e8434c,student,Eleanor,2025-08-12 10:00:15+00:00,CDC Light Trap (LTC),Fresh,"CDC trap, Mayuge
+House Number: 7",2025-08-12 10:00:15+00:00,2025-08-12 10:01:53+00:00,2025-08-12 10:01:56+00:00,2025-08-12 10:01:56+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+41,0,No,,0,Unknown,Unknown,,2025-08-12 09:48:53+00:00,2025-08-12 09:48:53+00:00,136.0,972fe6e9-b48d-4d99-b820-3d9df3d85532,student,Eleanor,2025-08-12 09:27:02+00:00,CDC Light Trap (LTC),Fresh,"CDC trap, Mayuge
+House Number: 1",2025-08-12 09:27:02+00:00,2025-08-12 09:48:48+00:00,2025-08-12 09:48:52+00:00,2025-08-12 09:48:52+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+40,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-12 09:22:16+00:00,2025-08-12 09:22:16+00:00,135.0,43285ede-d256-410e-aeeb-81ade12850ed,student,Lauren,2025-08-12 09:20:56+00:00,Other,Fresh,"JHU Trap, mayuge
+House Number: 6",2025-08-12 09:20:56+00:00,2025-08-12 09:22:15+00:00,2025-08-12 09:22:16+00:00,2025-08-12 09:22:16+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+39,0,No,,0,Unknown,Unknown,,2025-08-12 09:21:54+00:00,2025-08-12 09:21:54+00:00,134.0,d500b460-46f5-40c7-b601-00692446a7d9,student,Eleanor,2025-08-12 08:53:09+00:00,Other,Fresh,"JHU trap, Mayuge
+House Number: 3",2025-08-12 08:53:09+00:00,2025-08-12 09:21:49+00:00,2025-08-12 09:21:53+00:00,2025-08-12 09:21:53+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+38,2,No,,0,Unknown,Unknown,,2025-08-12 09:20:56+00:00,2025-08-12 09:20:56+00:00,133.0,e7e0363e-bc9c-43af-9d70-12cd66e16433,Student,Lauren,2025-08-12 08:42:23+00:00,Other,Fresh,"JHU Trap, mayuge
+House Number: 12",2025-08-12 08:42:23+00:00,2025-08-12 09:20:54+00:00,2025-08-12 09:20:56+00:00,2025-08-12 09:20:56+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+37,0,No,,0,Unknown,Unknown,,2025-08-12 00:01:36+00:00,2025-08-12 00:01:36+00:00,,,,,,Unknown,Unknown,,,,,,,Unknown,,,,,,,,,Unknown,,,,,,,,0.0,OK
+36,0,No,,0,Unknown,Unknown,,2025-08-11 17:10:06+00:00,2025-08-11 17:10:06+00:00,125.0,c0b3c38e-29c6-4e8d-a779-4fc102063ec0,test,sunny,2025-08-11 15:22:46+00:00,Other,Other,"test
+House Number: test",2025-08-11 15:22:46+00:00,2025-08-11 15:25:27+00:00,2025-08-11 17:10:06+00:00,2025-08-11 17:10:06+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+34,0,No,,0,Unknown,Unknown,,2025-08-11 14:41:37+00:00,2025-08-11 14:41:37+00:00,123.0,40d058b3-1107-44b3-908f-381d5e3b6dfc,Mr.,Jack Darbonne,2025-08-11 08:53:26+00:00,CDC Light Trap (LTC),Fresh,"CDC 6
+House Number: 6",2025-08-11 08:53:26+00:00,2025-08-11 09:10:54+00:00,2025-08-11 14:41:37+00:00,2025-08-11 14:41:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,34.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+35,0,No,,0,Unknown,Unknown,,2025-08-11 14:41:37+00:00,2025-08-11 14:41:37+00:00,124.0,a8b3fcaf-fb09-481d-a8ee-969f8def79f5,student,haley,2025-08-11 11:50:48+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 7",2025-08-11 11:50:48+00:00,2025-08-11 14:40:45+00:00,2025-08-11 14:41:37+00:00,2025-08-11 14:41:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,33.0,motorola moto g play (2021),2025-08-11T08:50:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+32,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:29+00:00,2025-08-11 14:07:29+00:00,121.0,55a2e39d-4198-405c-8ca2-415851328b6d,Grad student,Ana Perez,2023-02-06 09:58:27+00:00,CDC Light Trap (LTC),Fresh,"House Number: 10
+House Number: 10",2023-02-06 09:58:27+00:00,2023-02-06 10:29:56+00:00,2025-08-11 14:07:28+00:00,2025-08-11 14:07:28+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,31.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+33,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:29+00:00,2025-08-11 14:07:29+00:00,122.0,569365d6-c80f-47fd-a055-e64b5408349d,grad student,Ana PÃ©rez,2023-02-06 13:01:15+00:00,CDC Light Trap (LTC),Fresh,"House Number: 6
+House Number: 6",2023-02-06 13:01:15+00:00,2023-02-06 13:03:16+00:00,2025-08-11 14:07:28+00:00,2025-08-11 14:07:28+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,32.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+29,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:28+00:00,2025-08-11 14:07:28+00:00,117.0,5369c7bb-1345-4e24-9b2e-c7695bbe11f5,Grad student,Ana PÃ©rez,2023-02-06 12:06:12+00:00,CDC Light Trap (LTC),Fresh,"House Number: 4
+House Number: 4",2023-02-06 12:06:12+00:00,2023-02-06 12:36:30+00:00,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,26.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+30,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:28+00:00,2025-08-11 14:07:28+00:00,120.0,52149426-89fc-422f-a1b0-775b643793b8,Grad student,Ana PÃ©rez,2023-02-06 10:33:13+00:00,CDC Light Trap (LTC),Fresh,"House Number: 5
+House Number: 5",2023-02-06 10:33:13+00:00,2023-02-06 10:45:13+00:00,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,28.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+31,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:28+00:00,2025-08-11 14:07:28+00:00,118.0,a7a30820-f90f-446e-bc7e-580671d6f8ff,grad student,Ana p,2023-02-06 13:09:03+00:00,CDC Light Trap (LTC),Fresh,"House Number: 9
+House Number: 9",2023-02-06 13:09:03+00:00,2023-02-06 13:44:41+00:00,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,27.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+27,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,116.0,6b06608e-3779-4de3-80d4-8d67af2f0524,grad student,Ana PÃ©rez,2023-02-06 12:38:43+00:00,CDC Light Trap (LTC),Fresh,"House Number: 1
+House Number: 1",2023-02-06 12:38:43+00:00,2023-02-06 13:01:07+00:00,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,30.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+28,0,No,,0,Unknown,Unknown,,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,119.0,025d564a-dfb0-47c5-b871-32c625172aa5,Grad Student,Ana PÃ©rez,2023-02-06 10:51:59+00:00,CDC Light Trap (LTC),Fresh,"House Number: 4
+House Number: 4",2023-02-06 10:51:59+00:00,2023-02-06 11:07:11+00:00,2025-08-11 14:07:27+00:00,2025-08-11 14:07:27+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,29.0,motorola moto g play (2021),2023-02-06T09:55:31.000Z,2023.0,2.0,2023-02,1.0,0.0,OK
+26,0,No,,0,Unknown,Unknown,,2025-08-11 12:50:10+00:00,2025-08-11 12:50:10+00:00,115.0,79286296-f3bc-433e-a00c-1b41276b3073,student,Lauren,2025-08-11 11:15:57+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: 9",2025-08-11 11:15:57+00:00,2025-08-11 12:50:05+00:00,2025-08-11 12:50:10+00:00,2025-08-11 12:50:10+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+25,3,No,,1,Pyrethroid + PBO,PermaNet 3.0,3.0,2025-08-11 11:12:44+00:00,2025-08-11 11:12:44+00:00,114.0,af3e6219-73b8-4480-b9db-a821c0ee02fa,student,Lauren,2025-08-11 10:55:25+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+
+House Number: 3",2025-08-11 10:55:25+00:00,2025-08-11 11:12:44+00:00,2025-08-11 11:12:44+00:00,2025-08-11 11:12:44+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+24,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-11 10:55:29+00:00,2025-08-11 10:55:29+00:00,113.0,44183c24-b169-452a-b0e8-42dc3622aad9,student,Lauren,2025-08-11 10:09:07+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+House Number: 1",2025-08-11 10:09:07+00:00,2025-08-11 10:55:23+00:00,2025-08-11 10:55:29+00:00,2025-08-11 10:55:29+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+23,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-11 10:09:05+00:00,2025-08-11 10:09:05+00:00,112.0,6d5922d8-e084-4368-a95d-1899a7ac76c6,student,Lauren,2025-08-11 09:51:40+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+
+House Number: 4",2025-08-11 09:51:40+00:00,2025-08-11 10:09:05+00:00,2025-08-11 10:09:05+00:00,2025-08-11 10:09:05+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+22,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-11 10:06:05+00:00,2025-08-11 10:06:05+00:00,111.0,9854f719-113d-4a5b-a32c-c0422d2c7323,student,haley,2025-08-11 09:51:03+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 4",2025-08-11 09:51:03+00:00,2025-08-11 10:05:58+00:00,2025-08-11 10:06:04+00:00,2025-08-11 10:06:04+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+21,0,No,,0,Unknown,Unknown,,2025-08-11 09:41:37+00:00,2025-08-11 09:41:37+00:00,110.0,a1931548-6e20-4470-a3a8-0c0b1880bdeb,student,Lauren,2025-08-11 09:38:17+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+House Number: 8",2025-08-11 09:38:17+00:00,2025-08-11 09:41:35+00:00,2025-08-11 09:41:37+00:00,2025-08-11 09:41:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+20,3,No,,1,Pyrethroid + PBO,PermaNet 3.0,3.0,2025-08-11 09:41:17+00:00,2025-08-11 09:41:17+00:00,109.0,1a83a4ee-488f-439d-a707-f6429005da93,student,haley,2025-08-11 09:29:04+00:00,Human Landing Catch (HLC),Fresh,"mayuge
+House Number: CDC trap 3",2025-08-11 09:29:04+00:00,2025-08-11 09:41:15+00:00,2025-08-11 09:41:17+00:00,2025-08-11 09:41:17+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,Suspicious: More people than nets
+19,2,No,,1,Pyrethroid + PBO,PermaNet 3.0,2.0,2025-08-11 09:34:57+00:00,2025-08-11 09:34:57+00:00,108.0,fbb29c68-f1d0-4549-b157-f433405250b1,Student ,Lauren,2025-08-11 09:32:25+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+House Number: 2",2025-08-11 09:32:25+00:00,2025-08-11 09:34:57+00:00,2025-08-11 09:34:57+00:00,2025-08-11 09:34:57+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+18,0,No,,0,Unknown,Unknown,,2025-08-11 09:29:38+00:00,2025-08-11 09:29:38+00:00,107.0,b804e1e0-9d2d-4e32-a200-b33cf347804f,Student,Lauren,2025-08-11 09:24:11+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+
+House Number: 2",2025-08-11 09:24:11+00:00,2025-08-11 09:29:38+00:00,2025-08-11 09:29:37+00:00,2025-08-11 09:29:37+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+17,4,No,,2,Pyrethroid + PBO,PermaNet 3.0,4.0,2025-08-11 09:25:25+00:00,2025-08-11 09:25:25+00:00,106.0,d144a8c4-2d72-45dd-b748-debc4038246c,student,haley,2025-08-11 09:18:19+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 1",2025-08-11 09:18:19+00:00,2025-08-11 09:25:23+00:00,2025-08-11 09:25:24+00:00,2025-08-11 09:25:24+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,100.0,OK
+16,0,No,,0,Unknown,Unknown,,2025-08-11 09:22:00+00:00,2025-08-11 09:22:00+00:00,105.0,900dd2ea-f408-4586-8997-04fa4ed6e9ee,Student,Lauren,2025-08-11 09:20:34+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+House Number: 7",2025-08-11 09:20:34+00:00,2025-08-11 09:22:00+00:00,2025-08-11 09:22:00+00:00,2025-08-11 09:22:00+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+15,0,No,,0,Unknown,Unknown,,2025-08-11 09:20:32+00:00,2025-08-11 09:20:32+00:00,104.0,96b3da2f-dc6e-4a1c-aa1c-d0edc623ce2e,Student,Lauren,2025-08-11 09:11:20+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+
+
+House Number: 9",2025-08-11 09:11:20+00:00,2025-08-11 09:20:32+00:00,2025-08-11 09:20:31+00:00,2025-08-11 09:20:31+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+14,0,No,,0,Unknown,Unknown,,2025-08-11 09:18:18+00:00,2025-08-11 09:18:18+00:00,103.0,b2856d2a-583b-4b5c-93d9-e753a725183f,student,haley,2025-08-11 09:11:01+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 9",2025-08-11 09:11:01+00:00,2025-08-11 09:18:17+00:00,2025-08-11 09:18:18+00:00,2025-08-11 09:18:18+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+13,0,No,,0,Unknown,Unknown,,2025-08-11 09:11:18+00:00,2025-08-11 09:11:18+00:00,102.0,91234744-7f1d-4b57-8a76-6f6a35d78165,Student,Lauren,2025-08-11 08:46:24+00:00,CDC Light Trap (LTC),Fresh,"Mayuge
+House Number: 6",2025-08-11 08:46:24+00:00,2025-08-11 09:11:18+00:00,2025-08-11 09:11:18+00:00,2025-08-11 09:11:18+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,25.0,motorola moto g play (2021),2025-08-11T08:26:59.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+12,0,No,,0,Unknown,Unknown,,2025-08-11 09:01:08+00:00,2025-08-11 09:01:08+00:00,101.0,ffdceb17-7dd7-46f2-96b1-c5c8b40bee6c,student,haley,2025-08-11 08:46:07+00:00,CDC Light Trap (LTC),Fresh,"mayuge
+House Number: CDC trap 6",2025-08-11 08:46:07+00:00,2025-08-11 09:01:06+00:00,2025-08-11 09:01:07+00:00,2025-08-11 09:01:07+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,24.0,motorola moto g play (2021),2025-08-11T08:39:16.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
+11,2,No,,0,Unknown,Unknown,,2025-08-10 10:10:56+00:00,2025-08-10 10:10:56+00:00,100.0,ad66d622-5e22-47fc-8495-1ff2f5eff274,Entomologist ,Kigongo ,2025-08-10 10:07:11+00:00,CDC Light Trap (LTC),Fresh,"House Number: 001
+House Number: 001",2025-08-10 10:07:11+00:00,2025-08-10 10:10:21+00:00,2025-08-10 10:10:55+00:00,2025-08-10 10:10:55+00:00,11.0,Other,,,Other,,True,,1.0,National Malaria Elimination Division,Uganda,23.0,motorola moto g play (2021),2025-08-10T10:06:46.000Z,2025.0,8.0,2025-08,3.0,0.0,OK
