@@ -20,7 +20,8 @@ import {
   FiBarChart2, FiMapPin, FiCalendar, FiCheckCircle
 } from 'react-icons/fi';
 
-const Plot = dynamic(() => import('@/components/Plot'), { ssr: false });
+const Plot = dynamic<any>(() => import('@/components/Plot'), { ssr: false });
+
 
 const filterUnknownSpecies = (speciesData: Record<string, number>): Record<string, number> => {
   return Object.entries(speciesData)

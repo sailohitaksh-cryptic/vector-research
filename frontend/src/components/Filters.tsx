@@ -6,13 +6,11 @@ import { FiCalendar, FiMapPin, FiTarget, FiActivity, FiX } from 'react-icons/fi'
 export interface FilterState {
   dateRange: { start: string; end: string };
   districts: string[];
-  methods: string[];
   species: string[];
 }
 
 interface FilterOptions {
   districts: string[];
-  methods: string[];
   species: string[];
 }
 
@@ -42,7 +40,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
   };
 
   // Handle multi-select changes (districts, methods, species)
-  const handleMultiSelect = (field: 'districts' | 'methods' | 'species', value: string) => {
+  const handleMultiSelect = (field: 'districts' | 'species', value: string) => {
     const currentValues = localFilters[field];
     const updated = {
       ...localFilters,
@@ -59,7 +57,6 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
     const cleared: FilterState = {
       dateRange: { start: '', end: '' },
       districts: [],
-      methods: [],
       species: []
     };
     setLocalFilters(cleared);
@@ -70,7 +67,6 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
   const activeCount = 
     (localFilters.dateRange.start || localFilters.dateRange.end ? 1 : 0) +
     localFilters.districts.length +
-    localFilters.methods.length +
     localFilters.species.length;
 
   return (
@@ -160,7 +156,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
             </div>
           )}
 
-          {/* Collection Methods Filter */}
+          {/* Collection Methods Filter
           {filterOptions.methods.length > 0 && (
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-3">
@@ -184,7 +180,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
                 ))}
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Species Filter */}
           {filterOptions.species.length > 0 && (
@@ -264,7 +260,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
                     </button>
                   </span>
                 ))}
-                {localFilters.methods.map(method => (
+                {/* {localFilters.methods.map(method => (
                   <span
                     key={method}
                     className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-800 text-xs font-medium"
@@ -278,7 +274,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
                       <FiX size={12} />
                     </button>
                   </span>
-                ))}
+                ))} */}
                 {localFilters.species.map(species => (
                   <span
                     key={species}
@@ -317,7 +313,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
                 +{localFilters.districts.length - 3} more
               </span>
             )}
-            {localFilters.methods.slice(0, 2).map(method => (
+            {/* {localFilters.methods.slice(0, 2).map(method => (
               <span
                 key={method}
                 className="inline-flex items-center px-2 py-1 rounded bg-green-100 text-green-800 text-xs"
@@ -329,7 +325,7 @@ function Filters({ filters, onFilterChange, filterOptions }: FiltersProps) {
               <span className="inline-flex items-center px-2 py-1 rounded bg-gray-200 text-gray-700 text-xs">
                 +{localFilters.methods.length - 2} more
               </span>
-            )}
+            )} */}
           </div>
         </div>
       )}
