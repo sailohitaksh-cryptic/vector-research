@@ -47,9 +47,8 @@ export default function ExportAllButton({ filters = {} }: ExportAllButtonProps) 
       }
 
       const queryString = params.toString();
-      const url = `http://localhost:5001/api/export/vectorcam-report${
-        queryString ? '?' + queryString : ''
-      }`;
+      const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+const url = `${API_BASE_URL}/api/export/vectorcam-report...` + (queryString ? `?${queryString}` : '');
 
       console.log('Exporting from:', url);
       console.log('Active filters:', filters);
