@@ -38,10 +38,6 @@ LOGS_DIR.mkdir(parents=True, exist_ok=True)
 EXPORTS_DIR.mkdir(parents=True, exist_ok=True)  # ✅ CREATE EXPORTS DIR
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-API_SECRET_KEY = os.getenv('API_SECRET_KEY')
-# Validate required configuration
-if not API_SECRET_KEY:
-    print("WARNING: API_SECRET_KEY not set. Please create a .env file with your API key.")
 
 # Print paths for verification
 print("="*60)
