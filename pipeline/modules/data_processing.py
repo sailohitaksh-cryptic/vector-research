@@ -557,20 +557,37 @@ def filter_surveillance_sessions(df: pd.DataFrame) -> pd.DataFrame:
     """
     Filter dataframe to only include SURVEILLANCE type sessions.
     Excludes DATA_COLLECTION sessions.
-    
-    Args:
-        df: DataFrame with 'SessionType' column
-        
-    Returns:
-        Filtered DataFrame with only SURVEILLANCE sessions
+    Handles minor naming / casing issues.
     """
-    if 'SessionType' not in df.columns:
-        print("⚠️  Warning: SessionType column not found. Cannot filter.")
+    # Try to find the correct column name
+    candidate_cols = ['SessionType', 'session_type', 'sessionType']
+    session_type_col = None
+    for col in candidate_cols:
+        if col in df.columns:
+            session_type_col = col
+            break
+    
+    if session_type_col is None:
+        print("⚠️  Warning: no SessionType/session_type column found. Cannot filter.")
         return df
-    
+
+    # Normalize values: string, strip, uppercase
+    df = df.copy()
+    df[session_type_col] = (
+        df[session_type_col]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+    )
+
     initial_count = len(df)
-    
-    df_filtered = df[df['SessionType'] == 'SURVEILLANCE'].copy()
+
+    print("\n📊 SessionType value counts BEFORE filtering:")
+    print(df[session_type_col].value_counts(dropna=False).to_string())
+    print()
+
+    # Keep only SURVEILLANCE
+    df_filtered = df[df[session_type_col] == 'SURVEILLANCE'].copy()
     
     filtered_count = len(df_filtered)
     excluded_count = initial_count - filtered_count
@@ -578,7 +595,12 @@ def filter_surveillance_sessions(df: pd.DataFrame) -> pd.DataFrame:
     print("✅ Session filtering:")
     print(f"   - Total sessions: {initial_count}")
     print(f"   - SURVEILLANCE sessions: {filtered_count}")
-    print(f"   - DATA_COLLECTION excluded: {excluded_count}")
+    print(f"   - Non-SURVEILLANCE excluded: {excluded_count}")
+    
+    # Safety: if we accidentally filtered out everything, warn loudly
+    if filtered_count == 0:
+        print("⚠️  WARNING: No SURVEILLANCE sessions found after filtering. "
+              "Did the source data use a different label?")
     
     return df_filtered
 

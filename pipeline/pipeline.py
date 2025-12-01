@@ -70,7 +70,11 @@ class VectorInsightPipeline:
                     logger.error("Data extraction failed!")
                     return False
                 
-            surveillance_df = filter_surveillance_sessions(surveillance_df)
+            from modules.data_processing import filter_surveillance_sessions
+
+            # Filter surveillance to only include completed sessions
+            logger.info("Applying SURVEILLANCE filter to specimens data")
+            specimens_df = filter_surveillance_sessions(specimens_df)
 
             # Keep only specimens that belong to those sessions
             if 'session_id' in specimens_df.columns and 'session_id' in surveillance_df.columns:

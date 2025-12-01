@@ -13,7 +13,7 @@ load_dotenv()
 PROJECT_ROOT = Path(__file__).parent
 
 # API Configuration
-API_BASE_URL = os.getenv('API_BASE_URL', 'https://api.vectorcam.com')  # ✅ UPDATED to production
+API_BASE_URL = os.getenv('API_BASE_URL', 'https://test.api.vectorcam.com')  # ✅ UPDATED to production
 API_SECRET_KEY = os.getenv('API_SECRET_KEY', '')
 
 # API Endpoints
