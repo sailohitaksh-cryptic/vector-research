@@ -144,6 +144,7 @@ class UserTracker:
         
         ✅ FIXED: Uses surveillance_sessions and specimens (lowercase)
         ✅ FIXED: Uses SessionCollectorName instead of CollectorName
+        ✅ FIXED: Removed SiteName column (doesn't exist in table)
         """
         conn = self.connect()
         
@@ -153,7 +154,7 @@ class UserTracker:
             s.SessionCollectorName as collector_name,
             DATE(s.SessionCollectionDate) as submission_date,
             s.SiteDistrict as district,
-            s.SiteName as site,
+            NULL as site,
             s.SessionCollectionMethod as collection_method,
             COUNT(DISTINCT s.SessionID) as num_houses,
             COUNT(sp.SpecimenID) as num_specimens
@@ -161,7 +162,7 @@ class UserTracker:
         LEFT JOIN specimens sp ON s.SessionID = sp.SessionID
         WHERE s.SessionCollectorName IS NOT NULL AND s.SessionCollectorName != ''
         GROUP BY s.SessionCollectorName, DATE(s.SessionCollectionDate), s.SiteDistrict, 
-                 s.SiteName, s.SessionCollectionMethod
+                 s.SessionCollectionMethod
         """
         
         submissions = pd.read_sql_query(query, conn)
@@ -290,6 +291,7 @@ class UserTracker:
         
         ✅ FIXED: Uses surveillance_sessions (lowercase)
         ✅ FIXED: Uses SessionCollectorName instead of CollectorName
+        ✅ FIXED: Removed SiteName column (doesn't exist in table)
         """
         conn = self.connect()
         
@@ -298,7 +300,7 @@ class UserTracker:
         SELECT DISTINCT 
             s.SessionCollectorName as name,
             s.SiteDistrict as district,
-            s.SiteName as site
+            NULL as site
         FROM surveillance_sessions s
         WHERE s.SessionCollectorName IS NOT NULL AND s.SessionCollectorName != ''
         """
