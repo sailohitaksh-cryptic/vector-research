@@ -1,5 +1,9 @@
 /**
- * Metrics Calculator - WITH COLLECTION METHOD NORMALIZATION
+ * Metrics Calculator - WITH SURVEILLANCE FILTER + COLLECTION METHOD NORMALIZATION
+ * 
+ * CRITICAL FIX: Only processes SURVEILLANCE type sessions
+ * Excludes all DATA_COLLECTION sessions
+ * 
  * Normalizes collection methods to 4 categories:
  * - PSC (Pyrethrum Spray Catch)
  * - CDC Light Trap
@@ -14,8 +18,32 @@ const _ = require('lodash');
 
 class MetricsCalculator {
   constructor(surveillance, specimens) {
-    this.surveillance = surveillance;
-    this.specimens = specimens;
+    // ✅ FILTER: Only process SURVEILLANCE type sessions
+    // Exclude DATA_COLLECTION sessions
+    this.surveillance = surveillance.filter(s => 
+      s.SessionType === 'SURVEILLANCE'
+    );
+    
+    // ✅ FILTER: Only include specimens from SURVEILLANCE sessions
+    const surveillanceSessionIds = new Set(
+      this.surveillance.map(s => s.SessionID)
+    );
+    this.specimens = specimens.filter(sp => 
+      surveillanceSessionIds.has(sp.SessionID)
+    );
+    
+    // Log filtering results
+    const excludedSessions = surveillance.length - this.surveillance.length;
+    const excludedSpecimens = specimens.length - this.specimens.length;
+    
+    if (excludedSessions > 0) {
+      logger.info(`🔍 Filtered out ${excludedSessions} DATA_COLLECTION sessions`);
+    }
+    if (excludedSpecimens > 0) {
+      logger.info(`🔍 Filtered out ${excludedSpecimens} specimens from DATA_COLLECTION sessions`);
+    }
+    
+    logger.info(`✅ Processing ${this.surveillance.length} SURVEILLANCE sessions with ${this.specimens.length} specimens`);
   }
 
   /**
