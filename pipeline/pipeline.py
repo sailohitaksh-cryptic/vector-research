@@ -296,7 +296,7 @@ def main():
     args = parser.parse_args()
     
     # Check if API key is configured
-    if not args.skip_extraction and not config.API_SECRET_KEY:
+    if not args.skip_extraction and not config.API_KEY:
         logger.error("API_SECRET_KEY not configured!")
         logger.error("Please create a .env file with your API key or use --skip-extraction")
         sys.exit(1)
