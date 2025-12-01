@@ -12,6 +12,7 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell, PieChart, Pie } from 'recharts';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 interface FidelityData {
   yearMonth: string;
   houseFidelity: {
@@ -94,7 +95,7 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:5001/api/metrics/fidelity/${yearMonth}`);
+      const response = await fetch(`${API_BASE_URL}/api/metrics/fidelity/${yearMonth}`);
       
       if (!response.ok) {
         if (response.status === 404) {
