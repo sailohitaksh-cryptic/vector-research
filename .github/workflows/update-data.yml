@@ -30,7 +30,7 @@ jobs:
       
       - name: Run data pipeline
         env:
-          VECTORCAM_API_KEY: ${{ secrets.VECTORCAM_API_KEY }}
+            API_SECRET_KEY: ${{ secrets.VECTORCAM_API_KEY }}
         run: |
           cd pipeline
           python pipeline.py
