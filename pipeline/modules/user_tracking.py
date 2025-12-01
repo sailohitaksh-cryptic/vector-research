@@ -312,16 +312,19 @@ class UserTracker:
 # Convenience functions for pipeline integration
 def initialize_user_tracking():
     """Initialize user tracking system"""
-    tracker = UserTracker()
+    import config
+    # ✅ FIX: Use the correct database path from config
+    tracker = UserTracker(db_path=str(config.DB_PATH))
     tracker.create_user_tracking_tables()
     tracker.auto_register_collectors_from_surveillance()
     tracker.update_submission_logs_from_surveillance()
     return tracker
 
-
 def update_user_logs():
     """Update user logs after data processing"""
-    tracker = UserTracker()
+    import config
+    # ✅ FIX: Use the correct database path from config
+    tracker = UserTracker(db_path=str(config.DB_PATH))
     tracker.create_user_tracking_tables()
     tracker.auto_register_collectors_from_surveillance()
     tracker.update_submission_logs_from_surveillance()
