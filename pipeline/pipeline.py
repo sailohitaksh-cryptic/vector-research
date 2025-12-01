@@ -15,10 +15,14 @@ sys.path.append(str(Path(__file__).parent))
 
 import config
 from modules.data_extraction import extract_data
-from modules.data_processing import DataProcessor, process_data
+from modules.data_processing import DataProcessor
 from modules.metrics_calculator import calculate_metrics
 from modules.database import VectorInsightDB
 from modules.user_tracking import update_user_logs
+from modules.data_processing import (
+    process_data,
+    filter_surveillance_sessions,
+)
 
 # Setup logging
 logging.basicConfig(
@@ -65,6 +69,18 @@ class VectorInsightPipeline:
                 if surveillance_df is None or specimens_df is None:
                     logger.error("Data extraction failed!")
                     return False
+                
+            from modules.data_processing import filter_surveillance_sessions
+
+            # Filter surveillance to only include completed sessions
+            logger.info("Applying SURVEILLANCE filter to specimens data")
+            specimens_df = filter_surveillance_sessions(specimens_df)
+
+            # Keep only specimens that belong to those sessions
+            if 'session_id' in specimens_df.columns and 'session_id' in surveillance_df.columns:
+                surveillance_session_ids = set(surveillance_df['session_id'].unique())
+                specimens_df = specimens_df[specimens_df['session_id'].isin(surveillance_session_ids)].copy()
+            #
             
             # Step 2: Data Processing
             logger.info("STEP 2: Processing and cleaning data")

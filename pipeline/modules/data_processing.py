@@ -553,6 +553,150 @@ class DataProcessor:
         
         return clean_surveillance, clean_specimens, merged
 
+def filter_surveillance_sessions(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Filter dataframe to only include SURVEILLANCE type sessions.
+    Excludes DATA_COLLECTION sessions.
+    Handles minor naming / casing issues.
+    """
+    # Try to find the correct column name
+    candidate_cols = ['SessionType', 'session_type', 'sessionType']
+    session_type_col = None
+    for col in candidate_cols:
+        if col in df.columns:
+            session_type_col = col
+            break
+    
+    if session_type_col is None:
+        print("⚠️  Warning: no SessionType/session_type column found. Cannot filter.")
+        return df
+
+    # Normalize values: string, strip, uppercase
+    df = df.copy()
+    df[session_type_col] = (
+        df[session_type_col]
+        .astype(str)
+        .str.strip()
+        .str.upper()
+    )
+
+    initial_count = len(df)
+
+    print("\n📊 SessionType value counts BEFORE filtering:")
+    print(df[session_type_col].value_counts(dropna=False).to_string())
+    print()
+
+    # Keep only SURVEILLANCE
+    df_filtered = df[df[session_type_col] == 'SURVEILLANCE'].copy()
+    
+    filtered_count = len(df_filtered)
+    excluded_count = initial_count - filtered_count
+    
+    print("✅ Session filtering:")
+    print(f"   - Total sessions: {initial_count}")
+    print(f"   - SURVEILLANCE sessions: {filtered_count}")
+    print(f"   - Non-SURVEILLANCE excluded: {excluded_count}")
+    
+    # Safety: if we accidentally filtered out everything, warn loudly
+    if filtered_count == 0:
+        print("⚠️  WARNING: No SURVEILLANCE sessions found after filtering. "
+              "Did the source data use a different label?")
+    
+    return df_filtered
+
+
+def load_surveillance_csv(filepath: str) -> pd.DataFrame:
+    """
+    Load surveillance CSV and immediately filter for SURVEILLANCE type only
+    """
+    df = pd.read_csv(filepath)
+    
+    if 'SessionType' in df.columns:
+        df = df[df['SessionType'] == 'SURVEILLANCE'].copy()
+        print(f"✅ Loaded {len(df)} SURVEILLANCE sessions (excluded DATA_COLLECTION)")
+    else:
+        print("⚠️  SessionType column not found - no filtering applied")
+    
+    return df
+
+
+def audit_session_types(db_path: str) -> pd.DataFrame:
+    """
+    Audit the database to see what session types exist in surveillance_sessions
+    """
+    import sqlite3
+    conn = sqlite3.connect(db_path)
+    
+    query = """
+    SELECT 
+        session_type,
+        COUNT(*) as count,
+        MIN(collection_date) as first_date,
+        MAX(collection_date) as last_date
+    FROM surveillance_sessions
+    GROUP BY session_type
+    ORDER BY count DESC
+    """
+    
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    print("\n📊 Session Type Audit:")
+    print(df.to_string(index=False))
+    print()
+    
+    return df
+
+
+def clean_data_collection_sessions(db_path: str) -> None:
+    """
+    ONE-TIME CLEANUP: Remove all DATA_COLLECTION sessions from database
+    
+    WARNING: This will delete data. Run audit_session_types() first to confirm.
+    """
+    import sqlite3
+    
+    print("⚠️  WARNING: This will delete DATA_COLLECTION sessions from database")
+    print("Run audit_session_types() first to see what will be deleted")
+    
+    response = input("Continue? (yes/no): ")
+    if response.lower() != 'yes':
+        print("Cancelled.")
+        return
+    
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    count_before = cursor.execute(
+        "SELECT COUNT(*) FROM surveillance_sessions"
+    ).fetchone()[0]
+    
+    cursor.execute("""
+        DELETE FROM surveillance_sessions 
+        WHERE session_type = 'DATA_COLLECTION'
+    """)
+    
+    cursor.execute("""
+        DELETE FROM specimens 
+        WHERE session_id NOT IN (
+            SELECT session_id FROM surveillance_sessions
+        )
+    """)
+    
+    conn.commit()
+    
+    count_after = cursor.execute(
+        "SELECT COUNT(*) FROM surveillance_sessions"
+    ).fetchone()[0]
+    
+    conn.close()
+    
+    print("✅ Cleanup complete:")
+    print(f"   - Sessions before: {count_before}")
+    print(f"   - Sessions after: {count_after}")
+    print(f"   - Deleted: {count_before - count_after}")
+
+
 
 def process_data(surveillance_df: pd.DataFrame, 
                 specimens_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
