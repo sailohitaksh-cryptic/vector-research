@@ -151,10 +151,10 @@ class UserTracker:
             s.SessionCollectionMethod as collection_method,
             COUNT(DISTINCT s.SessionID) as num_houses,
             COUNT(sp.SpecimenID) as num_specimens
-        FROM Surveillance s
-        LEFT JOIN Specimens sp ON s.SessionID = sp.SessionID
-        WHERE s.CollectorName IS NOT NULL AND s.CollectorName != ''
-        GROUP BY s.CollectorName, DATE(s.SessionCollectionDate), s.SiteDistrict, 
+        FROM surveillance_sessions s
+        LEFT JOIN specimens sp ON s.SessionID = sp.SessionID
+        WHERE s.SessionCollectorName IS NOT NULL AND s.SessionCollectorName != ''
+        GROUP BY s.SessionCollectorName, DATE(s.SessionCollectionDate), s.SiteDistrict, 
                  s.SiteName, s.SessionCollectionMethod
         """
         
@@ -288,8 +288,8 @@ class UserTracker:
             s.CollectorName as name,
             s.SiteDistrict as district,
             s.SiteName as site
-        FROM Surveillance s
-        WHERE s.CollectorName IS NOT NULL AND s.CollectorName != ''
+        FROM surveillance_sessions s
+        WHERE s.SessionCollectorName IS NOT NULL AND s.SessionCollectorName != ''
         """
         
         collectors = pd.read_sql_query(query, conn)
