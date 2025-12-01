@@ -1,6 +1,9 @@
 """
 User Tracking Module for VectorResearch
 Tracks field team activity, submissions, and training status
+
+FIXED: Updated table names from Surveillance/Specimens to surveillance_sessions/specimens
+FIXED: Updated column name from CollectorName to SessionCollectorName
 """
 
 import pandas as pd
@@ -136,15 +139,18 @@ class UserTracker:
     
     def update_submission_logs_from_surveillance(self):
         """
-        Extract submission data from surveillance table and populate submission logs
+        Extract submission data from surveillance_sessions table and populate submission logs
         This should be run after data processing pipeline
+        
+        ✅ FIXED: Uses surveillance_sessions and specimens (lowercase)
+        ✅ FIXED: Uses SessionCollectorName instead of CollectorName
         """
         conn = self.connect()
         
-        # Get submission data from surveillance table
+        # Get submission data from surveillance_sessions table
         query = """
         SELECT 
-            s.CollectorName as collector_name,
+            s.SessionCollectorName as collector_name,
             DATE(s.SessionCollectionDate) as submission_date,
             s.SiteDistrict as district,
             s.SiteName as site,
@@ -279,13 +285,18 @@ class UserTracker:
         return df
     
     def auto_register_collectors_from_surveillance(self):
-        """Automatically register all collectors found in surveillance data"""
+        """
+        Automatically register all collectors found in surveillance data
+        
+        ✅ FIXED: Uses surveillance_sessions (lowercase)
+        ✅ FIXED: Uses SessionCollectorName instead of CollectorName
+        """
         conn = self.connect()
         
-        # Get unique collectors from surveillance data
+        # Get unique collectors from surveillance_sessions data
         query = """
         SELECT DISTINCT 
-            s.CollectorName as name,
+            s.SessionCollectorName as name,
             s.SiteDistrict as district,
             s.SiteName as site
         FROM surveillance_sessions s
@@ -319,6 +330,7 @@ def initialize_user_tracking():
     tracker.auto_register_collectors_from_surveillance()
     tracker.update_submission_logs_from_surveillance()
     return tracker
+
 
 def update_user_logs():
     """Update user logs after data processing"""
