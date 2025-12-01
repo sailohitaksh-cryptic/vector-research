@@ -33,7 +33,7 @@ class DataExtractor:
         Args:
             api_key: API secret key. If None, uses config.API_SECRET_KEY
         """
-        self.api_key = api_key or config.API_SECRET_KEY
+        self.api_key = api_key or config.API_KEY
         self.headers = {
             'Authorization': f'Bearer {self.api_key}',
             'Accept': 'text/csv'
