@@ -553,6 +553,128 @@ class DataProcessor:
         
         return clean_surveillance, clean_specimens, merged
 
+def filter_surveillance_sessions(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Filter dataframe to only include SURVEILLANCE type sessions.
+    Excludes DATA_COLLECTION sessions.
+    
+    Args:
+        df: DataFrame with 'SessionType' column
+        
+    Returns:
+        Filtered DataFrame with only SURVEILLANCE sessions
+    """
+    if 'SessionType' not in df.columns:
+        print("⚠️  Warning: SessionType column not found. Cannot filter.")
+        return df
+    
+    initial_count = len(df)
+    
+    df_filtered = df[df['SessionType'] == 'SURVEILLANCE'].copy()
+    
+    filtered_count = len(df_filtered)
+    excluded_count = initial_count - filtered_count
+    
+    print("✅ Session filtering:")
+    print(f"   - Total sessions: {initial_count}")
+    print(f"   - SURVEILLANCE sessions: {filtered_count}")
+    print(f"   - DATA_COLLECTION excluded: {excluded_count}")
+    
+    return df_filtered
+
+
+def load_surveillance_csv(filepath: str) -> pd.DataFrame:
+    """
+    Load surveillance CSV and immediately filter for SURVEILLANCE type only
+    """
+    df = pd.read_csv(filepath)
+    
+    if 'SessionType' in df.columns:
+        df = df[df['SessionType'] == 'SURVEILLANCE'].copy()
+        print(f"✅ Loaded {len(df)} SURVEILLANCE sessions (excluded DATA_COLLECTION)")
+    else:
+        print("⚠️  SessionType column not found - no filtering applied")
+    
+    return df
+
+
+def audit_session_types(db_path: str) -> pd.DataFrame:
+    """
+    Audit the database to see what session types exist in surveillance_sessions
+    """
+    import sqlite3
+    conn = sqlite3.connect(db_path)
+    
+    query = """
+    SELECT 
+        session_type,
+        COUNT(*) as count,
+        MIN(collection_date) as first_date,
+        MAX(collection_date) as last_date
+    FROM surveillance_sessions
+    GROUP BY session_type
+    ORDER BY count DESC
+    """
+    
+    df = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    print("\n📊 Session Type Audit:")
+    print(df.to_string(index=False))
+    print()
+    
+    return df
+
+
+def clean_data_collection_sessions(db_path: str) -> None:
+    """
+    ONE-TIME CLEANUP: Remove all DATA_COLLECTION sessions from database
+    
+    WARNING: This will delete data. Run audit_session_types() first to confirm.
+    """
+    import sqlite3
+    
+    print("⚠️  WARNING: This will delete DATA_COLLECTION sessions from database")
+    print("Run audit_session_types() first to see what will be deleted")
+    
+    response = input("Continue? (yes/no): ")
+    if response.lower() != 'yes':
+        print("Cancelled.")
+        return
+    
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    
+    count_before = cursor.execute(
+        "SELECT COUNT(*) FROM surveillance_sessions"
+    ).fetchone()[0]
+    
+    cursor.execute("""
+        DELETE FROM surveillance_sessions 
+        WHERE session_type = 'DATA_COLLECTION'
+    """)
+    
+    cursor.execute("""
+        DELETE FROM specimens 
+        WHERE session_id NOT IN (
+            SELECT session_id FROM surveillance_sessions
+        )
+    """)
+    
+    conn.commit()
+    
+    count_after = cursor.execute(
+        "SELECT COUNT(*) FROM surveillance_sessions"
+    ).fetchone()[0]
+    
+    conn.close()
+    
+    print("✅ Cleanup complete:")
+    print(f"   - Sessions before: {count_before}")
+    print(f"   - Sessions after: {count_after}")
+    print(f"   - Deleted: {count_before - count_after}")
+
+
 
 def process_data(surveillance_df: pd.DataFrame, 
                 specimens_df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
