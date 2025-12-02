@@ -6,8 +6,8 @@
  * 3. VHT penetration (VHTs collecting in current month / VHTs in first month)
  * 4. VHT training completion (trained VHTs / 18 total VHTs)
  * 
- * Replace: backend/src/processors/completenessMetric.js
- * (or rename to fidelityMetric.js)
+ * ✅ FIXED: Now queries training data from field_collectors and training_records tables
+ * Replace: backend/src/processors/fidelityMetric.js
  */
 
 const logger = require('../utils/logger');
@@ -205,23 +205,48 @@ class FidelityMetric {
   /**
    * 4. Calculate VHT training completion
    * Trained VHTs / Total VHTs (18) * 100
-   * Based on LastTrainedOn field
+   * Based on training_records table from user tracking system
+   * 
+   * ✅ FIXED: Now queries from field_collectors and training_records tables
    */
   calculateVHTTraining(sessions) {
     const TOTAL_VHTS = 18;
 
-    // Get unique VHTs who have been trained (have LastTrainedOn date)
-    const trainedVHTsQuery = `
-      SELECT DISTINCT SessionCollectorName
-      FROM surveillance_sessions
-      WHERE LastTrainedOn IS NOT NULL 
-        AND LastTrainedOn != ''
-        AND SessionCollectorName IS NOT NULL 
-        AND SessionCollectorName != ''
-        AND SessionCollectorName != 'Unknown'
-    `;
-
     try {
+      // Check if training tables exist
+      const tablesExist = database.db.prepare(`
+        SELECT name FROM sqlite_master 
+        WHERE type='table' AND (name='field_collectors' OR name='training_records')
+      `).all();
+
+      if (tablesExist.length < 2) {
+        // Training tables don't exist yet - return default
+        const uniqueVHTs = new Set(
+          sessions
+            .map(s => s.SessionCollectorName)
+            .filter(name => name && name !== 'Unknown')
+        );
+
+        return {
+          trainedVHTs: 0,
+          totalVHTs: TOTAL_VHTS,
+          untrainedVHTs: TOTAL_VHTS,
+          trainingRate: 0,
+          activeVHTs: uniqueVHTs.size,
+          status: 'Training data not yet available'
+        };
+      }
+
+      // Get unique VHTs who have been trained from training_records
+      const trainedVHTsQuery = `
+        SELECT DISTINCT fc.collector_name
+        FROM field_collectors fc
+        INNER JOIN training_records tr ON fc.collector_id = tr.collector_id
+        WHERE fc.collector_name IS NOT NULL 
+          AND fc.collector_name != ''
+          AND fc.collector_name != 'Unknown'
+      `;
+
       const trainedVHTs = database.db.prepare(trainedVHTsQuery).all();
       const trainedCount = trainedVHTs.length;
 
@@ -230,13 +255,16 @@ class FidelityMetric {
       // Get training details for each VHT
       const trainingDetailsQuery = `
         SELECT 
-          SessionCollectorName,
-          LastTrainedOn,
-          MAX(SessionCollectionDate) as last_collection_date
-        FROM surveillance_sessions
-        WHERE LastTrainedOn IS NOT NULL 
-          AND LastTrainedOn != ''
-        GROUP BY SessionCollectorName
+          fc.collector_name,
+          MAX(tr.training_date) as last_trained_on,
+          tr.training_type,
+          tr.certification_status,
+          MAX(sl.submission_date) as last_collection_date
+        FROM field_collectors fc
+        INNER JOIN training_records tr ON fc.collector_id = tr.collector_id
+        LEFT JOIN submission_logs sl ON fc.collector_name = sl.collector_name
+        GROUP BY fc.collector_id
+        ORDER BY last_trained_on DESC
       `;
 
       const trainingDetails = database.db.prepare(trainingDetailsQuery).all();
@@ -247,8 +275,10 @@ class FidelityMetric {
         untrainedVHTs: TOTAL_VHTS - trainedCount,
         trainingRate: Math.round(trainingRate * 10) / 10,
         trainingDetails: trainingDetails.map(t => ({
-          name: t.SessionCollectorName,
-          trainedOn: t.LastTrainedOn,
+          name: t.collector_name,
+          trainedOn: t.last_trained_on,
+          trainingType: t.training_type,
+          certificationStatus: t.certification_status,
           lastCollection: t.last_collection_date
         })),
         status: trainingRate >= 90 ? 'Excellent' : 
@@ -264,7 +294,7 @@ class FidelityMetric {
         sessions
           .map(s => s.SessionCollectorName)
           .filter(name => name && name !== 'Unknown')
-      );
+        );
 
       return {
         trainedVHTs: 0,
@@ -272,7 +302,8 @@ class FidelityMetric {
         untrainedVHTs: TOTAL_VHTS,
         trainingRate: 0,
         activeVHTs: uniqueVHTs.size,
-        status: 'Training data not yet available'
+        status: 'Training data not yet available',
+        error: error.message
       };
     }
   }
