@@ -77,10 +77,16 @@ class VectorInsightPipeline:
             specimens_df = filter_surveillance_sessions(specimens_df)
 
             # Keep only specimens that belong to those sessions
-            if 'session_id' in specimens_df.columns and 'session_id' in surveillance_df.columns:
-                surveillance_session_ids = set(surveillance_df['session_id'].unique())
-                specimens_df = specimens_df[specimens_df['session_id'].isin(surveillance_session_ids)].copy()
-            #
+            # ✅ CORRECT - uses 'SessionID' (capital)
+            if 'SessionID' in specimens_df.columns and 'SessionID' in surveillance_df.columns:
+                surveillance_session_ids = set(surveillance_df['SessionID'].unique())
+                before_count = len(specimens_df)
+                specimens_df = specimens_df[specimens_df['SessionID'].isin(surveillance_session_ids)].copy()
+                after_count = len(specimens_df)
+                logger.info(f"✅ Filtered specimens to match surveillance sessions:")
+                logger.info(f"   Before: {before_count} specimens")
+                logger.info(f"   After: {after_count} specimens")
+                logger.info(f"   Removed: {before_count - after_count} orphaned specimens")
             
             # Step 2: Data Processing
             logger.info("STEP 2: Processing and cleaning data")

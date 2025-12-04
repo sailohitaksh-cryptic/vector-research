@@ -341,9 +341,12 @@ class DataProcessor:
         report_rows = []
         
         # Group by SessionID to get per-house data
-        for session_id in surveillance_df['SessionID'].unique():
-            # Get session info
-            session_info = surveillance_df[surveillance_df['SessionID'] == session_id].iloc[0]
+        for session_id in surveillance_df['SessionID'].dropna().unique():
+            matching_sessions = surveillance_df[surveillance_df['SessionID'] == session_id]
+            if len(matching_sessions) == 0:
+                logger.warning(f"Session {session_id} not found in surveillance data - skipping")
+                continue
+            session_info = matching_sessions.iloc[0]
             
             # Get specimens for this session
             session_specimens = specimens_df[specimens_df['SessionID'] == session_id]
