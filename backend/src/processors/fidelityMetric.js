@@ -1,24 +1,29 @@
 /**
  * Fidelity Metrics Calculator (formerly Completeness)
  * Calculates:
- * 1. House data fidelity (houses with data / 30 total expected)
+ * 1. House data fidelity (houses with data / expected houses from API)
  * 2. Mosquito data completeness (missing mosquito data)
- * 3. VHT penetration (VHTs collecting in current month / VHTs in first month)
- * 4. VHT training completion (trained VHTs / 18 total VHTs)
+ * 3. VHT penetration (VHTs collecting in current month / VHTs in 2025-11)
+ * 4. VHT training completion (trained VHTs using SessionCollectorLastTrainedOn / 18 total VHTs)
  * 
- * ✅ FIXED: Now queries training data from field_collectors and training_records tables
+ * ✅ UPDATED: 
+ * - Uses SessionCollectorLastTrainedOn from raw data
+ * - First rollout month hardcoded to 2025-11
+ * - Fetches expected houses from sites API
+ * 
  * Replace: backend/src/processors/fidelityMetric.js
  */
 
 const logger = require('../utils/logger');
 const database = require('../services/database');
+const axios = require('axios');
 
 class FidelityMetric {
   /**
    * Calculate fidelity metrics for a specific month
    * @param {string} yearMonth - Format: YYYY-MM (e.g., "2025-11")
    */
-  calculateFidelityMetrics(yearMonth) {
+  async calculateFidelityMetrics(yearMonth) {
     logger.info(`Calculating fidelity metrics for ${yearMonth}...`);
 
     try {
@@ -40,7 +45,7 @@ class FidelityMetric {
       if (sessions.length === 0) {
         return {
           yearMonth,
-          houseFidelity: this.calculateHouseFidelity(0),
+          houseFidelity: await this.calculateHouseFidelity(yearMonth, 0),
           mosquitoFidelity: this.calculateMosquitoFidelity([]),
           vhtPenetration: this.calculateVHTPenetration(yearMonth, []),
           vhtTraining: this.calculateVHTTraining([]),
@@ -49,7 +54,7 @@ class FidelityMetric {
       }
 
       // Calculate all fidelity metrics
-      const houseFidelity = this.calculateHouseFidelity(sessions.length);
+      const houseFidelity = await this.calculateHouseFidelity(yearMonth, sessions.length);
       const mosquitoFidelity = this.calculateMosquitoFidelity(sessions);
       const vhtPenetration = this.calculateVHTPenetration(yearMonth, sessions);
       const vhtTraining = this.calculateVHTTraining(sessions);
@@ -71,21 +76,56 @@ class FidelityMetric {
 
   /**
    * 1. Calculate house data fidelity
-   * Houses with data / Total expected houses (30)
+   * Houses with data / Total expected houses (from API)
+   * 
+   * ✅ UPDATED: Fetches expected houses from sites API
    */
-  calculateHouseFidelity(housesWithData) {
-    const TOTAL_EXPECTED_HOUSES = 30;
+  async calculateHouseFidelity(yearMonth, housesWithData) {
+    try {
+      // Fetch expected houses from sites API
+      const axios = require('axios');
+      const apiUrl = 'http://test.api.vectorcam.org/sites';
+      
+      let totalExpectedHouses = 30; // Default fallback
+      
+      try {
+        const response = await axios.get(apiUrl);
+        
+        // Sum up expected houses from all sites
+        if (response.data && Array.isArray(response.data)) {
+          totalExpectedHouses = response.data.reduce((sum, site) => {
+            return sum + (site.expected_houses || site.expectedHouses || 0);
+          }, 0);
+        }
+      } catch (apiError) {
+        logger.warn('Could not fetch expected houses from API, using default:', apiError.message);
+      }
 
-    const fidelityRate = (housesWithData / TOTAL_EXPECTED_HOUSES) * 100;
+      const fidelityRate = (housesWithData / totalExpectedHouses) * 100;
 
-    return {
-      housesWithData,
-      totalExpectedHouses: TOTAL_EXPECTED_HOUSES,
-      fidelityRate: Math.round(fidelityRate * 10) / 10, // Round to 1 decimal
-      status: fidelityRate >= 90 ? 'Excellent' : 
-              fidelityRate >= 70 ? 'Good' : 
-              fidelityRate >= 50 ? 'Fair' : 'Needs Improvement'
-    };
+      return {
+        housesWithData,
+        totalExpectedHouses,
+        fidelityRate: Math.round(fidelityRate * 10) / 10,
+        status: fidelityRate >= 90 ? 'Excellent' : 
+                fidelityRate >= 70 ? 'Good' : 
+                fidelityRate >= 50 ? 'Fair' : 'Needs Improvement'
+      };
+    } catch (error) {
+      logger.error('Error calculating house fidelity:', error);
+      
+      // Fallback to default
+      const fidelityRate = (housesWithData / 30) * 100;
+      return {
+        housesWithData,
+        totalExpectedHouses: 30,
+        fidelityRate: Math.round(fidelityRate * 10) / 10,
+        status: fidelityRate >= 90 ? 'Excellent' : 
+                fidelityRate >= 70 ? 'Good' : 
+                fidelityRate >= 50 ? 'Fair' : 'Needs Improvement',
+        error: error.message
+      };
+    }
   }
 
   /**
@@ -130,6 +170,8 @@ class FidelityMetric {
   /**
    * 3. Calculate VHT penetration
    * VHTs collecting in current month / VHTs in first rollout month * 100
+   * 
+   * ✅ UPDATED: First rollout month hardcoded to 2025-11
    */
   calculateVHTPenetration(currentYearMonth, currentSessions) {
     try {
@@ -140,31 +182,11 @@ class FidelityMetric {
           .filter(name => name && name !== 'Unknown')
       );
 
-      // Get first month of rollout (earliest collection date in database)
-      const firstMonthQuery = `
-        SELECT 
-          strftime('%Y-%m', MIN(SessionCollectionDate)) as first_month
-        FROM surveillance_sessions
-        WHERE SessionCollectorName IS NOT NULL 
-          AND SessionCollectorName != ''
-          AND SessionCollectorName != 'Unknown'
-      `;
-
-      const firstMonthResult = database.db.prepare(firstMonthQuery).get();
-      const firstMonth = firstMonthResult?.first_month;
-
-      if (!firstMonth) {
-        return {
-          currentMonthVHTs: currentVHTs.size,
-          firstMonthVHTs: 0,
-          penetrationRate: 0,
-          firstRolloutMonth: 'Unknown',
-          status: 'No baseline data'
-        };
-      }
+      // ✅ HARDCODED: First rollout month is 2025-11
+      const firstMonth = '2025-11';
 
       // Get VHTs from first rollout month
-      const firstMonthQuery2 = `
+      const firstMonthQuery = `
         SELECT DISTINCT SessionCollectorName
         FROM surveillance_sessions
         WHERE strftime('%Y-%m', SessionCollectionDate) = ?
@@ -173,7 +195,7 @@ class FidelityMetric {
           AND SessionCollectorName != 'Unknown'
       `;
 
-      const firstMonthVHTs = database.db.prepare(firstMonthQuery2).all(firstMonth);
+      const firstMonthVHTs = database.db.prepare(firstMonthQuery).all(firstMonth);
       const firstMonthCount = firstMonthVHTs.length;
 
       const penetrationRate = firstMonthCount > 0 
@@ -197,6 +219,7 @@ class FidelityMetric {
         currentMonthVHTs: 0,
         firstMonthVHTs: 0,
         penetrationRate: 0,
+        firstRolloutMonth: '2025-11',
         status: 'Error calculating'
       };
     }
@@ -205,46 +228,27 @@ class FidelityMetric {
   /**
    * 4. Calculate VHT training completion
    * Trained VHTs / Total VHTs (18) * 100
-   * Based on training_records table from user tracking system
+   * Based on SessionCollectorLastTrainedOn field in surveillance_sessions
    * 
-   * ✅ FIXED: Now queries from field_collectors and training_records tables
+   * ✅ UPDATED: Uses SessionCollectorLastTrainedOn from raw data
    */
   calculateVHTTraining(sessions) {
     const TOTAL_VHTS = 18;
 
     try {
-      // Check if training tables exist
-      const tablesExist = database.db.prepare(`
-        SELECT name FROM sqlite_master 
-        WHERE type='table' AND (name='field_collectors' OR name='training_records')
-      `).all();
-
-      if (tablesExist.length < 2) {
-        // Training tables don't exist yet - return default
-        const uniqueVHTs = new Set(
-          sessions
-            .map(s => s.SessionCollectorName)
-            .filter(name => name && name !== 'Unknown')
-        );
-
-        return {
-          trainedVHTs: 0,
-          totalVHTs: TOTAL_VHTS,
-          untrainedVHTs: TOTAL_VHTS,
-          trainingRate: 0,
-          activeVHTs: uniqueVHTs.size,
-          status: 'Training data not yet available'
-        };
-      }
-
-      // Get unique VHTs who have been trained from training_records
+      // Get unique VHTs who have been trained (have SessionCollectorLastTrainedOn date)
       const trainedVHTsQuery = `
-        SELECT DISTINCT fc.collector_name
-        FROM field_collectors fc
-        INNER JOIN training_records tr ON fc.collector_id = tr.collector_id
-        WHERE fc.collector_name IS NOT NULL 
-          AND fc.collector_name != ''
-          AND fc.collector_name != 'Unknown'
+        SELECT DISTINCT 
+          SessionCollectorName,
+          SessionCollectorLastTrainedOn,
+          MAX(SessionCollectionDate) as last_collection_date
+        FROM surveillance_sessions
+        WHERE SessionCollectorLastTrainedOn IS NOT NULL 
+          AND SessionCollectorLastTrainedOn != ''
+          AND SessionCollectorName IS NOT NULL 
+          AND SessionCollectorName != ''
+          AND SessionCollectorName != 'Unknown'
+        GROUP BY SessionCollectorName
       `;
 
       const trainedVHTs = database.db.prepare(trainedVHTsQuery).all();
@@ -252,33 +256,14 @@ class FidelityMetric {
 
       const trainingRate = (trainedCount / TOTAL_VHTS) * 100;
 
-      // Get training details for each VHT
-      const trainingDetailsQuery = `
-        SELECT 
-          fc.collector_name,
-          MAX(tr.training_date) as last_trained_on,
-          tr.training_type,
-          tr.certification_status,
-          MAX(sl.submission_date) as last_collection_date
-        FROM field_collectors fc
-        INNER JOIN training_records tr ON fc.collector_id = tr.collector_id
-        LEFT JOIN submission_logs sl ON fc.collector_name = sl.collector_name
-        GROUP BY fc.collector_id
-        ORDER BY last_trained_on DESC
-      `;
-
-      const trainingDetails = database.db.prepare(trainingDetailsQuery).all();
-
       return {
         trainedVHTs: trainedCount,
         totalVHTs: TOTAL_VHTS,
         untrainedVHTs: TOTAL_VHTS - trainedCount,
         trainingRate: Math.round(trainingRate * 10) / 10,
-        trainingDetails: trainingDetails.map(t => ({
-          name: t.collector_name,
-          trainedOn: t.last_trained_on,
-          trainingType: t.training_type,
-          certificationStatus: t.certification_status,
+        trainingDetails: trainedVHTs.map(t => ({
+          name: t.SessionCollectorName,
+          trainedOn: t.SessionCollectorLastTrainedOn,
           lastCollection: t.last_collection_date
         })),
         status: trainingRate >= 90 ? 'Excellent' : 
@@ -294,7 +279,7 @@ class FidelityMetric {
         sessions
           .map(s => s.SessionCollectorName)
           .filter(name => name && name !== 'Unknown')
-        );
+      );
 
       return {
         trainedVHTs: 0,
@@ -311,8 +296,8 @@ class FidelityMetric {
   /**
    * Get overall fidelity summary
    */
-  calculateOverallFidelity(yearMonth) {
-    const metrics = this.calculateFidelityMetrics(yearMonth);
+  async calculateOverallFidelity(yearMonth) {
+    const metrics = await this.calculateFidelityMetrics(yearMonth);
 
     // Calculate composite fidelity score (average of all metrics)
     const scores = [

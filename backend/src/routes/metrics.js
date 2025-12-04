@@ -188,25 +188,12 @@ router.get('/completeness/:yearMonth/incomplete-sites', (req, res) => {
   }
 });
 
-router.get('/fidelity/:yearMonth', (req, res) => {
+router.get('/fidelity/:yearMonth', async (req, res) => {
   try {
-    const { yearMonth } = req.params;
-    
-    logger.info(`Calculating fidelity for ${yearMonth}`);
-    
-    const fidelity = fidelityMetric.calculateOverallFidelity(yearMonth);
-    
-    res.json({
-      success: true,
-      fidelity
-    });
+    const metrics = await fidelityMetric.calculateOverallFidelity(req.params.yearMonth);
+    res.json(metrics);
   } catch (error) {
     logger.error('Error calculating fidelity:', error);
-    res.status(500).json({
-      success: false,
-      error: error.message
-    });
+    res.status(500).json({ error: 'Failed to calculate fidelity metrics' });
   }
 });
-
-module.exports = router;
