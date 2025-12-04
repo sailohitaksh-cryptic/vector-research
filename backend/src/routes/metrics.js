@@ -197,3 +197,5 @@ router.get('/fidelity/:yearMonth', async (req, res) => {
     res.status(500).json({ error: 'Failed to calculate fidelity metrics' });
   }
 });
+
+module.exports = router;
