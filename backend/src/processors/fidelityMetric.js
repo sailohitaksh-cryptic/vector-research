@@ -84,7 +84,7 @@ class FidelityMetric {
     try {
       // Fetch expected houses from sites API
       const axios = require('axios');
-      const apiUrl = 'http://test.api.vectorcam.org/sites';
+      const apiUrl = 'http://api.vectorcam.org/sites';
       
       let totalExpectedHouses = 30; // Default fallback
       
@@ -182,8 +182,8 @@ class FidelityMetric {
           .filter(name => name && name !== 'Unknown')
       );
 
-      // ✅ HARDCODED: First rollout month is 2025-11
-      const firstMonth = '2025-11';
+      // ✅ HARDCODED: First rollout month is 2025-12
+      const firstMonth = '2025-12';
 
       // Get VHTs from first rollout month
       const firstMonthQuery = `

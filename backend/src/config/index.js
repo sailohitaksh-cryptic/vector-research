@@ -13,7 +13,7 @@ const config = {
 
   // VectorCam API
   vectorcam: {
-    baseUrl: process.env.VECTORCAM_API_URL || 'https://test.api.vectorcam.org',
+    baseUrl: process.env.VECTORCAM_API_URL || 'https://api.vectorcam.org',
     apiSecretKey: process.env.API_SECRET_KEY || process.env.VECTORCAM_API_SECRET,
     email: process.env.VECTORCAM_API_EMAIL,
     password: process.env.VECTORCAM_API_PASSWORD,

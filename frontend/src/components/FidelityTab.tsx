@@ -63,7 +63,50 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
   const [data, setData] = useState<FidelityData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedMonth, setSelectedMonth] = useState(currentYearMonth || getCurrentYearMonth());
+  const [selectedMonth, setSelectedMonth] = useState<string>('');
+  const [availableMonths, setAvailableMonths] = useState<string[]>([]);
+
+  // Fetch available months on mount
+  useEffect(() => {
+    fetchAvailableMonths();
+  }, []);
+
+  async function fetchAvailableMonths() {
+    try {
+      // Get distinct months from surveillance data
+      const response = await fetch(`${API_BASE_URL}/api/surveillance`);
+      if (response.ok) {
+        const data = await response.json();
+        const sessions = data.data || [];
+        
+        // Extract unique year-months
+        const months = new Set<string>();
+        sessions.forEach((session: any) => {
+          if (session.SessionCollectionDate) {
+            const yearMonth = session.SessionCollectionDate.substring(0, 7); // YYYY-MM
+            months.add(yearMonth);
+          }
+        });
+        
+        // Sort descending (newest first)
+        const sortedMonths = Array.from(months).sort().reverse();
+        setAvailableMonths(sortedMonths);
+        
+        // Set selected month to the latest month with data
+        if (sortedMonths.length > 0) {
+          setSelectedMonth(sortedMonths[0]); // Most recent month
+        } else {
+          setSelectedMonth(getCurrentYearMonth()); // Fallback to current
+        }
+      } else {
+        // Fallback to current month if API fails
+        setSelectedMonth(getCurrentYearMonth());
+      }
+    } catch (err) {
+      console.error('Error fetching available months:', err);
+      setSelectedMonth(getCurrentYearMonth()); // Fallback to current
+    }
+  }
 
   function getCurrentYearMonth() {
     const now = new Date();
@@ -73,6 +116,17 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
   }
 
   function getMonthOptions() {
+    // If we have available months from data, use those
+    if (availableMonths.length > 0) {
+      return availableMonths.map(yearMonth => {
+        const [year, month] = yearMonth.split('-');
+        const date = new Date(parseInt(year), parseInt(month) - 1, 1);
+        const label = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+        return { value: yearMonth, label };
+      });
+    }
+    
+    // Fallback: generate last 6 months
     const options = [];
     const now = new Date();
     
@@ -87,7 +141,9 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
   }
 
   useEffect(() => {
-    fetchFidelity(selectedMonth);
+    if (selectedMonth) {
+      fetchFidelity(selectedMonth);
+    }
   }, [selectedMonth]);
 
   async function fetchFidelity(yearMonth: string) {
