@@ -98,6 +98,40 @@ class DataProcessor:
         if 'NumPeopleSleptInHouse' in df.columns:
             mask = (df['NumPeopleSleptInHouse'] > 50)
             df.loc[mask, 'DataQualityFlag'] = 'Suspicious: Large household'
+
+        logger.info("Applying global data filters...")
+        
+        initial_count = len(df)
+        
+        # Filter 1: Remove sessions without SessionID
+        if 'SessionID' in df.columns:
+            before = len(df)
+            df = df[df['SessionID'].notna()].copy()
+            df = df[df['SessionID'] != ''].copy()
+            df = df[df['SessionID'] != 'N/A'].copy()
+            removed = before - len(df)
+            if removed > 0:
+                logger.info(f"  ✅ Removed {removed} records without valid SessionID")
+        
+        # Filter 2: Remove sites 1-11
+        if 'SiteID' in df.columns:
+            before = len(df)
+            df = df[~df['SiteID'].between(1, 11)].copy()
+            removed = before - len(df)
+            if removed > 0:
+                logger.info(f"  ✅ Removed {removed} records from sites 1-11")
+        
+        # Filter 3: Remove district "Other"
+        if 'SiteDistrict' in df.columns:
+            before = len(df)
+            df = df[df['SiteDistrict'] != 'Other'].copy()
+            removed = before - len(df)
+            if removed > 0:
+                logger.info(f"  ✅ Removed {removed} records from district 'Other'")
+        
+        total_removed = initial_count - len(df)
+        logger.info(f"  📊 Total records after filtering: {len(df)} (removed {total_removed})")
+        # ============================================================================
         
         logger.info(f"Cleaned surveillance data: {len(df)} records")
         logger.info(f"Data quality flags: {df['DataQualityFlag'].value_counts().to_dict()}")
