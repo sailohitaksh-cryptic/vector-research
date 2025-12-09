@@ -251,6 +251,45 @@ class DataProcessor:
         # Flag if species is N/A but should be identified
         mask = (df['Species'].isin(['N/A', 'Unknown'])) & (df['Sex'] != 'N/A')
         df.loc[mask, 'DataQualityFlag'] = 'Missing species ID'
+
+        # ============================================================================
+        # ✅ GLOBAL DATA FILTERS - Applied at data processing level
+        # Same filters as surveillance to keep data in sync!
+        # ============================================================================
+        logger.info("Applying global data filters to SPECIMENS...")
+        
+        initial_count = len(df)
+        
+        # Filter 1: Remove specimens without SessionID
+        if 'SessionID' in df.columns:
+            before = len(df)
+            df = df[df['SessionID'].notna()].copy()
+            df = df[df['SessionID'] != ''].copy()
+            df = df[df['SessionID'] != 'N/A'].copy()
+            removed = before - len(df)
+            if removed > 0:
+                logger.info(f"  ✅ Removed {removed} specimens without valid SessionID")
+        
+        # Filter 2: Remove specimens from sites 1-11
+        if 'SiteID' in df.columns:
+            before = len(df)
+            df = df[~df['SiteID'].between(1, 11)].copy()
+            removed = before - len(df)
+            if removed > 0:
+                logger.info(f"  ✅ Removed {removed} specimens from sites 1-11")
+        
+        # Filter 3: Remove specimens from district "Other"
+        if 'SiteDistrict' in df.columns:
+            before = len(df)
+            df = df[df['SiteDistrict'] != 'Other'].copy()
+            removed = before - len(df)
+            if removed > 0:
+                logger.info(f"  ✅ Removed {removed} specimens from district 'Other'")
+        
+        total_removed = initial_count - len(df)
+        logger.info(f"  📊 Total SPECIMENS after filtering: {len(df)} (removed {total_removed})")
+        # ============================================================================
+
         
         logger.info(f"Cleaned specimens data: {len(df)} records")
         logger.info(f"Species distribution: {df['Species'].value_counts().head(10).to_dict()}")
