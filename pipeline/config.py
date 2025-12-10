@@ -17,8 +17,8 @@ API_BASE_URL = os.getenv('API_BASE_URL', 'https://api.vectorcam.org')  # ✅ UPD
 API_KEY = os.getenv('API_SECRET_KEY') or os.getenv('VECTORCAM_API_KEY')
 
 # API Endpoints
-SURVEILLANCE_ENDPOINT = f"{API_BASE_URL}/sessions/export/surveillance-forms/csv"
-SPECIMENS_ENDPOINT = f"{API_BASE_URL}/specimens/export/csv"
+SURVEILLANCE_ENDPOINT = f"{API_BASE_URL}/sessions/export/surveillance-forms/csv?startDate=2025-12-01"
+SPECIMENS_ENDPOINT = f"{API_BASE_URL}/specimens/export/csv?startDate=2025-12-01"
 
 # Database Configuration - POINTS TO BACKEND
 DB_PATH = PROJECT_ROOT.parent / 'backend' / 'data' / 'vectorinsight.db'  # ✅ FIXED
