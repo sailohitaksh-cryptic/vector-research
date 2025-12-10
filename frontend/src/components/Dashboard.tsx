@@ -1426,7 +1426,8 @@ function SpeciesTable({ sortedSpecies, total }: { sortedSpecies: [string, number
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {displayedSpecies.map(([species, count], index) => {
-              const percentage = ((count / total) * 100).toFixed(1);
+              const percentageNum = (count / total) * 100;           // Keep as NUMBER
+              const percentage = percentageNum.toFixed(1); 
               const isVector = species.toLowerCase().includes('anopheles');
               
               return (
@@ -1439,7 +1440,7 @@ function SpeciesTable({ sortedSpecies, total }: { sortedSpecies: [string, number
                       <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
                         <div 
                           className={`h-2 rounded-full ${isVector ? 'bg-red-600' : 'bg-blue-600'}`}
-                          style={{ width: `${Math.min(percentage, 100)}%` }}
+                          style={{ width: `${Math.min(percentageNum, 100)}%` }}
                         />
                       </div>
                       <span>{percentage}%</span>
