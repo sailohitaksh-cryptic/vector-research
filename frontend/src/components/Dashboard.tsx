@@ -829,7 +829,7 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
               <FiUsers className="text-blue-700" size={24} />
             </div>
           </div>
-          <div className="text-4xl font-bold text-blue-900 mb-2">{totalCollectors}</div>
+          <div className="text-4xl font-bold text-blue-900 mb-2">{totalCollectors.toLocaleString()}</div>
           <div className="text-sm font-medium text-blue-700">Active Collectors</div>
           <p className="text-xs text-blue-600 mt-2">Field team members actively collecting data</p>
         </div>
@@ -840,7 +840,7 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
               <FiTarget className="text-green-700" size={24} />
             </div>
           </div>
-          <div className="text-4xl font-bold text-green-900 mb-2">{totalCollections}</div>
+          <div className="text-4xl font-bold text-green-900 mb-2">{totalCollections.toLocaleString()}</div>
           <div className="text-sm font-medium text-green-700">Total Collections</div>
           <p className="text-xs text-green-600 mt-2">Combined team output</p>
         </div>
@@ -857,6 +857,34 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
         </div>
       </div>
 
+      {/* Performance Bands Legend */}
+      <div className="bg-gradient-to-r from-blue-50 to-green-50 border-2 border-blue-200 rounded-lg p-4">
+        <h3 className="text-md font-semibold text-gray-900 mb-3 flex items-center">
+          <FiActivity className="mr-2" />
+          Performance Bands
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div className="flex items-center p-3 bg-green-50 border border-green-200 rounded-lg">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 mr-3">
+              High
+            </span>
+            <span className="text-gray-700">≥ 1.2× average ({(avgCollections * 1.2).toFixed(1)}+ collections)</span>
+          </div>
+          <div className="flex items-center p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 mr-3">
+              Medium
+            </span>
+            <span className="text-gray-700">0.8-1.2× average ({(avgCollections * 0.8).toFixed(1)}-{(avgCollections * 1.2).toFixed(1)} collections)</span>
+          </div>
+          <div className="flex items-center p-3 bg-orange-50 border border-orange-200 rounded-lg">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-orange-100 text-orange-800 mr-3">
+              Low
+            </span>
+            <span className="text-gray-700">&lt; 0.8× average (&lt;{(avgCollections * 0.8).toFixed(1)} collections)</span>
+          </div>
+        </div>
+      </div>
+
       {/* Top Performers */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Top 10 Performers</h3>
@@ -867,8 +895,21 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
     y: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
     type: 'bar',
     marker: { 
-      color: '#10b981',
-      line: { color: '#059669', width: 1 }
+      color: sortedCollectors.slice(0, 10).map(c => {
+        const collectorTotal = getCollectorTotalCollections(c);
+        if (collectorTotal >= avgCollections * 1.2) return '#10b981'; // green - High
+        if (collectorTotal >= avgCollections * 0.8) return '#3b82f6'; // blue - Medium
+        return '#f97316'; // orange - Low
+      }),
+      line: { 
+        color: sortedCollectors.slice(0, 10).map(c => {
+          const collectorTotal = getCollectorTotalCollections(c);
+          if (collectorTotal >= avgCollections * 1.2) return '#059669'; // dark green
+          if (collectorTotal >= avgCollections * 0.8) return '#2563eb'; // dark blue
+          return '#ea580c'; // dark orange
+        }),
+        width: 1 
+      }
     },
     text: sortedCollectors.slice(0, 10).map(c => getCollectorTotalCollections(c)),
     textposition: 'outside',
@@ -909,6 +950,10 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
                 const performanceColor = performance === 'High' ? 'green' : 
                                         performance === 'Medium' ? 'blue' : 'orange';
                 
+                // Row background color based on performance
+                const rowBgColor = performance === 'High' ? 'bg-green-50' : 
+                                   performance === 'Medium' ? 'bg-blue-50' : 'bg-orange-50';
+                
                 // Try multiple possible field names for collector name
                 const collectorName = getCollectorName(collector);
 
@@ -917,7 +962,7 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
                 const lastActivityDate = lastActivity ? new Date(lastActivity) : null;
                 
                 return (
-                  <tr key={index} className="hover:bg-gray-50">
+                  <tr key={index} className={`${rowBgColor} hover:opacity-80 transition-opacity`}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {collectorName}
@@ -926,13 +971,13 @@ const avgCollections = totalCollections > 0 ? totalCollections / totalCollectors
   {getCollectorDistrict(collector)}
 </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collectorTotal}
+                      {collectorTotal.toLocaleString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {lastActivity ? new Date(lastActivity).toLocaleDateString() : 'N/A'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${performanceColor}-100 text-${performanceColor}-800`}>
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${performanceColor}-100 text-${performanceColor}-800 border border-${performanceColor}-200`}>
                         {performance}
                       </span>
                     </td>
