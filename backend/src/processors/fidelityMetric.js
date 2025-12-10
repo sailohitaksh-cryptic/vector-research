@@ -98,7 +98,7 @@ class FidelityMetric {
       const axios = require('axios');
       const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&limit=100';
       
-      let totalExpectedHouses = 60; // Default if API fetch fails
+      let totalExpectedHouses = 30; // Default if API fetch fails
       
       try {
         const apiKey = process.env.API_SECRET_KEY || process.env.VECTORCAM_API_KEY;
