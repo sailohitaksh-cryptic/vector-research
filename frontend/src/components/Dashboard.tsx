@@ -720,6 +720,9 @@ function IndoorRestingDensityTab({
       {/* Visual Comparison */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Density Comparison</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Average number of mosquitoes collected per trapping event.
+        </p>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
             data={[{
@@ -1546,7 +1549,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
             <div className="text-4xl font-bold text-green-900">{llinRate.toFixed(1)}%</div>
           </div>
           <p className="text-sm text-green-700 mb-4">
-            Percentage of people who slept under net previous night
+            Percentage of people who slept under a mosquito net the previous night.
           </p>
           <div className="w-full bg-green-200 rounded-full h-4">
             <div 
@@ -1555,7 +1558,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
             />
           </div>
           <p className="text-xs text-green-600 mt-3">
-            Gap between ownership and usage indicates need for behavior change campaigns
+            A gap between LLIN ownership and usage suggests the need for social and behavior change communication (SBCC) efforts
           </p>
         </div>
 
@@ -1564,16 +1567,16 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
           <h3 className="text-lg font-semibold text-purple-900 mb-4">LLIN Household Statistics</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <span className="text-sm font-medium text-gray-700">Total LLINs</span>
-              <span className="text-xl font-bold text-purple-900">{totalLlins}</span>
+              <span className="text-sm font-medium text-gray-700">Total LLINs Distributed</span>
+              <span className="text-xl font-bold text-purple-900">{totalLlins.toLocaleString()}</span>
             </div>
             <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <span className="text-sm font-medium text-gray-700">Avg LLINs per House</span>
+              <span className="text-sm font-medium text-gray-700">Average LLINs per Household</span>
               <span className="text-xl font-bold text-purple-900">{avgLlinsPerHouse.toFixed(2)}</span>
             </div>
             <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <span className="text-sm font-medium text-gray-700">Houses with LLINs</span>
-              <span className="text-xl font-bold text-purple-900">{housesWithLlins}</span>
+              <span className="text-sm font-medium text-gray-700">Households Owning at Least One LLIN</span>
+              <span className="text-xl font-bold text-purple-900">{housesWithLlins.toLocaleString()}</span>
             </div>
           </div>
           <p className="text-xs text-purple-600 mt-3">
@@ -1584,7 +1587,10 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
 
       {/* Coverage Comparison Chart */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Intervention Coverage Comparison</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Comparison of Malaria Prevention Intervention Coverage</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Comparison of IRS coverage and LLIN usage among surveyed households.
+        </p>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
             data={[{
@@ -1601,12 +1607,12 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
             }]}
             layout={{
               yaxis: { 
-                title: 'Coverage Percentage (%)', 
+                title: 'Percentage of Households / Individuals Covered', 
                 range: [0, Math.max(100, Math.max(irsRate, llinRate) * 1.1)]
               },
               xaxis: { title: 'Intervention Type' },
               showlegend: false,
-              margin: { l: 60, r: 30, t: 30, b: 60 }
+              margin: { l: 80, r: 30, t: 30, b: 60 }
             }}
             config={{ responsive: true, displayModeBar: false }}
             style={{ width: '100%', height: '400px' }}
@@ -1626,7 +1632,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">District</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collections</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Collections</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage Status</th>
                 </tr>
               </thead>
@@ -1636,7 +1642,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
                   .map(([district, count]) => (
                     <tr key={district} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{district}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{(count as number).toLocaleString()}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                           Active Surveillance
