@@ -98,9 +98,9 @@ class FidelityMetric {
       const axios = require('axios');
       // ✅ Get all sites for programId=1 (Uganda)
       // No filtering needed - pipeline.py already filtered the database
-      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&limit=100';
+      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&isActive=true';
       
-      let totalExpectedHouses = 60; // Default if API fetch fails
+      let totalExpectedHouses = 30; // Default if API fetch fails
       
       try {
         // ✅ FIX: Add Bearer token authentication
