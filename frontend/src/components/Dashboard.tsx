@@ -720,9 +720,6 @@ function IndoorRestingDensityTab({
       {/* Visual Comparison */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Density Comparison</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Average number of mosquitoes collected per trapping event.
-        </p>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
             data={[{
@@ -1549,7 +1546,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
             <div className="text-4xl font-bold text-green-900">{llinRate.toFixed(1)}%</div>
           </div>
           <p className="text-sm text-green-700 mb-4">
-            Percentage of people who slept under a mosquito net the previous night.
+            Percentage of people who slept under net previous night
           </p>
           <div className="w-full bg-green-200 rounded-full h-4">
             <div 
@@ -1558,7 +1555,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
             />
           </div>
           <p className="text-xs text-green-600 mt-3">
-            A gap between LLIN ownership and usage suggests the need for social and behavior change communication (SBCC) efforts
+            Gap between ownership and usage indicates need for behavior change campaigns
           </p>
         </div>
 
@@ -1567,16 +1564,16 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
           <h3 className="text-lg font-semibold text-purple-900 mb-4">LLIN Household Statistics</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <span className="text-sm font-medium text-gray-700">Total LLINs Distributed</span>
-              <span className="text-xl font-bold text-purple-900">{totalLlins.toLocaleString()}</span>
+              <span className="text-sm font-medium text-gray-700">Total LLINs</span>
+              <span className="text-xl font-bold text-purple-900">{totalLlins}</span>
             </div>
             <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <span className="text-sm font-medium text-gray-700">Average LLINs per Household</span>
+              <span className="text-sm font-medium text-gray-700">Avg LLINs per House</span>
               <span className="text-xl font-bold text-purple-900">{avgLlinsPerHouse.toFixed(2)}</span>
             </div>
             <div className="flex items-center justify-between p-3 bg-white rounded-lg">
-              <span className="text-sm font-medium text-gray-700">Households Owning at Least One LLIN</span>
-              <span className="text-xl font-bold text-purple-900">{housesWithLlins.toLocaleString()}</span>
+              <span className="text-sm font-medium text-gray-700">Houses with LLINs</span>
+              <span className="text-xl font-bold text-purple-900">{housesWithLlins}</span>
             </div>
           </div>
           <p className="text-xs text-purple-600 mt-3">
@@ -1587,10 +1584,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
 
       {/* Coverage Comparison Chart */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Comparison of Malaria Prevention Intervention Coverage</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Comparison of IRS coverage and LLIN usage among surveyed households.
-        </p>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Intervention Coverage Comparison</h3>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
             data={[{
@@ -1607,12 +1601,12 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
             }]}
             layout={{
               yaxis: { 
-                title: 'Percentage of Households / Individuals Covered', 
+                title: 'Coverage Percentage (%)', 
                 range: [0, Math.max(100, Math.max(irsRate, llinRate) * 1.1)]
               },
               xaxis: { title: 'Intervention Type' },
               showlegend: false,
-              margin: { l: 80, r: 30, t: 30, b: 60 }
+              margin: { l: 60, r: 30, t: 30, b: 60 }
             }}
             config={{ responsive: true, displayModeBar: false }}
             style={{ width: '100%', height: '400px' }}
@@ -1632,7 +1626,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">District</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Collections</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collections</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage Status</th>
                 </tr>
               </thead>
@@ -1642,7 +1636,7 @@ function InterventionCoverageTab({ metrics }: { metrics: Metrics | null }) {
                   .map(([district, count]) => (
                     <tr key={district} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{district}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{(count as number).toLocaleString()}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                           Active Surveillance
@@ -1787,6 +1781,17 @@ function CollectionMethodsTab({ metrics }: { metrics: Metrics | null }) {
         <p className="text-sm text-gray-600 mb-4">
           Compare methods for resource allocation decisions. Higher specimens-per-collection indicates method efficiency.
         </p>
+        
+        {/* Usage Level Thresholds Legend */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4 text-sm">
+          <div className="font-semibold text-blue-900 mb-2">Usage Level Thresholds:</div>
+          <div className="flex flex-wrap gap-4 text-blue-700">
+            <span><strong>High:</strong> &gt;30% of total collections</span>
+            <span><strong>Medium:</strong> 10-30% of total collections</span>
+            <span><strong>Low:</strong> &lt;10% of total collections</span>
+          </div>
+        </div>
+        
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -1794,13 +1799,15 @@ function CollectionMethodsTab({ metrics }: { metrics: Metrics | null }) {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Method</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collections</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">% of Total Collections</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Specimens/Collection</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usage Level</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {sortedMethods.map(([method, count], index) => {
                 const percentage = ((count / total) * 100).toFixed(1);
+                const specimensPerCollection = totalSpecimens > 0 && total > 0 ? (totalSpecimens / total).toFixed(1) : 'N/A';
                 const usageLevel = count > total * 0.3 ? 'High' : count > total * 0.1 ? 'Medium' : 'Low';
                 const usageColor = usageLevel === 'High' ? 'green' : usageLevel === 'Medium' ? 'yellow' : 'gray';
                 
@@ -1808,7 +1815,7 @@ function CollectionMethodsTab({ metrics }: { metrics: Metrics | null }) {
                   <tr key={method} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{method}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count.toLocaleString()}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <div className="flex items-center">
                         <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
@@ -1820,6 +1827,7 @@ function CollectionMethodsTab({ metrics }: { metrics: Metrics | null }) {
                         <span>{percentage}%</span>
                       </div>
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-medium">{specimensPerCollection}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${usageColor}-100 text-${usageColor}-800`}>
                         {usageLevel}
@@ -1920,7 +1928,7 @@ function GeographicDistributionTab({ metrics }: { metrics: Metrics | null }) {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Collections by District</h3>
         <p className="text-sm text-gray-600 mb-4">
-          Identify undersampled areas for surveillance expansion and high-burden districts for targeted interventions
+          Identify districts with low surveillance coverage and prioritize areas for expansion or intensified sampling.
         </p>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
@@ -1951,15 +1959,18 @@ function GeographicDistributionTab({ metrics }: { metrics: Metrics | null }) {
       {/* District Comparison Table */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">District-Level Analysis</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Assess district-level surveillance coverage and identify gaps.
+        </p>
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">District</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collections</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Number of Collections</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage of Total</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coverage Level</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Surveillance Coverage Level</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -1974,7 +1985,7 @@ function GeographicDistributionTab({ metrics }: { metrics: Metrics | null }) {
                   <tr key={district} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{district}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{(count as number).toLocaleString()}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <div className="flex items-center">
                         <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
@@ -1988,7 +1999,7 @@ function GeographicDistributionTab({ metrics }: { metrics: Metrics | null }) {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${coverageColor}-100 text-${coverageColor}-800`}>
-                        {coverageLevel} Coverage
+                        {coverageLevel}
                       </span>
                     </td>
                   </tr>
@@ -2001,7 +2012,7 @@ function GeographicDistributionTab({ metrics }: { metrics: Metrics | null }) {
 
       {/* Geographic Coverage Pie Chart */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">District Distribution</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Distribution of Collections by District</h3>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
             data={[{
