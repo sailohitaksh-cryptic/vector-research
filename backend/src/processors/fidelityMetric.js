@@ -78,32 +78,29 @@ class FidelityMetric {
 
   /**
    * 1. Calculate house data fidelity
-   * Houses with data / Total expected houses (from API)
+   * Houses with data / Total expected houses (from API, excluding siteId 11)
    * 
-   * ✅ UPDATED: Fetches expected houses from sites API
-   * ✅ UPDATED: Counts unique SiteIDs (not sessions)
-   * ✅ TEST: Changed default from 30 to 999 to verify API is working
+   * ✅ UPDATED: Excludes siteId 11 (district "Other")
+   * ✅ UPDATED: Counts unique SessionSiteId values for current month
    */
   async calculateHouseFidelity(yearMonth, sessions) {
     try {
-      // ✅ FIX: Count unique SiteIDs for houses (not total sessions)
+      // ✅ Count unique SessionSiteId values for houses with data in current month
+      // Try multiple possible field names
       const uniqueSiteIds = new Set(
         sessions
-          .map(s => s.SiteID)
-          .filter(id => id != null && id !== '')
+          .map(s => s.SessionSiteId || s.SiteID || s.site_id)
+          .filter(id => id != null && id !== '' && id != 11) // Exclude siteId 11
       );
       const housesWithData = uniqueSiteIds.size;
       
       // Fetch expected houses from sites API
       const axios = require('axios');
-      // ✅ Get all sites for programId=1 (Uganda)
-      // No filtering needed - pipeline.py already filtered the database
-      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&isActive=true';
+      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1';
       
-      let totalExpectedHouses = 30; // Default if API fetch fails
+      let totalExpectedHouses = 60; // Default if API fetch fails
       
       try {
-        // ✅ FIX: Add Bearer token authentication
         const apiKey = process.env.API_SECRET_KEY || process.env.VECTORCAM_API_KEY;
         
         const response = await axios.get(apiUrl, {
@@ -112,17 +109,24 @@ class FidelityMetric {
           }
         });
         
-        // ✅ Count all sites from API (no filtering - already done in pipeline)
+        // ✅ Filter out siteId 11 (district "Other") and count remaining sites
         if (response.data && response.data.sites && Array.isArray(response.data.sites)) {
-          totalExpectedHouses = response.data.sites.length;
+          const validSites = response.data.sites.filter(site => 
+            site.siteId !== 11 && 
+            site.district !== 'Other' &&
+            site.isActive === true
+          );
+          totalExpectedHouses = validSites.length;
           
-          logger.info(`✅ Fetched ${totalExpectedHouses} expected houses from API`);
+          logger.info(`✅ Fetched ${totalExpectedHouses} expected houses from API (excluded siteId 11)`);
         }
       } catch (apiError) {
-        logger.warn(`Could not fetch expected houses from API, using default: ${totalExpectedHouses}`, apiError);
+        logger.warn(`Could not fetch expected houses from API, using default: ${totalExpectedHouses}`, apiError.message);
       }
 
-      const fidelityRate = (housesWithData / totalExpectedHouses) * 100;
+      const fidelityRate = totalExpectedHouses > 0 
+        ? (housesWithData / totalExpectedHouses) * 100 
+        : 0;
 
       return {
         housesWithData,
@@ -136,7 +140,6 @@ class FidelityMetric {
       logger.error('Error calculating house fidelity:', error);
       
       // Fallback to default
-      const fidelityRate = (0 / 60) * 100;
       return {
         housesWithData: 0,
         totalExpectedHouses: 60,
