@@ -1140,33 +1140,61 @@ const total = (Object.values(speciesCounts) as number[])
     <div className="space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Species Composition</h2>
-        <p className="text-gray-600">Identify mosquito populations and malaria vector presence. Anopheles gambiae and Anopheles funestus are primary malaria vectors in Uganda.</p>
+        <p className="text-gray-600">Identify the distribution of mosquito species and the presence of key malaria vectors. Anopheles gambiae and Anopheles funestus are the primary malaria vectors in Uganda.</p>
       </div>
 
       {/* Species Distribution Donut Chart */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Overall Species Distribution</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Overall Mosquito Species Distribution</h3>
         <div className="bg-gray-50 rounded-lg p-4 border">
           <Plot
             data={[{
-              labels: sortedSpecies.map(([species]) => species),
+              labels: sortedSpecies.map(([species]) => {
+                // Add group prefixes for legend organization
+                if (species.toLowerCase().includes('gambiae') || species.toLowerCase().includes('funestus')) {
+                  return `PRIMARY VECTOR: ${species}`;
+                } else if (species.toLowerCase().includes('anopheles')) {
+                  return `PRIMARY VECTOR: ${species}`;
+                } else if (species.toLowerCase().includes('culex') || species.toLowerCase().includes('mansonia') || species.toLowerCase().includes('aedes')) {
+                  return `OTHER MOSQUITO: ${species}`;
+                } else {
+                  return `OTHER CAPTURE: ${species}`;
+                }
+              }),
               values: sortedSpecies.map(([, count]) => count),
               type: 'pie',
               hole: 0.4,
               marker: {
-                colors: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#f97316', '#84cc16', '#06b6d4']
+                colors: sortedSpecies.map(([species]) => {
+                  // Color coding by group
+                  if (species.toLowerCase().includes('gambiae')) return '#dc2626'; // Dark red for gambiae
+                  if (species.toLowerCase().includes('funestus')) return '#ea580c'; // Orange for funestus
+                  if (species.toLowerCase().includes('anopheles')) return '#f97316'; // Light orange for other Anopheles
+                  if (species.toLowerCase().includes('culex')) return '#3b82f6'; // Blue for Culex
+                  if (species.toLowerCase().includes('mansonia')) return '#06b6d4'; // Cyan for Mansonia
+                  if (species.toLowerCase().includes('aedes')) return '#8b5cf6'; // Purple for Aedes
+                  return '#10b981'; // Green for other captures
+                })
               },
               textinfo: 'label+percent',
-              textposition: 'outside'
+              textposition: 'outside',
+              textfont: { size: 11 },
+              automargin: true
             }]}
             layout={{
               showlegend: true,
-              legend: { orientation: 'v', x: 1.1, y: 0.5 },
-              height: 500,
-              margin: { l: 20, r: 150, t: 20, b: 20 }
+              legend: { 
+                orientation: 'v', 
+                x: 1.15, 
+                y: 0.5,
+                font: { size: 11 },
+                itemsizing: 'constant'
+              },
+              height: 600,
+              margin: { l: 80, r: 250, t: 40, b: 80 }
             }}
             config={{ responsive: true, displayModeBar: false }}
-            style={{ width: '100%', height: '500px' }}
+            style={{ width: '100%', height: '600px' }}
           />
         </div>
       </div>
@@ -1179,16 +1207,26 @@ const total = (Object.values(speciesCounts) as number[])
             Anopheles Species (Malaria Vectors)
           </h3>
           <p className="text-sm text-gray-600 mb-4">
-            <strong>An. gambiae</strong> is the primary malaria vector. <strong>An. funestus</strong> is important in perennial transmission areas. Track ratios for vector control targeting.
+            An. gambiae is the primary malaria vector in Uganda, while An. funestus plays a key role in perennial transmission areas. Monitoring their relative abundance supports vector control planning and targeting.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             {anophelesSpecies.slice(0, 3).map(([species, count]) => {
               const percentage = ((count / total) * 100).toFixed(1);
+              // Add descriptive labels
+              let displayName = species;
+              if (species.toLowerCase().includes('gambiae')) {
+                displayName = `${species} (Primary Vector)`;
+              } else if (species.toLowerCase().includes('funestus')) {
+                displayName = `${species} (Perennial Vector)`;
+              } else if (species.toLowerCase().includes('other')) {
+                displayName = 'Other Anopheles';
+              }
+              
               return (
                 <div key={species} className="bg-gradient-to-br from-red-50 to-orange-50 border-2 border-red-200 rounded-lg p-6">
-                  <div className="text-sm text-red-700 font-medium mb-2">{species}</div>
-                  <div className="text-3xl font-bold text-red-900 mb-1">{count}</div>
+                  <div className="text-sm text-red-700 font-medium mb-2">{displayName}</div>
+                  <div className="text-3xl font-bold text-red-900 mb-1">{count.toLocaleString()}</div>
                   <div className="text-sm text-red-600">{percentage}% of total specimens</div>
                 </div>
               );
@@ -1196,21 +1234,26 @@ const total = (Object.values(speciesCounts) as number[])
           </div>
 
           <div className="bg-gray-50 rounded-lg p-4 border">
+            <h4 className="text-lg font-semibold text-gray-900 mb-4">Anopheles Species Counts</h4>
             <Plot
               data={[{
                 x: anophelesSpecies.map(([species]) => species),
                 y: anophelesSpecies.map(([, count]) => count),
                 type: 'bar',
                 marker: { 
-                  color: '#ef4444',
-                  line: { color: '#dc2626', width: 1 }
+                  color: anophelesSpecies.map(([species]) => {
+                    if (species.toLowerCase().includes('gambiae')) return '#dc2626'; // Red for gambiae
+                    if (species.toLowerCase().includes('funestus')) return '#ea580c'; // Orange for funestus
+                    return '#f97316'; // Light orange for other Anopheles
+                  }),
+                  line: { color: '#991b1b', width: 1 }
                 },
                 text: anophelesSpecies.map(([, count]) => count),
                 textposition: 'outside'
               }]}
               layout={{
                 xaxis: { title: 'Anopheles Species' },
-                yaxis: { title: 'Number of Specimens' },
+                yaxis: { title: 'Specimen Count' },
                 showlegend: false,
                 margin: { l: 60, r: 30, t: 30, b: 100 }
               }}
@@ -1228,22 +1271,43 @@ const total = (Object.values(speciesCounts) as number[])
           <p className="text-sm text-gray-600 mb-4">
             Culex and Mansonia are nuisance mosquitoes but not malaria vectors. Their presence indicates breeding site conditions.
           </p>
+          
+          {/* Metric Cards for Other Species */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            {otherSpecies.slice(0, 3).map(([species, count]) => {
+              const percentage = ((count / total) * 100).toFixed(1);
+              return (
+                <div key={species} className="bg-gradient-to-br from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-lg p-6">
+                  <div className="text-sm text-blue-700 font-medium mb-2">{species}</div>
+                  <div className="text-3xl font-bold text-blue-900 mb-1">{count.toLocaleString()}</div>
+                  <div className="text-sm text-blue-600">{percentage}% of total specimens</div>
+                </div>
+              );
+            })}
+          </div>
+          
           <div className="bg-gray-50 rounded-lg p-4 border">
+            <h4 className="text-lg font-semibold text-gray-900 mb-4">Counts of Non-Vector Mosquito Species</h4>
             <Plot
               data={[{
                 x: otherSpecies.map(([species]) => species),
                 y: otherSpecies.map(([, count]) => count),
                 type: 'bar',
                 marker: { 
-                  color: '#3b82f6',
-                  line: { color: '#2563eb', width: 1 }
+                  color: otherSpecies.map(([species]) => {
+                    if (species.toLowerCase().includes('culex')) return '#3b82f6'; // Blue for Culex
+                    if (species.toLowerCase().includes('mansonia')) return '#06b6d4'; // Cyan for Mansonia
+                    if (species.toLowerCase().includes('aedes')) return '#8b5cf6'; // Purple for Aedes
+                    return '#10b981'; // Green for others
+                  }),
+                  line: { color: '#1e40af', width: 1 }
                 },
                 text: otherSpecies.map(([, count]) => count),
                 textposition: 'outside'
               }]}
               layout={{
                 xaxis: { title: 'Species' },
-                yaxis: { title: 'Number of Specimens' },
+                yaxis: { title: 'Specimen Count' },
                 showlegend: false,
                 margin: { l: 60, r: 30, t: 30, b: 100 }
               }}
@@ -1255,57 +1319,148 @@ const total = (Object.values(speciesCounts) as number[])
       )}
 
       {/* Detailed Species Table */}
-      <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Detailed Species Counts</h3>
-        <div className="bg-white border rounded-lg overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rank</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Species</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Count</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vector Status</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {sortedSpecies.map(([species, count], index) => {
-                const percentage = ((count / total) * 100).toFixed(1);
-                const isVector = species.toLowerCase().includes('anopheles');
-                
-                return (
-                  <tr key={species} className={isVector ? 'bg-red-50' : 'hover:bg-gray-50'}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{species}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count.toLocaleString()}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div className="flex items-center">
-                        <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
-                          <div 
-                            className={`h-2 rounded-full ${isVector ? 'bg-red-600' : 'bg-blue-600'}`}
-                            style={{ width: `${percentage}%` }}
-                          />
-                        </div>
-                        <span>{percentage}%</span>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {isVector ? (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                          Malaria Vector
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                          Non-Vector
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+      <SpeciesTable sortedSpecies={sortedSpecies} total={total} />
+    </div>
+  );
+}
+
+// Interactive Species Table Component
+function SpeciesTable({ sortedSpecies, total }: { sortedSpecies: [string, number][], total: number }) {
+  const [filter, setFilter] = useState<'all' | 'vector' | 'non-vector'>('all');
+  const [sortBy, setSortBy] = useState<'rank' | 'count'>('rank');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+
+  // Filter species based on selection
+  const filteredSpecies = sortedSpecies.filter(([species]) => {
+    const isVector = species.toLowerCase().includes('anopheles');
+    if (filter === 'vector') return isVector;
+    if (filter === 'non-vector') return !isVector;
+    return true; // 'all'
+  });
+
+  // Sort filtered species
+  const displayedSpecies = [...filteredSpecies].sort((a, b) => {
+    if (sortBy === 'count') {
+      return sortOrder === 'asc' ? a[1] - b[1] : b[1] - a[1];
+    }
+    return 0; // rank is already sorted
+  });
+
+  const handleSort = (column: 'rank' | 'count') => {
+    if (sortBy === column) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(column);
+      setSortOrder(column === 'count' ? 'desc' : 'asc');
+    }
+  };
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-semibold text-gray-900">Detailed Species Counts</h3>
+        
+        {/* Filter Buttons */}
+        <div className="flex gap-2">
+          <button
+            onClick={() => setFilter('all')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              filter === 'all'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            All Species ({sortedSpecies.length})
+          </button>
+          <button
+            onClick={() => setFilter('vector')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              filter === 'vector'
+                ? 'bg-red-600 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            Vectors ({sortedSpecies.filter(([s]) => s.toLowerCase().includes('anopheles')).length})
+          </button>
+          <button
+            onClick={() => setFilter('non-vector')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              filter === 'non-vector'
+                ? 'bg-green-600 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            Non-Vectors ({sortedSpecies.filter(([s]) => !s.toLowerCase().includes('anopheles')).length})
+          </button>
         </div>
+      </div>
+
+      <div className="bg-white border rounded-lg overflow-hidden">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Rank
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Species
+              </th>
+              <th 
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
+                onClick={() => handleSort('count')}
+              >
+                <div className="flex items-center">
+                  Count
+                  {sortBy === 'count' && (
+                    <span className="ml-1">{sortOrder === 'asc' ? '↑' : '↓'}</span>
+                  )}
+                </div>
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Percentage
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Vector Status
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {displayedSpecies.map(([species, count], index) => {
+              const percentage = ((count / total) * 100).toFixed(1);
+              const isVector = species.toLowerCase().includes('anopheles');
+              
+              return (
+                <tr key={species} className={isVector ? 'bg-red-50' : 'hover:bg-gray-50'}>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{species}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{count.toLocaleString()}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <div className="w-24 bg-gray-200 rounded-full h-2 mr-2">
+                        <div 
+                          className={`h-2 rounded-full ${isVector ? 'bg-red-600' : 'bg-blue-600'}`}
+                          style={{ width: `${Math.min(percentage, 100)}%` }}
+                        />
+                      </div>
+                      <span>{percentage}%</span>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    {isVector ? (
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                        Malaria Vector
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                        Non-Vector
+                      </span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </div>
   );
