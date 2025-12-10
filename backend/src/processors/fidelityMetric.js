@@ -3,13 +3,14 @@
  * Calculates:
  * 1. House data fidelity (houses with data / expected houses from API)
  * 2. Mosquito data completeness (missing mosquito data)
- * 3. VHT penetration (VHTs collecting in current month / VHTs in 2025-11)
+ * 3. VHT penetration (VHTs collecting in current month / VHTs in 2025-12)
  * 4. VHT training completion (trained VHTs using SessionCollectorLastTrainedOn / 18 total VHTs)
  * 
  * ✅ UPDATED: 
  * - Uses SessionCollectorLastTrainedOn from raw data
- * - First rollout month hardcoded to 2025-11
- * - Fetches expected houses from sites API
+ * - First rollout month hardcoded to 2025-12
+ * - Fetches expected houses count from sites API (programId=1)
+ * - No data filtering needed - already done in pipeline.py
  * 
  * Replace: backend/src/processors/fidelityMetric.js
  */
@@ -30,6 +31,7 @@ class FidelityMetric {
       const [year, month] = yearMonth.split('-');
 
       // Get all surveillance data for the month
+      // ✅ No filters needed - data already cleaned in pipeline.py
       const surveillanceQuery = `
         SELECT 
           sv.*,
@@ -45,7 +47,7 @@ class FidelityMetric {
       if (sessions.length === 0) {
         return {
           yearMonth,
-          houseFidelity: await this.calculateHouseFidelity(yearMonth, 0),
+          houseFidelity: await this.calculateHouseFidelity(yearMonth, []),
           mosquitoFidelity: this.calculateMosquitoFidelity([]),
           vhtPenetration: this.calculateVHTPenetration(yearMonth, []),
           vhtTraining: this.calculateVHTTraining([]),
@@ -54,7 +56,7 @@ class FidelityMetric {
       }
 
       // Calculate all fidelity metrics
-      const houseFidelity = await this.calculateHouseFidelity(yearMonth, sessions.length);
+      const houseFidelity = await this.calculateHouseFidelity(yearMonth, sessions);
       const mosquitoFidelity = this.calculateMosquitoFidelity(sessions);
       const vhtPenetration = this.calculateVHTPenetration(yearMonth, sessions);
       const vhtTraining = this.calculateVHTTraining(sessions);
@@ -79,26 +81,45 @@ class FidelityMetric {
    * Houses with data / Total expected houses (from API)
    * 
    * ✅ UPDATED: Fetches expected houses from sites API
+   * ✅ UPDATED: Counts unique SiteIDs (not sessions)
+   * ✅ TEST: Changed default from 30 to 999 to verify API is working
    */
-  async calculateHouseFidelity(yearMonth, housesWithData) {
+  async calculateHouseFidelity(yearMonth, sessions) {
     try {
+      // ✅ FIX: Count unique SiteIDs for houses (not total sessions)
+      const uniqueSiteIds = new Set(
+        sessions
+          .map(s => s.SiteID)
+          .filter(id => id != null && id !== '')
+      );
+      const housesWithData = uniqueSiteIds.size;
+      
       // Fetch expected houses from sites API
       const axios = require('axios');
-      const apiUrl = 'http://api.vectorcam.org/sites';
+      // ✅ Get all sites for programId=1 (Uganda)
+      // No filtering needed - pipeline.py already filtered the database
+      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&limit=100';
       
-      let totalExpectedHouses = 30; // Default fallback
+      let totalExpectedHouses = 60; // Default if API fetch fails
       
       try {
-        const response = await axios.get(apiUrl);
+        // ✅ FIX: Add Bearer token authentication
+        const apiKey = process.env.API_SECRET_KEY || process.env.VECTORCAM_API_KEY;
         
-        // Sum up expected houses from all sites
-        if (response.data && Array.isArray(response.data)) {
-          totalExpectedHouses = response.data.reduce((sum, site) => {
-            return sum + (site.expected_houses || site.expectedHouses || 0);
-          }, 0);
+        const response = await axios.get(apiUrl, {
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          }
+        });
+        
+        // ✅ Count all sites from API (no filtering - already done in pipeline)
+        if (response.data && response.data.sites && Array.isArray(response.data.sites)) {
+          totalExpectedHouses = response.data.sites.length;
+          
+          logger.info(`✅ Fetched ${totalExpectedHouses} expected houses from API`);
         }
       } catch (apiError) {
-        logger.warn('Could not fetch expected houses from API, using default:', apiError.message);
+        logger.warn(`Could not fetch expected houses from API, using default: ${totalExpectedHouses}`, apiError);
       }
 
       const fidelityRate = (housesWithData / totalExpectedHouses) * 100;
@@ -115,14 +136,12 @@ class FidelityMetric {
       logger.error('Error calculating house fidelity:', error);
       
       // Fallback to default
-      const fidelityRate = (housesWithData / 30) * 100;
+      const fidelityRate = (0 / 60) * 100;
       return {
-        housesWithData,
-        totalExpectedHouses: 30,
-        fidelityRate: Math.round(fidelityRate * 10) / 10,
-        status: fidelityRate >= 90 ? 'Excellent' : 
-                fidelityRate >= 70 ? 'Good' : 
-                fidelityRate >= 50 ? 'Fair' : 'Needs Improvement',
+        housesWithData: 0,
+        totalExpectedHouses: 60,
+        fidelityRate: 0,
+        status: 'Needs Improvement',
         error: error.message
       };
     }
@@ -171,7 +190,7 @@ class FidelityMetric {
    * 3. Calculate VHT penetration
    * VHTs collecting in current month / VHTs in first rollout month * 100
    * 
-   * ✅ UPDATED: First rollout month hardcoded to 2025-11
+   * ✅ UPDATED: First rollout month hardcoded to 2025-12
    */
   calculateVHTPenetration(currentYearMonth, currentSessions) {
     try {
@@ -186,6 +205,7 @@ class FidelityMetric {
       const firstMonth = '2025-12';
 
       // Get VHTs from first rollout month
+      // ✅ No filters needed - data already cleaned in pipeline.py
       const firstMonthQuery = `
         SELECT DISTINCT SessionCollectorName
         FROM surveillance_sessions
@@ -219,7 +239,7 @@ class FidelityMetric {
         currentMonthVHTs: 0,
         firstMonthVHTs: 0,
         penetrationRate: 0,
-        firstRolloutMonth: '2025-11',
+        firstRolloutMonth: '2025-12',
         status: 'Error calculating'
       };
     }
@@ -237,6 +257,10 @@ class FidelityMetric {
 
     try {
       // Get unique VHTs who have been trained (have SessionCollectorLastTrainedOn date)
+      // ✅ FILTERS APPLIED:
+      // - Exclude sites 1-11
+      // - Exclude district "Other"
+      // - Exclude sessions without SessionID
       const trainedVHTsQuery = `
         SELECT DISTINCT 
           SessionCollectorName,
@@ -248,6 +272,10 @@ class FidelityMetric {
           AND SessionCollectorName IS NOT NULL 
           AND SessionCollectorName != ''
           AND SessionCollectorName != 'Unknown'
+          AND SessionID IS NOT NULL 
+          AND SessionID != ''
+          AND (SiteID IS NULL OR SiteID NOT BETWEEN 1 AND 11)
+          AND (SiteDistrict IS NULL OR SiteDistrict != 'Other')
         GROUP BY SessionCollectorName
       `;
 
