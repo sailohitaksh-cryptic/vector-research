@@ -80,16 +80,24 @@ class FidelityMetric {
    * 1. Calculate house data fidelity
    * Houses with data / Total expected houses (from API, excluding siteId 11)
    * 
-   * ✅ FIXED: Only counts site IDs that are in the valid sites list
-   * ✅ Prevents counting data from invalid/inactive sites
+   * ✅ UPDATED: Excludes siteId 11 (district "Other")
+   * ✅ UPDATED: Counts unique SessionSiteId values for current month
    */
   async calculateHouseFidelity(yearMonth, sessions) {
     try {
-      // Fetch valid site IDs from API first
+      // ✅ Count unique SessionSiteId values for houses with data in current month
+      // Try multiple possible field names
+      const uniqueSiteIds = new Set(
+        sessions
+          .map(s => s.SessionSiteId || s.SiteID || s.site_id)
+          .filter(id => id != null && id !== '' && id != 11) // Exclude siteId 11
+      );
+      const housesWithData = uniqueSiteIds.size;
+      
+      // Fetch expected houses from sites API
       const axios = require('axios');
       const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&limit=100';
       
-      let validSiteIds = new Set();
       let totalExpectedHouses = 60; // Default if API fetch fails
       
       try {
@@ -101,41 +109,19 @@ class FidelityMetric {
           }
         });
         
-        // Get valid site IDs (excluding siteId 11, inactive, etc.)
+        // ✅ Filter out siteId 11 (district "Other") and count remaining sites
         if (response.data && response.data.sites && Array.isArray(response.data.sites)) {
           const validSites = response.data.sites.filter(site => 
             site.siteId !== 11 && 
             site.district !== 'Other' &&
             site.isActive === true
           );
-          
           totalExpectedHouses = validSites.length;
-          validSiteIds = new Set(validSites.map(s => s.siteId));
           
-          logger.info(`✅ Fetched ${totalExpectedHouses} valid sites from API (excluded siteId 11)`);
-          logger.info(`Valid site IDs: ${Array.from(validSiteIds).sort((a,b) => a-b).slice(0, 20).join(', ')}...`);
+          logger.info(`✅ Fetched ${totalExpectedHouses} expected houses from API (excluded siteId 11)`);
         }
       } catch (apiError) {
         logger.warn(`Could not fetch expected houses from API, using default: ${totalExpectedHouses}`, apiError.message);
-      }
-      
-      // Extract site IDs from sessions (try multiple field names)
-      const sessionSiteIds = sessions
-        .map(s => s.SessionSiteId || s.SiteID || s.site_id)
-        .filter(id => id != null && id !== '' && id != 11);
-      
-      // ✅ CRITICAL FIX: Only count site IDs that are in the valid sites list
-      const validHousesWithData = validSiteIds.size > 0
-        ? sessionSiteIds.filter(id => validSiteIds.has(parseInt(id)))
-        : sessionSiteIds; // Fallback if API failed
-      
-      const uniqueHousesWithData = new Set(validHousesWithData);
-      const housesWithData = uniqueHousesWithData.size;
-      
-      logger.info(`Found ${sessionSiteIds.length} session records with site IDs`);
-      logger.info(`After filtering to valid sites: ${housesWithData} houses with data`);
-      if (housesWithData > 0) {
-        logger.info(`Site IDs with data: ${Array.from(uniqueHousesWithData).sort((a,b) => a-b).join(', ')}`);
       }
 
       const fidelityRate = totalExpectedHouses > 0 
@@ -153,6 +139,7 @@ class FidelityMetric {
     } catch (error) {
       logger.error('Error calculating house fidelity:', error);
       
+      // Fallback to default
       return {
         housesWithData: 0,
         totalExpectedHouses: 60,
