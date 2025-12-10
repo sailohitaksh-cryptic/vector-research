@@ -231,6 +231,39 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
         </div>
       </div>
 
+      {/* What is Fidelity? Definition Box */}
+      <div className="bg-gradient-to-r from-indigo-50 to-blue-50 border-2 border-indigo-200 rounded-lg p-5">
+        <div className="flex items-start">
+          <div className="flex-shrink-0 text-3xl mr-4">ℹ️</div>
+          <div>
+            <h3 className="text-lg font-semibold text-indigo-900 mb-2">What is Fidelity?</h3>
+            <p className="text-sm text-indigo-800 mb-3">
+              <strong>Fidelity</strong> measures how consistently and completely data is collected according to the surveillance protocol. 
+              High fidelity means the program is following its design: data collectors are active, required houses are being sampled, 
+              and mosquito specimens are being properly documented.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-indigo-700">
+              <div className="flex items-start">
+                <span className="font-semibold mr-2">📊 House Fidelity:</span>
+                <span>Are we sampling the expected number of houses?</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-semibold mr-2">🦟 Mosquito Data:</span>
+                <span>Are specimens being collected during visits?</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-semibold mr-2">👥 VHT Retention:</span>
+                <span>Are trained collectors still active?</span>
+              </div>
+              <div className="flex items-start">
+                <span className="font-semibold mr-2">🎓 Training Coverage:</span>
+                <span>Have all required VHTs been trained?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Overall Fidelity Score */}
       {data.overallFidelityScore !== undefined && (
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
@@ -251,19 +284,45 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
 
       {/* 1. House Data Fidelity */}
       <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">📊 House Data Fidelity</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Proportion of expected houses with data collected
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">📊 House Data Fidelity</h3>
+        <p className="text-sm text-gray-600 mb-1">
+          <strong>Definition:</strong> Proportion of expected houses with surveillance data collected this month.
         </p>
+        <p className="text-sm text-gray-600 mb-4">
+          <strong>Target:</strong> 60 houses per month (baseline expectation for comprehensive coverage).
+        </p>
+        
+        {/* Threshold Guide */}
+        <div className="bg-gray-50 border border-gray-200 rounded p-3 mb-4 text-xs">
+          <div className="font-semibold text-gray-700 mb-2">Performance Thresholds:</div>
+          <div className="grid grid-cols-4 gap-2">
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+              <span className="text-gray-600">Excellent: ≥90%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+              <span className="text-gray-600">Good: 70-89%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+              <span className="text-gray-600">Fair: 50-69%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+              <span className="text-gray-600">Poor: &lt;50%</span>
+            </div>
+          </div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600">Houses with Data</div>
-            <div className="text-2xl font-bold text-gray-900 mt-1">{data.houseFidelity.housesWithData}</div>
+            <div className="text-2xl font-bold text-gray-900 mt-1">{data.houseFidelity.housesWithData.toLocaleString()}</div>
           </div>
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600">Expected Houses</div>
-            <div className="text-2xl font-bold text-gray-900 mt-1">{data.houseFidelity.totalExpectedHouses}</div>
+            <div className="text-2xl font-bold text-gray-900 mt-1">{data.houseFidelity.totalExpectedHouses.toLocaleString()}</div>
           </div>
           <div className={`rounded-lg p-4 border ${getStatusColor(data.houseFidelity.status)}`}>
             <div className="text-sm font-medium">Fidelity Rate</div>
@@ -283,23 +342,50 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
 
       {/* 2. Mosquito Data Completeness */}
       <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🦟 Mosquito Data Completeness</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Sessions with mosquito specimen data collected
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">🦟 Mosquito Data Completeness</h3>
+        <p className="text-sm text-gray-600 mb-1">
+          <strong>Definition:</strong> Percentage of surveillance sessions that successfully collected mosquito specimens.
         </p>
+        <p className="text-sm text-gray-600 mb-4">
+          <strong>Why it matters:</strong> Empty collections may indicate issues with trap placement, timing, or documentation. 
+          Higher rates ensure representative data for entomological analysis.
+        </p>
+
+        {/* Threshold Guide */}
+        <div className="bg-gray-50 border border-gray-200 rounded p-3 mb-4 text-xs">
+          <div className="font-semibold text-gray-700 mb-2">Performance Thresholds:</div>
+          <div className="grid grid-cols-4 gap-2">
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+              <span className="text-gray-600">Excellent: ≥90%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+              <span className="text-gray-600">Good: 70-89%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+              <span className="text-gray-600">Fair: 50-69%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+              <span className="text-gray-600">Poor: &lt;50%</span>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="text-sm text-green-600">With Mosquitoes</div>
-            <div className="text-2xl font-bold text-green-900 mt-1">{data.mosquitoFidelity.sessionsWithMosquitoes}</div>
+            <div className="text-2xl font-bold text-green-900 mt-1">{data.mosquitoFidelity.sessionsWithMosquitoes.toLocaleString()}</div>
           </div>
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
             <div className="text-sm text-red-600">Without Mosquitoes</div>
-            <div className="text-2xl font-bold text-red-900 mt-1">{data.mosquitoFidelity.sessionsWithoutMosquitoes}</div>
+            <div className="text-2xl font-bold text-red-900 mt-1">{data.mosquitoFidelity.sessionsWithoutMosquitoes.toLocaleString()}</div>
           </div>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
             <div className="text-sm text-blue-600">Total Specimens</div>
-            <div className="text-2xl font-bold text-blue-900 mt-1">{data.mosquitoFidelity.totalSpecimens}</div>
+            <div className="text-2xl font-bold text-blue-900 mt-1">{data.mosquitoFidelity.totalSpecimens.toLocaleString()}</div>
           </div>
           <div className={`rounded-lg p-4 border ${getStatusColor(data.mosquitoFidelity.status)}`}>
             <div className="text-sm font-medium">Data Rate</div>
@@ -310,26 +396,53 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
 
         <div className="bg-gray-50 rounded-lg p-4">
           <div className="text-sm text-gray-600">Average Specimens per Session</div>
-          <div className="text-xl font-bold text-gray-900">{data.mosquitoFidelity.avgSpecimensPerSession}</div>
+          <div className="text-xl font-bold text-gray-900">{data.mosquitoFidelity.avgSpecimensPerSession.toLocaleString()}</div>
         </div>
       </div>
 
       {/* 3. VHT Penetration (Penetration User Level) */}
       <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">👥 Penetration User Level</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Percentage of VHTs from first rollout month still actively collecting data
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">👥 VHT Retention (Penetration User Level)</h3>
+        <p className="text-sm text-gray-600 mb-1">
+          <strong>Definition:</strong> Percentage of VHTs from the first rollout month who are still actively collecting data.
         </p>
+        <p className="text-sm text-gray-600 mb-4">
+          <strong>Why it matters:</strong> Measures program sustainability and VHT retention. Declining rates may indicate 
+          need for refresher training, motivation, or addressing operational barriers.
+        </p>
+
+        {/* Threshold Guide */}
+        <div className="bg-gray-50 border border-gray-200 rounded p-3 mb-4 text-xs">
+          <div className="font-semibold text-gray-700 mb-2">Performance Thresholds:</div>
+          <div className="grid grid-cols-4 gap-2">
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+              <span className="text-gray-600">Excellent: ≥90%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+              <span className="text-gray-600">Good: 70-89%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+              <span className="text-gray-600">Fair: 50-69%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+              <span className="text-gray-600">Poor: &lt;50%</span>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600">First Month VHTs</div>
-            <div className="text-2xl font-bold text-gray-900 mt-1">{data.vhtPenetration.firstMonthVHTs}</div>
+            <div className="text-2xl font-bold text-gray-900 mt-1">{data.vhtPenetration.firstMonthVHTs.toLocaleString()}</div>
             <div className="text-xs text-gray-500 mt-1">{data.vhtPenetration.firstRolloutMonth}</div>
           </div>
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600">Current Month VHTs</div>
-            <div className="text-2xl font-bold text-gray-900 mt-1">{data.vhtPenetration.currentMonthVHTs}</div>
+            <div className="text-2xl font-bold text-gray-900 mt-1">{data.vhtPenetration.currentMonthVHTs.toLocaleString()}</div>
             <div className="text-xs text-gray-500 mt-1">{selectedMonth}</div>
           </div>
           <div className={`rounded-lg p-4 border ${getStatusColor(data.vhtPenetration.status)}`}>
@@ -338,10 +451,37 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
             <div className="text-xs mt-1">{data.vhtPenetration.status}</div>
           </div>
           <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
-            <div className="text-sm text-indigo-600">Change</div>
-            <div className="text-2xl font-bold text-indigo-900 mt-1">
-              {data.vhtPenetration.currentMonthVHTs - data.vhtPenetration.firstMonthVHTs > 0 ? '+' : ''}
-              {data.vhtPenetration.currentMonthVHTs - data.vhtPenetration.firstMonthVHTs}
+            <div className="text-sm text-indigo-600 mb-1">Trend</div>
+            <div className="flex items-center justify-center">
+              {data.vhtPenetration.currentMonthVHTs - data.vhtPenetration.firstMonthVHTs > 0 ? (
+                <div className="flex items-center">
+                  <span className="text-2xl mr-2">📈</span>
+                  <div>
+                    <div className="text-2xl font-bold text-green-900">
+                      +{data.vhtPenetration.currentMonthVHTs - data.vhtPenetration.firstMonthVHTs}
+                    </div>
+                    <div className="text-xs text-green-600">Growing</div>
+                  </div>
+                </div>
+              ) : data.vhtPenetration.currentMonthVHTs - data.vhtPenetration.firstMonthVHTs < 0 ? (
+                <div className="flex items-center">
+                  <span className="text-2xl mr-2">📉</span>
+                  <div>
+                    <div className="text-2xl font-bold text-red-900">
+                      {data.vhtPenetration.currentMonthVHTs - data.vhtPenetration.firstMonthVHTs}
+                    </div>
+                    <div className="text-xs text-red-600">Declining</div>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <span className="text-2xl mr-2">➡️</span>
+                  <div>
+                    <div className="text-2xl font-bold text-blue-900">0</div>
+                    <div className="text-xs text-blue-600">Stable</div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -373,23 +513,49 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
 
       {/* 4. VHT Training Completion */}
       <div className="bg-white border border-gray-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">🎓 VHT Training Completion</h3>
-        <p className="text-sm text-gray-600 mb-4">
-          Percentage of total VHTs in the district that have been trained
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">🎓 VHT Training Completion</h3>
+        <p className="text-sm text-gray-600 mb-1">
+          <strong>Definition:</strong> Percentage of all VHTs in the district who have completed required training.
         </p>
+        <p className="text-sm text-gray-600 mb-4">
+          <strong>Target:</strong> 18 trained VHTs per district for optimal surveillance coverage.
+        </p>
+
+        {/* Threshold Guide */}
+        <div className="bg-gray-50 border border-gray-200 rounded p-3 mb-4 text-xs">
+          <div className="font-semibold text-gray-700 mb-2">Performance Thresholds:</div>
+          <div className="grid grid-cols-4 gap-2">
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+              <span className="text-gray-600">Excellent: ≥90%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-blue-500 mr-2"></span>
+              <span className="text-gray-600">Good: 70-89%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+              <span className="text-gray-600">Fair: 50-69%</span>
+            </div>
+            <div className="flex items-center">
+              <span className="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+              <span className="text-gray-600">Poor: &lt;50%</span>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <div className="text-sm text-green-600">Trained VHTs</div>
-            <div className="text-2xl font-bold text-green-900 mt-1">{data.vhtTraining.trainedVHTs}</div>
+            <div className="text-2xl font-bold text-green-900 mt-1">{data.vhtTraining.trainedVHTs.toLocaleString()}</div>
           </div>
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600">Total VHTs</div>
-            <div className="text-2xl font-bold text-gray-900 mt-1">{data.vhtTraining.totalVHTs}</div>
+            <div className="text-2xl font-bold text-gray-900 mt-1">{data.vhtTraining.totalVHTs.toLocaleString()}</div>
           </div>
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
             <div className="text-sm text-red-600">Untrained VHTs</div>
-            <div className="text-2xl font-bold text-red-900 mt-1">{data.vhtTraining.untrainedVHTs}</div>
+            <div className="text-2xl font-bold text-red-900 mt-1">{data.vhtTraining.untrainedVHTs.toLocaleString()}</div>
           </div>
           <div className={`rounded-lg p-4 border ${getStatusColor(data.vhtTraining.status)}`}>
             <div className="text-sm font-medium">Training Rate</div>
@@ -432,14 +598,48 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
         )}
       </div>
 
-      {/* Help Text */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h4 className="text-sm font-semibold text-blue-900 mb-2">About Fidelity Metrics</h4>
-        <div className="text-sm text-blue-800 space-y-1">
-          <p><strong>House Fidelity:</strong> Measures data collection coverage (target: 30 houses per month)</p>
-          <p><strong>Mosquito Data:</strong> Ensures mosquito specimens are collected during surveillance</p>
-          <p><strong>Penetration User Level:</strong> Tracks VHT retention from first rollout month</p>
-          <p><strong>Training Completion:</strong> Monitors training status (target: 18 VHTs)</p>
+      {/* Interpretation Guide */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-5">
+        <h4 className="text-lg font-semibold text-blue-900 mb-3 flex items-center">
+          <span className="text-2xl mr-2">📖</span>
+          How to Interpret Fidelity Metrics
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800">
+          <div className="bg-white rounded-lg p-4 border border-blue-200">
+            <div className="font-semibold mb-2">📊 House Data Fidelity</div>
+            <p className="mb-2">Tracks whether the expected number of houses (60/month) are being surveyed.</p>
+            <ul className="list-disc list-inside text-xs space-y-1">
+              <li><strong>High (&gt;90%):</strong> On track with surveillance plan</li>
+              <li><strong>Low (&lt;50%):</strong> May need more VHTs or logistical support</li>
+            </ul>
+          </div>
+          
+          <div className="bg-white rounded-lg p-4 border border-blue-200">
+            <div className="font-semibold mb-2">🦟 Mosquito Data Completeness</div>
+            <p className="mb-2">Ensures specimens are collected during surveillance visits.</p>
+            <ul className="list-disc list-inside text-xs space-y-1">
+              <li><strong>High (&gt;90%):</strong> Good trap placement and timing</li>
+              <li><strong>Low (&lt;50%):</strong> Review collection protocols</li>
+            </ul>
+          </div>
+          
+          <div className="bg-white rounded-lg p-4 border border-blue-200">
+            <div className="font-semibold mb-2">👥 VHT Retention</div>
+            <p className="mb-2">Measures how many original VHTs remain active.</p>
+            <ul className="list-disc list-inside text-xs space-y-1">
+              <li><strong>Growing (📈):</strong> Program expanding successfully</li>
+              <li><strong>Declining (📉):</strong> Address retention barriers</li>
+            </ul>
+          </div>
+          
+          <div className="bg-white rounded-lg p-4 border border-blue-200">
+            <div className="font-semibold mb-2">🎓 Training Completion</div>
+            <p className="mb-2">Tracks progress toward 18 trained VHTs per district.</p>
+            <ul className="list-disc list-inside text-xs space-y-1">
+              <li><strong>High (&gt;90%):</strong> Strong program capacity</li>
+              <li><strong>Low (&lt;50%):</strong> Prioritize training rollout</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
