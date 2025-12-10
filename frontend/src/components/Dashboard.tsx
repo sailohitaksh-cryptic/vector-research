@@ -17,10 +17,36 @@ import {
 import { 
   FiTrendingUp, FiActivity, FiHome, FiShield, 
   FiTarget, FiMap, FiUsers, FiFilter, FiAlertCircle, 
-  FiBarChart2, FiMapPin, FiCalendar, FiCheckCircle
+  FiBarChart2, FiMapPin, FiCalendar, FiCheckCircle, FiInfo
 } from 'react-icons/fi';
 
 const Plot = dynamic<any>(() => import('@/components/Plot'), { ssr: false });
+
+// Simple Tooltip Component
+const InfoTooltip = ({ text }: { text: string }) => {
+  const [show, setShow] = useState(false);
+  
+  return (
+    <div className="relative inline-block ml-2">
+      <button
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        className="text-gray-400 hover:text-gray-600 transition-colors"
+        type="button"
+      >
+        <FiInfo size={16} />
+      </button>
+      {show && (
+        <div className="absolute z-50 w-80 p-3 bg-gray-900 text-white text-sm rounded-lg shadow-lg -top-2 left-6 transform -translate-y-full">
+          {text}
+          <div className="absolute top-full left-4 transform -translate-x-1/2 -mt-1">
+            <div className="border-8 border-transparent border-t-gray-900"></div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 
 const filterUnknownSpecies = (speciesData: Record<string, number>): Record<string, number> => {
@@ -937,7 +963,7 @@ function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
     <div className="space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Temporal Analysis</h2>
-        <p className="text-gray-600">Track surveillance activities and mosquito populations over time</p>
+        <p className="text-gray-600">Track surveillance activities and mosquito populations over time, helping to identify seasonal patterns and operational gaps.</p>
       </div>
 
       {/* Collections Over Time */}
@@ -945,6 +971,7 @@ function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
         <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
           <FiCalendar className="mr-2" />
           Collections by Month
+          <InfoTooltip text="Track surveillance effort consistency over time to identify seasonal patterns and operational gaps." />
         </h3>
         <p className="text-sm text-gray-600 mb-4">
           Track surveillance effort consistency over time to identify seasonal patterns and operational gaps
@@ -978,6 +1005,7 @@ function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
         <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
           <FiActivity className="mr-2" />
           Specimens by Month
+          <InfoTooltip text="Monitor mosquito population abundance seasonally - peak months may indicate need for intensified interventions." />
         </h3>
         <p className="text-sm text-gray-600 mb-4">
           Monitor mosquito population abundance seasonally - peak months may indicate need for intensified interventions
@@ -1008,7 +1036,10 @@ function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
 
       {/* Combined Comparison */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Collections vs Specimens Comparison</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+          Collections vs Specimens Comparison
+          <InfoTooltip text="Compare the number of collections to the number of mosquitoes caught to understand how active mosquito populations are and how effective each collection effort is." />
+        </h3>
         <p className="text-sm text-gray-600 mb-4">
           Compare surveillance effort against mosquito population to assess collection efficiency
         </p>
@@ -1049,6 +1080,9 @@ function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
       {/* Monthly Statistics Table */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Monthly Statistics</h3>
+        <p className="text-sm text-gray-600 mb-4">
+          Shows how many collections were performed each month, how many mosquitoes were found, and the average number caught per collection.
+        </p>
         <div className="bg-white border rounded-lg overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -1056,7 +1090,7 @@ function TemporalAnalysisTab({ metrics }: { metrics: Metrics | null }) {
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Month</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Collections</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Specimens</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Specimens/Collection</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Avg. Specimens per Collection</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
