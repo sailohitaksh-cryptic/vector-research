@@ -288,9 +288,6 @@ export default function FidelityTab({ currentYearMonth }: FidelityTabProps) {
         <p className="text-sm text-gray-600 mb-1">
           <strong>Definition:</strong> Proportion of expected houses with surveillance data collected this month.
         </p>
-        <p className="text-sm text-gray-600 mb-4">
-          <strong>Target:</strong> 60 houses per month (baseline expectation for comprehensive coverage).
-        </p>
         
         {/* Threshold Guide */}
         <div className="bg-gray-50 border border-gray-200 rounded p-3 mb-4 text-xs">
