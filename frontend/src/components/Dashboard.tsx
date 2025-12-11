@@ -72,7 +72,7 @@ const tabs = [
   { id: 5, label: 'Collection Methods', icon: FiTarget },
   { id: 6, label: 'Geographic Distribution', icon: FiMap },
   { id: 7, label: 'Field Team Performance', icon: FiUsers },
-  { id: 8, label: 'Fidelity', icon: FiCheckCircle },
+  { id: 8, label: 'MEL Metrics', icon: FiCheckCircle },
 ];
 
 export default function Dashboard() {

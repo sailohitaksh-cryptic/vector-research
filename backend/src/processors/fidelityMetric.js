@@ -11,6 +11,7 @@
  * - First rollout month hardcoded to 2025-12
  * - Fetches expected houses count from sites API (programId=1)
  * - No data filtering needed - already done in pipeline.py
+ * - ✅ FIXED: Houses with data only counts site IDs in valid sites list
  * 
  * Replace: backend/src/processors/fidelityMetric.js
  */
@@ -80,25 +81,16 @@ class FidelityMetric {
    * 1. Calculate house data fidelity
    * Houses with data / Total expected houses (from API, excluding siteId 11)
    * 
-   * ✅ UPDATED: Excludes siteId 11 (district "Other")
-   * ✅ UPDATED: Counts unique SessionSiteId values for current month
+   * ✅ FIXED: Only counts site IDs that are in the valid sites list
    */
   async calculateHouseFidelity(yearMonth, sessions) {
     try {
-      // ✅ Count unique SessionSiteId values for houses with data in current month
-      // Try multiple possible field names
-      const uniqueSiteIds = new Set(
-        sessions
-          .map(s => s.SessionSiteId || s.SiteID || s.site_id)
-          .filter(id => id != null && id !== '' && id != 11) // Exclude siteId 11
-      );
-      const housesWithData = uniqueSiteIds.size;
-      
       // Fetch expected houses from sites API
       const axios = require('axios');
-      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1&limit=100';
+      const apiUrl = 'http://api.vectorcam.org/sites/?programId=1';
       
-      let totalExpectedHouses = 30; // Default if API fetch fails
+      let totalExpectedHouses = 60; // Default if API fetch fails
+      let validSiteIds = new Set(); // Track valid site IDs
       
       try {
         const apiKey = process.env.API_SECRET_KEY || process.env.VECTORCAM_API_KEY;
@@ -117,12 +109,28 @@ class FidelityMetric {
             site.isActive === true
           );
           totalExpectedHouses = validSites.length;
+          validSiteIds = new Set(validSites.map(s => s.siteId)); // Store valid site IDs
           
           logger.info(`✅ Fetched ${totalExpectedHouses} expected houses from API (excluded siteId 11)`);
         }
       } catch (apiError) {
         logger.warn(`Could not fetch expected houses from API, using default: ${totalExpectedHouses}`, apiError.message);
       }
+
+      // ✅ FIX: Only count SessionSiteId values that are in the valid sites list
+      const sessionSiteIds = sessions
+        .map(s => s.SessionSiteId || s.SiteID || s.site_id)
+        .filter(id => id != null && id !== '');
+      
+      // Filter to only valid site IDs
+      const validSessionSiteIds = validSiteIds.size > 0
+        ? sessionSiteIds.filter(id => validSiteIds.has(parseInt(id)))
+        : sessionSiteIds; // Fallback if API failed
+      
+      const housesWithData = new Set(validSessionSiteIds).size;
+      
+      logger.info(`Found ${sessionSiteIds.length} session records with site IDs`);
+      logger.info(`After filtering to valid sites: ${housesWithData} houses with data`);
 
       const fidelityRate = totalExpectedHouses > 0 
         ? (housesWithData / totalExpectedHouses) * 100 
@@ -193,32 +201,42 @@ class FidelityMetric {
    * 3. Calculate VHT penetration
    * VHTs collecting in current month / VHTs in first rollout month * 100
    * 
-   * ✅ UPDATED: First rollout month hardcoded to 2025-12
+   * ✅ FIXED: Only counts collectors where SessionCollectorTitle = 'Village Health Team (VHT)'
+   * ✅ FIXED: Expected VHTs calculated as: number_of_districts * 6
    */
   calculateVHTPenetration(currentYearMonth, currentSessions) {
     try {
-      // Get unique VHTs (collectors) in current month
-      const currentVHTs = new Set(
-        currentSessions
-          .map(s => s.SessionCollectorName)
-          .filter(name => name && name !== 'Unknown')
-      );
+      // ✅ NEW: Only count VHTs from specimens table where SessionCollectorTitle = 'Village Health Team (VHT)'
+      const currentVHTsQuery = `
+        SELECT DISTINCT sp.SessionCollectorName
+        FROM specimens sp
+        INNER JOIN surveillance_sessions sv ON sp.SessionID = sv.SessionID
+        WHERE strftime('%Y-%m', sv.SessionCollectionDate) = ?
+          AND sp.SessionCollectorTitle = 'Village Health Team (VHT)'
+          AND sp.SessionCollectorName IS NOT NULL 
+          AND sp.SessionCollectorName != ''
+          AND sp.SessionCollectorName != 'Unknown'
+      `;
+      
+      const currentVHTsResult = database.db.prepare(currentVHTsQuery).all(currentYearMonth);
+      const currentVHTs = new Set(currentVHTsResult.map(r => r.SessionCollectorName));
 
       // ✅ HARDCODED: First rollout month is 2025-12
       const firstMonth = '2025-12';
 
-      // Get VHTs from first rollout month
-      // ✅ No filters needed - data already cleaned in pipeline.py
-      const firstMonthQuery = `
-        SELECT DISTINCT SessionCollectorName
-        FROM surveillance_sessions
-        WHERE strftime('%Y-%m', SessionCollectionDate) = ?
-          AND SessionCollectorName IS NOT NULL 
-          AND SessionCollectorName != ''
-          AND SessionCollectorName != 'Unknown'
+      // ✅ Get VHTs from first rollout month (also filtered by VHT title)
+      const firstMonthVHTsQuery = `
+        SELECT DISTINCT sp.SessionCollectorName
+        FROM specimens sp
+        INNER JOIN surveillance_sessions sv ON sp.SessionID = sv.SessionID
+        WHERE strftime('%Y-%m', sv.SessionCollectionDate) = ?
+          AND sp.SessionCollectorTitle = 'Village Health Team (VHT)'
+          AND sp.SessionCollectorName IS NOT NULL 
+          AND sp.SessionCollectorName != ''
+          AND sp.SessionCollectorName != 'Unknown'
       `;
 
-      const firstMonthVHTs = database.db.prepare(firstMonthQuery).all(firstMonth);
+      const firstMonthVHTs = database.db.prepare(firstMonthVHTsQuery).all(firstMonth);
       const firstMonthCount = firstMonthVHTs.length;
 
       const penetrationRate = firstMonthCount > 0 
@@ -250,47 +268,56 @@ class FidelityMetric {
 
   /**
    * 4. Calculate VHT training completion
-   * Trained VHTs / Total VHTs (18) * 100
-   * Based on SessionCollectorLastTrainedOn field in surveillance_sessions
+   * Trained VHTs / Expected VHTs (districts * 6) * 100
    * 
-   * ✅ UPDATED: Uses SessionCollectorLastTrainedOn from raw data
+   * ✅ FIXED: Only counts collectors where SessionCollectorTitle = 'Village Health Team (VHT)'
+   * ✅ FIXED: Expected VHTs calculated as: number_of_districts * 6
    */
   calculateVHTTraining(sessions) {
-    const TOTAL_VHTS = 18;
-
     try {
-      // Get unique VHTs who have been trained (have SessionCollectorLastTrainedOn date)
-      // ✅ FILTERS APPLIED:
-      // - Exclude sites 1-11
-      // - Exclude district "Other"
-      // - Exclude sessions without SessionID
+      // ✅ Get number of districts from data
+      const districtsQuery = `
+        SELECT COUNT(DISTINCT SiteDistrict) as district_count
+        FROM surveillance_sessions
+        WHERE SiteDistrict IS NOT NULL 
+          AND SiteDistrict != ''
+          AND SiteDistrict != 'Other'
+      `;
+      
+      const districtsResult = database.db.prepare(districtsQuery).get();
+      const numDistricts = districtsResult?.district_count || 2; // Fallback to 2
+      const TOTAL_VHTS = numDistricts * 6; // ✅ Dynamic calculation
+      
+      logger.info(`Calculating VHT training: ${numDistricts} districts * 6 = ${TOTAL_VHTS} expected VHTs`);
+
+      // ✅ Get unique VHTs who have been trained (with VHT title filter)
       const trainedVHTsQuery = `
         SELECT DISTINCT 
-          SessionCollectorName,
-          SessionCollectorLastTrainedOn,
-          MAX(SessionCollectionDate) as last_collection_date
-        FROM surveillance_sessions
-        WHERE SessionCollectorLastTrainedOn IS NOT NULL 
-          AND SessionCollectorLastTrainedOn != ''
-          AND SessionCollectorName IS NOT NULL 
-          AND SessionCollectorName != ''
-          AND SessionCollectorName != 'Unknown'
-          AND SessionID IS NOT NULL 
-          AND SessionID != ''
-          AND (SiteID IS NULL OR SiteID NOT BETWEEN 1 AND 11)
-          AND (SiteDistrict IS NULL OR SiteDistrict != 'Other')
-        GROUP BY SessionCollectorName
+          sp.SessionCollectorName,
+          sv.SessionCollectorLastTrainedOn,
+          MAX(sv.SessionCollectionDate) as last_collection_date
+        FROM specimens sp
+        INNER JOIN surveillance_sessions sv ON sp.SessionID = sv.SessionID
+        WHERE sv.SessionCollectorLastTrainedOn IS NOT NULL 
+          AND sv.SessionCollectorLastTrainedOn != ''
+          AND sp.SessionCollectorTitle = 'Village Health Team (VHT)'
+          AND sp.SessionCollectorName IS NOT NULL 
+          AND sp.SessionCollectorName != ''
+          AND sp.SessionCollectorName != 'Unknown'
+          AND sv.SessionID IS NOT NULL 
+          AND sv.SessionID != ''
+        GROUP BY sp.SessionCollectorName
       `;
 
       const trainedVHTs = database.db.prepare(trainedVHTsQuery).all();
       const trainedCount = trainedVHTs.length;
 
-      const trainingRate = (trainedCount / TOTAL_VHTS) * 100;
+      const trainingRate = TOTAL_VHTS > 0 ? (trainedCount / TOTAL_VHTS) * 100 : 0;
 
       return {
         trainedVHTs: trainedCount,
         totalVHTs: TOTAL_VHTS,
-        untrainedVHTs: TOTAL_VHTS - trainedCount,
+        untrainedVHTs: Math.max(0, TOTAL_VHTS - trainedCount),
         trainingRate: Math.round(trainingRate * 10) / 10,
         trainingDetails: trainedVHTs.map(t => ({
           name: t.SessionCollectorName,
@@ -305,19 +332,14 @@ class FidelityMetric {
     } catch (error) {
       logger.error('Error calculating VHT training:', error);
       
-      // Fallback: count unique VHTs in current data
-      const uniqueVHTs = new Set(
-        sessions
-          .map(s => s.SessionCollectorName)
-          .filter(name => name && name !== 'Unknown')
-      );
-
+      // Fallback: Use 2 districts * 6 = 12 VHTs
+      const TOTAL_VHTS = 12;
+      
       return {
         trainedVHTs: 0,
         totalVHTs: TOTAL_VHTS,
         untrainedVHTs: TOTAL_VHTS,
         trainingRate: 0,
-        activeVHTs: uniqueVHTs.size,
         status: 'Training data not yet available',
         error: error.message
       };
